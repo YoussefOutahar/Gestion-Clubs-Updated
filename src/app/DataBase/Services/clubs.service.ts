@@ -82,34 +82,6 @@ export class ClubsService {
     return data;
   }
 
-  // ============== Events ============== //
-  async getEvents(): Promise<Event[]> {
-    const { data, error } = await this.supabase.from(TableNames.Events).select('*');
-    if (error) {
-      throw error;
-    }
-    return data;
-  }
-
-  async getClubEvents(club: Club): Promise<Event[]> {
-    const { data, error } = await this.supabase
-      .from(TableNames.Events)
-      .select('*')
-      .eq('id_club', club.id);
-    if (error) {
-      throw error;
-    }
-    return data;
-  }
-
-  async getEventById(id: number): Promise<Event[]> {
-    const { data, error } = await this.supabase.from(TableNames.Events).select('*').eq('id', id);
-    if (error) {
-      throw error;
-    }
-    return data;
-  }
-
 
   // ============== Meetings ============== //
 

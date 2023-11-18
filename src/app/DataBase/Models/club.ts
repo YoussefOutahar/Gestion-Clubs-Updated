@@ -65,7 +65,7 @@ export interface ForumMessage {
 export interface Event {
     id: number;
     name: string;
-    date: Time;
+    date: string;
     cost: number;
     img: string;
     earnings: number;
@@ -76,7 +76,7 @@ export interface Event {
     location: string;
     file_name: string;
     aimed_target: string;
-    time: Time;
+    time: string;
     funding_method: string;
     article_for_newsletter: string;
     state: string;
