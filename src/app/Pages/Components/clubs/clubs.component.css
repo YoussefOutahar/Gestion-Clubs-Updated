@@ -1,12 +1,33 @@
 .club-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-  }
-  
-  .club-logo {
-    max-width: 100%;
-    height: auto;
-  }
-  
+  transition: transform 0.2s ease-in-out;
+}
+
+.club-card:hover {
+  transform: scale(1.05); /* Adjust the scale factor for the desired pop-up effect */
+}
+
+.back-button {
+  margin-bottom: 20px; /* Add margin bottom */
+  margin-right: auto; /* Move the button to the left */
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: 100%;
+}
+
+.details-row {
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+}
+
+.image-container {
+  flex: 1;
+  max-width: 50%;
+  max-height: 50%;
+  margin-right: 20px;
+}

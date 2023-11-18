@@ -15,6 +15,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     LayoutModule,
     AuthModule,
     MaterialModule,
+    MatGridListModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TablerIconsModule.pick(TablerIcons),
