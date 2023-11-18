@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from 'src/environments/environment';
 
-import { Category, Club, Meeting, Forum, ForumMessage, Event } from '../Models/club';
+import { Club, Category, Event, Meeting, Forum, ForumMessage } from '../Models/club';
 import { TableNames } from 'src/app/Config/constants';
 
 @Injectable({
@@ -76,6 +76,34 @@ export class ClubsService {
 
   async getClubCategories(clubs: Club[]): Promise<Category[]> {
     const { data, error } = await this.supabase.from(TableNames.Category).select('*');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  // ============== Events ============== //
+  async getEvents(): Promise<Event[]> {
+    const { data, error } = await this.supabase.from(TableNames.Events).select('*');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getClubEvents(club: Club): Promise<Event[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Events)
+      .select('*')
+      .eq('id_club', club.id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getEventById(id: number): Promise<Event[]> {
+    const { data, error } = await this.supabase.from(TableNames.Events).select('*').eq('id', id);
     if (error) {
       throw error;
     }
