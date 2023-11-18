@@ -14,6 +14,8 @@ import { MatCommonModule } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule } from '@angular/forms';
+import { EventsComponent } from './Components/events/events.component';
+import { ValidationComponent } from './Components/validation/validation.component';
 @NgModule({
   declarations: [
     DashboardPageComponent,
@@ -21,6 +23,8 @@ import { FormsModule } from '@angular/forms';
     // ========== Componenets ========== //
     ClubsComponent,
     MembersComponent,
+    EventsComponent,
+    ValidationComponent,
     ForumComponent,
   ],
   imports: [

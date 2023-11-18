@@ -1,0 +1,36 @@
+<!-- validation.component.html -->
+
+<table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Display pending clubs -->
+      <tr *ngFor="let club of clubs">
+        <td>{{ 'New Club' }}</td>
+        <td>{{ club.name }}</td>
+        <td></td>
+        <td>
+          <button (click)="validateClub(club)">Validate</button>
+          <button (click)="cancelClub(club)">Cancel</button>
+        </td>
+      </tr>
+  
+      <!-- Display pending events-->
+      <tr *ngFor="let event of events">
+        <td>{{ 'New Event' }}</td>
+        <td>{{ event.name }}</td>
+        <td></td>
+        <td>
+          <button (click)="validateEvent(event)">Validate</button>
+          <button (click)="cancelEvent(event)">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
