@@ -1,0 +1,14 @@
+<div class="container">
+  <ul>
+    <li *ngFor="let m of messages">{{ m }}</li>
+  </ul>
+
+  <div class="bottom-container">
+    <div class="input-container">
+      <TextField [(ngModel)]="message" (keydown.enter)="sendMessage()" label="Type a message" fullWidth />
+    </div>
+    <div class="button-container">
+      <Button variant="contained" color="primary" (click)="sendMessage()">Send</Button>
+    </div>
+  </div>
+</div>
