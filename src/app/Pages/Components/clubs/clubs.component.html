@@ -1,3 +1,7 @@
-<p>
-  clubs works!
-</p>
+<div *ngFor="let club of clubs" class="club-card">
+  <img [src]="club.logo" alt="{{ club.name }}" class="club-logo">
+  <h3>{{ club.name }}</h3>
+  <p>{{ club.mission }}</p>
+  <Button variant="contained" color="primary" (click)="showDetails(club)">View Details</Button>
+  <Button variant="contained" color="secondary" (click)="deleteClub(club)">Delete</Button>
+</div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from 'src/environments/environment';
 
-import { Category, Club, Meeting, Forum } from '../Models/club';
+import { Category, Club, Meeting, Forum, ForumMessage } from '../Models/club';
 import { TableNames } from 'src/app/Config/constants';
 
 @Injectable({
@@ -133,4 +133,32 @@ export class ClubsService {
     return data;
   }
 
+  
+  // ============== Messages ============== //
+  async getMessages(): Promise<ForumMessage[]> {
+    const { data, error } = await this.supabase.from(TableNames.Messages).select('*');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getForumMessages(forum: Forum): Promise<ForumMessage[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Messages)
+      .select('*')
+      .eq('forum_id', forum.id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getForumMessageById(id: number): Promise<ForumMessage[]> {
+    const { data, error } = await this.supabase.from(TableNames.Messages).select('*').eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
 }

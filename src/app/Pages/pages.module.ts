@@ -8,6 +8,9 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { NgApexchartsModule } from "ng-apexcharts";
 import { ClubsComponent } from './Components/clubs/clubs.component';
 import { MembersComponent } from './Components/members/members.component';
+import { MaterialModule } from '../material.module';
+import { MatCommonModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     DashboardPageComponent,
@@ -17,6 +20,9 @@ import { MembersComponent } from './Components/members/members.component';
     MembersComponent
   ],
   imports: [
+    CommonModule,
+    MaterialModule,
+    MatCommonModule,
     NgApexchartsModule,
     RouterModule.forChild(pageRoutes)
   ],
