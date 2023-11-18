@@ -16,6 +16,26 @@ export interface Category {
     name: string;
 }
 
+export interface Event {
+    id: number;
+    name: string;
+    date: string;
+    cost: number;
+    img: string;
+    earnings: number;
+    supp_budget: number;
+    url: string;
+    id_club: number;
+    description: string;
+    location: string;
+    file_name: string;
+    aimed_target: string;
+    time: string;
+    funding_method: string;
+    article_for_newsletter: string;
+    state: string;
+}
+
 export interface Meeting {
     id: number;
     id_club: number;
