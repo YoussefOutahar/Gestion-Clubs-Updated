@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-auth-page',
@@ -15,16 +16,22 @@ export class AuthPageComponent implements OnInit {
   
   constructor(
     private authService: AuthService,
+    private spinner: NgxSpinnerService,
     private router: Router,
   ) { 
     this.loginForm = new FormGroup({
-      email: new FormControl('example@email.com', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      email: new FormControl('youssefoutahar1@gmail.com', [Validators.required, Validators.email]),
+      password: new FormControl('testtest', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
     });
    }
 
+   ngOnInit(): void {
+    this.returnUrl = '/dashboard/home';
+    this.authService.logout();
+  }
 
-  onFormSubmit(): void {
+
+  async onFormSubmit() {
     console.log('Submiting login form');
 
     if (this.loginForm.invalid) {
@@ -45,19 +52,19 @@ export class AuthPageComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.loginForm.get('email')?.value!, this.loginForm.get('password')?.value!);
-    // const data: Ilogin = {
-    //   email: this.loginForm.get('email')?.value,
-    //   password: this.loginForm.get('password')?.value,
-    // };
+    this.spinner.show();
+
+    const email = this.loginForm.get('email')?.value;
+    const password = this.loginForm.get('password')?.value;
+
+    const result = await this.authService.login(email, password);
+
+    this.spinner.hide();
+
+    if (result) {
+      this.router.navigate([this.returnUrl]);
+    } else {
+      console.log('Login failed');
+    }
   }
-
-
-  ngOnInit(): void {
-    this.returnUrl = '/dashboard';
-    this.authService.logout();
-  }
-
-
-
 }

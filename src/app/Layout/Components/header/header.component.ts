@@ -6,6 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Auth/auth.service';
 
 
 @Component({
@@ -22,5 +24,12 @@ export class HeaderComponent {
 
   showFiller = true;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,private auth: AuthService,private router: Router) {}
+
+  async logout() {
+    console.log('loging out...');
+    await this.auth.logout();
+    this.router.navigate(['/session/authenticate']);
+    console.log('logged out');
+  }
 }

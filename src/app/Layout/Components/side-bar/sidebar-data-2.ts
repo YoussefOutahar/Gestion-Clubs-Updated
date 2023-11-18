@@ -2,54 +2,59 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems2: NavItem[] = [
 
-    // {
-    //     navCap: 'Espace Actors ',
-    // }
     {
-        displayName: 'Office',
+        navCap: 'Espace Admin',
+    },
+    {
+        displayName: 'Dashboard',
         iconName: 'home',
-        route: '/dashboard/office',
-    },
-    {
-        displayName: 'Budget',
-        iconName: 'money',
-        route: '/dashboard/budget',
-    },
-    {
-        displayName: 'Gantt',
-        iconName: 'calendar',
-        route: '/dashboard/gantt',
-    },
-    {
-        displayName: 'Ressources',
-        iconName: 'people',
-        route: '/dashboard/ressources',
-    },
-    {
-        displayName: 'Activity Network',
-        iconName: 'link',
-        route: '/dashboard/activity-network',
-    },
-    {
-        displayName: 'Reports',
-        iconName: 'list',
-        route: '/dashboard/reports',
-    },
-    {
-        displayName: 'Calendar',
-        iconName: 'calendar',
-        route: '/dashboard/calendar',
-    },
-    {
-        displayName: 'Risk Register',
-        iconName: 'list',
-        route: '/dashboard/risk-register',
-    },
-    {
-        displayName: 'RACI Matrix',
-        iconName: 'list',
-        route: '/dashboard/raci-matrix',
-    },
+        route: '/dashboard/home',
+    }
+    // {
+    //     displayName: 'Office',
+    //     iconName: 'home',
+    //     route: '/dashboard/office',
+    // },
+    // {
+    //     displayName: 'Budget',
+    //     iconName: 'money',
+    //     route: '/dashboard/budget',
+    // },
+    // {
+    //     displayName: 'Gantt',
+    //     iconName: 'calendar',
+    //     route: '/dashboard/gantt',
+    // },
+    // {
+    //     displayName: 'Ressources',
+    //     iconName: 'people',
+    //     route: '/dashboard/ressources',
+    // },
+    // {
+    //     displayName: 'Activity Network',
+    //     iconName: 'link',
+    //     route: '/dashboard/activity-network',
+    // },
+    // {
+    //     displayName: 'Reports',
+    //     iconName: 'list',
+    //     route: '/dashboard/reports',
+    // },
+    // {
+    //     displayName: 'Calendar',
+    //     iconName: 'calendar',
+    //     route: '/dashboard/calendar',
+    // },
+    // {
+    //     displayName: 'Risk Register',
+    //     iconName: 'list',
+    //     route: '/dashboard/risk-register',
+    // },
+    // {
+    //     displayName: 'RACI Matrix',
+    //     iconName: 'list',
+    //     route: '/dashboard/raci-matrix',
+    // },
 //     {
 //         navCap: 'Espace Actors ',
 //     },

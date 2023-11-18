@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,8 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
     HttpClientModule,
     BrowserAnimationsModule,
     TablerIconsModule.pick(TablerIcons),
+    // ==========================
+    NgxSpinnerModule,
   ],
   exports: [TablerIconsModule],
   providers: [],

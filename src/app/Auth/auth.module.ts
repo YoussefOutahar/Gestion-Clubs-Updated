@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
-import { } from 'ngx-webstorage';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,7 @@ import { } from 'ngx-webstorage';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     RouterModule.forChild(AuthRoutes)
   ],
   declarations: [

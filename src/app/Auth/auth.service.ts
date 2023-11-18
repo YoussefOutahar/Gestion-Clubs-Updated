@@ -1,53 +1,86 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 
-import { Constants } from '../Config/constants';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, filter, map, take } from 'rxjs';
 
-import { LoginRequest } from './Interfaces/LoginRequest';
-import { RegisterRequest } from './Interfaces/RegisterRequest';
-import { TokenResponse } from './Interfaces/TokenResponse';
+import { AuthChangeEvent, Session, SupabaseClient, User, createClient } from '@supabase/supabase-js';
+import { supabaseEnvironment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private router: Router, private http: HttpClient) {}
+  private supabase: SupabaseClient;
+  private _currentUser: BehaviorSubject<boolean | User | any> =
+    new BehaviorSubject(null);
 
-  publicUrlAuth = Constants.API_URL_AUTH;
+  constructor(private router: Router) {
+    this.supabase = createClient(
+      supabaseEnvironment.supabaseUrl,
+      supabaseEnvironment.supabaseKey
+    );
 
-  login(email: string, password: string): void {
-    // Sett Session and token
-    console.log('Login In')
+    const user = this.supabase.auth.getUser().then((user) => {
+      if (user) {
+        this._currentUser.next(user);
+      } else {
+        this._currentUser.next(false);
+        this.router.navigateByUrl('/', { replaceUrl: true })
+      }
+    });
 
-    const data: LoginRequest = {
-      email: email,
-      password: password,
-    };
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
 
-    // this.http.post<TokenResponse>(this.publicUrlAuth + 'login', data).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     localStorage.setItem('isLoggedIn', 'true');
-    //     localStorage.setItem('access_token', res.access_token);
-    //     localStorage.setItem('refresh_token', res.refresh_token);
-    //     this.router.navigate(['/dashboard']);
-    //   },
-    //   (err) => {
-    //     console.log(err);
+      if (event === 'SIGNED_IN') {
+        this._currentUser.next(session?.user);
+      } else {
+        this._currentUser.next(false);
+        router.navigate(['/session/authenticate']);
+      }
+    });
+  }
+
+  authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
+    return this.supabase.auth.onAuthStateChange(callback)
+  }
+
+  login(email: string, password: string) {
+    return this.supabase.auth.signInWithPassword({email, password});
+  }
+
+  signInWithEmail(email: string) {
+    return this.supabase.auth.signInWithOtp({
+      email,
+    })
+  }
+
+  isLoggedIn(): Observable<boolean | UrlTree> {
+    // return !!this.supabase.auth.getSession().then((session) => {
+    //   if (session) {
+    //     return true;
+    //   } else {
+    //     return false;
     //   }
-    // );
-
+    // });
+    return this._currentUser.pipe(
+      filter((val) => val !== null), // Filter out initial Behaviour subject value
+      take(1), // Otherwise the Observable doesn't complete!
+      map((isAuthenticated) => {
+        if (isAuthenticated) {
+          return true
+        } else {
+          return this.router.createUrlTree(['/session/authenticate'])
+        }
+      })
+    )
   }
 
-  isLoggedIn(): boolean {
-    // this.router.navigate(['dashboard/home']);
-    return true;
-    // return !!localStorage.getItem('token');
+  logout() {
+    return this.supabase.auth.signOut()
   }
 
-  logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('token');
+  get currentUser() {
+    return this._currentUser.asObservable();
   }
 }
