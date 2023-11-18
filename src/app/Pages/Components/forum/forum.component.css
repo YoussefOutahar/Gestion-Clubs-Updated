@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 16px;
+  }
+  
+  .bottom-container {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .input-container {
+    flex-grow: 1;
+  }
+  
+  .button-container {
+    flex-shrink: 0;
+  }
+  
