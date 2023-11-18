@@ -9,32 +9,32 @@ export const navItems2: NavItem[] = [
         displayName: 'Dashboard',
         iconName: 'home',
         route: '/dashboard/home',
-    }
-    // {
-    //     displayName: 'Office',
-    //     iconName: 'home',
-    //     route: '/dashboard/office',
-    // },
-    // {
-    //     displayName: 'Budget',
-    //     iconName: 'money',
-    //     route: '/dashboard/budget',
-    // },
-    // {
-    //     displayName: 'Gantt',
-    //     iconName: 'calendar',
-    //     route: '/dashboard/gantt',
-    // },
-    // {
-    //     displayName: 'Ressources',
-    //     iconName: 'people',
-    //     route: '/dashboard/ressources',
-    // },
-    // {
-    //     displayName: 'Activity Network',
-    //     iconName: 'link',
-    //     route: '/dashboard/activity-network',
-    // },
+    },
+    {
+         displayName: 'Clubs',
+         iconName: 'home',
+         route: '/dashboard/clubs',
+    },
+    {
+        displayName: 'Members',
+        iconName: 'money',
+        route: '/dashboard/members',
+    },
+    {
+        displayName: 'Finance management',
+        iconName: 'calendar',
+        route: '/dashboard/finance',
+    },
+    {
+        displayName: 'Events',
+        iconName: 'people',
+        route: '/dashboard/events',
+    },
+    {
+        displayName: 'Validation Page',
+        iconName: 'link',
+        route: '/dashboard/validation',
+    },
     // {
     //     displayName: 'Reports',
     //     iconName: 'list',

@@ -1,3 +1,6 @@
+import { Time } from "@angular/common";
+import { Timestamp } from "rxjs";
+
 export interface Club {
     id: number;
     name: string;
@@ -37,4 +40,24 @@ export interface ForumMessage {
     forum_id: number;
     user_id: string;
     content: string;
+}
+
+export interface Event {
+    id: number;
+    name: string;
+    date: Time;
+    cost: number;
+    img: string;
+    earnings: number;
+    supp_budget:number;
+    url: string;
+    id_club: number;
+    description: string;
+    location: string;
+    file_name: string;
+    aimed_target: string;
+    time: Time;
+    funding_method: string;
+    article_for_newsletter: string;
+    state: string;
 }
