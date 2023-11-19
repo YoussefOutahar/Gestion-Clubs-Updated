@@ -52,7 +52,7 @@ export class ClubsService {
     return data ? data : [];
   }
 
-  async deleteClubById(id: string): Promise<Club[]> {
+  async deleteClubById(id: number): Promise<Club[]> {
     const { data, error } = await this.supabase.from(TableNames.Clubs).delete().eq('id', id);
     if (error) {
       throw error;

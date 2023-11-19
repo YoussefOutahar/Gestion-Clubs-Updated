@@ -1,7 +1,33 @@
-<div *ngFor="let club of clubs" class="club-card">
-  <img [src]="club.logo" alt="{{ club.name }}" class="club-logo">
-  <h3>{{ club.name }}</h3>
-  <p>{{ club.mission }}</p>
-  <Button variant="contained" color="primary" (click)="showDetails(club)">View Details</Button>
-  <Button variant="contained" color="secondary" (click)="deleteClub(club)">Delete</Button>
+<!-- clubs.component.html -->
+<div *ngIf="showDetails" class="details-container">
+  <button mat-raised-button color="primary" (click)="handleBackToTop()" class="back-button">
+    <mat-icon>arrow_back</mat-icon> Back to Club List
+  </button>
+  <h2>{{ activeClub?.name }}</h2>
+  <div class="details-row">
+    <div class="image-container">
+      <img [src]="activeClub?.logo" alt="{{ activeClub?.name }}" style="width: 100%;">
+    </div>
+    <div class="club-details-card">
+      <p>Creation date: {{ activeClub?.date_creation }}</p>
+      <p>Number of Members: {{ activeClub?.nb_member }}</p>
+      <p>Category: {{ category }}</p>
+      <p>Mission: {{ activeClub?.mission }}</p>
+      <button mat-raised-button color="warn" (click)="handleDelete(activeClub)">Delete</button>
+    </div>
+  </div>
+  <div>
+    <!-- Add dialog for delete confirmation -->
+  </div>
+</div>
+
+<div *ngIf="!showDetails">
+  <mat-grid-list cols="4" rowHeight="200px" gutterSize="10">
+    <mat-grid-tile *ngFor="let club of clubs" (click)="handleLearnMore(clubs.indexOf(club))" class="club-card">
+      <img [src]="club.logo" alt="{{ club.name }}" style="width: 100%; border-radius: 8px 8px 0 0;">
+      <mat-grid-tile-footer style="padding: 8px; border-radius: 0 0 8px 8px;">
+        <h3>{{ club.name }}</h3>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
