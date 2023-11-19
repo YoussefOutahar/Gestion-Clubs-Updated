@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+  <!-- Add form fields for editing user details -->
+  <p>Name: {{ data.name }}</p>
+  <p>Email: {{ data.email }}</p>
+  <!-- Add more fields as needed -->
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</div>
