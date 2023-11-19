@@ -15,6 +15,7 @@ import { Notification } from 'src/app/DataBase/Models/notification';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
