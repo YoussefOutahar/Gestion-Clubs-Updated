@@ -22,11 +22,11 @@ export class ClubsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getClubs();
+    this.getActiveClubs();
   }
 
-  getClubs() {
-    this.clubsService.getClubs().then(clubs => {
+  getActiveClubs() {
+    this.clubsService.getActiveClubs().then(clubs => {
       this.clubs = clubs;
       console.log(this.clubs);
     });
@@ -59,7 +59,7 @@ export class ClubsComponent implements OnInit {
   async handleConfirmDelete() {
     if (this.clubToDelete) {
       await this.clubsService.deleteClubById(this.clubToDelete.id);
-      this.getClubs();
+      this.getActiveClubs();
     }
 
     this.openDeleteDialog = false;
