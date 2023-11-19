@@ -13,6 +13,8 @@ export class ForumComponent implements OnInit {
   messages: String[];
   message: string;
 
+  selectedConversation: any
+
   constructor(
     private ClubsService: ClubsService,
   ) {
