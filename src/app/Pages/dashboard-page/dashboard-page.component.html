@@ -1,3 +1,11 @@
-<p>
-  dashboard-page works!
-</p>
+<div class="dashboard-container">
+  <!-- First Row with 3 Cards -->
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let card of topRowCards">
+      <mat-card class="dashboard-card">
+        <!-- Card Content, e.g., Chart Component -->
+        <h2>{{ card.title }}</h2>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

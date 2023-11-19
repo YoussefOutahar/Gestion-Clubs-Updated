@@ -13,11 +13,12 @@ import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
 import { NgApexchartsModule } from "ng-apexcharts";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventsComponent } from './Components/events/events.component';
 import { ValidationComponent } from './Components/validation/validation.component';
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
+import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -44,8 +45,9 @@ import { MemberDeleteDialogComponent } from './Components/Membershandling/member
     CommonModule,
     MaterialModule,
     MatCommonModule,
-    NgApexchartsModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgApexchartsModule,
     RouterModule.forChild(pageRoutes),
     
   ],
