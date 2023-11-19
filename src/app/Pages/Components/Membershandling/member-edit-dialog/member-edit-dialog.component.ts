@@ -5,7 +5,6 @@ import { Profile } from 'src/app/DataBase/Models/profile';
 @Component({
   selector: 'app-member-edit-dialog',
   templateUrl: './member-edit-dialog.component.html',
-  styleUrls: ['./member-edit-dialog.component.css'],
 })
 export class MemberEditDialogComponent implements OnInit {
   constructor(
