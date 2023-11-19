@@ -9,14 +9,34 @@
   <!-- Notification Dropdown -->
   <!-- --------------------------------------------------------------- -->
 
-  <button mat-icon-button aria-label="Notifications">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="notificationMenu"
+    aria-label="Notifications"
+  >
     <i-tabler
       class="d-flex"
       name="bell"
-      matBadge="1"
+      [matBadge]="notifications.length"
       matBadgeColor="primary"
     ></i-tabler>
   </button>
+
+  <mat-menu #notificationMenu="matMenu" class="topbar-dd cardWithShadow">
+    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+      <button
+        mat-menu-item
+        *ngFor="let notification of notifications"
+        (click)="handleNotificationClick(notification)"
+      >
+        <mat-icon>{{ notification.icon }}</mat-icon>
+        <span>{{ notification.title }}</span>
+      </button>
+    </ng-container>
+    <ng-template #noNotifications>
+      <div class="empty-state">No notifications</div>
+    </ng-template>
+  </mat-menu>
 
   <span class="flex-1-auto"></span>
 
@@ -60,8 +80,9 @@
         (click)="logout()"
         color="primary"
         class="w-100"
-        >Logout</button
       >
+        Logout
+      </button>
     </div>
   </mat-menu>
 </mat-toolbar>
