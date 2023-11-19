@@ -21,3 +21,13 @@ table {
     margin-right: 5px;
     cursor: pointer;
   }
+
+  .red-button {
+    background-color: rgba(255, 0, 0, 0.864);
+    color: white; /* You may adjust the text color based on your preference */
+  }
+
+  .green-button {
+    background-color: rgb(108, 193, 166);
+    color: white; /* You may adjust the text color based on your preference */
+  }

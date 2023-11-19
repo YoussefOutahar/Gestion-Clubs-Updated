@@ -28,6 +28,14 @@ export class ClubsService {
     return data;
   }
 
+  async getActiveClubs(): Promise<Club[]> {
+    const { data, error } = await this.supabase.from(TableNames.Clubs).select('*').eq('state', 'active');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   async getPendingClubs(): Promise<Club[]> {
     const { data, error } = await this.supabase.from(TableNames.Clubs).select('*').eq('state', 'pending');
     if (error) {
@@ -54,6 +62,15 @@ export class ClubsService {
 
   async deleteClubById(id: number): Promise<Club[]> {
     const { data, error } = await this.supabase.from(TableNames.Clubs).delete().eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+  
+  async validateClub(club: Club): Promise<Club[]> {
+    const updatedClub: Club = { ...club, state: 'active' };
+    const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedClub).eq('id', club.id);
     if (error) {
       throw error;
     }
@@ -203,6 +220,23 @@ export class ClubsService {
       throw error;
     }
     return data;
+  }
+
+  async validateEvent(event: Event): Promise<Event[]> {
+    const updatedEvent: Event = { ...event, state: 'active' };
+    const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedEvent).eq('id', event.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async deleteEventById(id: number): Promise<Event[]> {
+    const { data, error } = await this.supabase.from(TableNames.Events).delete().eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
   }
 
 }

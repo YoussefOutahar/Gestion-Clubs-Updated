@@ -23,7 +23,7 @@ export class ValidationComponent implements OnInit{
   }
 
   getPendingClubs() {
-    this.clubsService.getClubs().then(clubs => {
+    this.clubsService.getPendingClubs().then(clubs => {
       this.clubs = clubs;
       
     console.log(this.clubs);
@@ -32,7 +32,7 @@ export class ValidationComponent implements OnInit{
   }
 
   getPendingEvents() {
-    this.clubsService.getEvents().then(events => {
+    this.clubsService.getPendingEvents().then(events => {
       this.events = events;
       
     console.log(this.events);
@@ -41,18 +41,42 @@ export class ValidationComponent implements OnInit{
   }
 
   validateClub(club: Club) {
-    // Implement logic to validate the club
+    this.clubsService.validateClub(club).then((updatedClubs) => {
+      // Optionally, update the local 'clubs' array with the updated data
+      this.clubs = updatedClubs;
+      console.log('Club validated:', club);
+    });
   }
 
   cancelClub(club: Club) {
-    // Implement logic to cancel the club
+    this.clubsService.deleteClubById(club.id).then(() => {
+        // Optionally, update the local 'clubs' array after deletion
+        this.clubs = this.clubs.filter(c => c.id !== club.id);
+        console.log('Club canceled:', club);
+    });
+}
+
+  showClubDetail(club: Club) {
+    // Implement logic to cancel the event
   }
 
   validateEvent(event: Event) {
-    // Implement logic to validate the event
+    this.clubsService.validateEvent(event).then((updatedEvent) => {
+      // Optionally, update the local 'clubs' array with the updated data
+      this.events = updatedEvent;
+      console.log('Event validated:', event);
+    });
   }
 
   cancelEvent(event: Event) {
+    this.clubsService.deleteEventById(event.id).then(() => {
+        // Optionally, update the local 'events' array after deletion
+        this.events = this.events.filter(e => e.id !== event.id);
+        console.log('Event canceled:', event);
+    });
+}
+
+  showEventDetails(event: Event) {
     // Implement logic to cancel the event
   }
 
