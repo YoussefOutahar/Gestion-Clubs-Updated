@@ -16,6 +16,18 @@ const routes: Routes = [
         loadChildren: () =>
           import('./Pages/pages.module').then((m) => m.PagesModule),
       },
+      {
+        path: 'ui-components',
+        loadChildren: () =>
+          import('./Pages/ui-components/ui-components.module').then(
+            (m) => m.UicomponentsModule
+          ),
+      },
+      {
+        path: 'extra',
+        loadChildren: () =>
+          import('./Pages/extra/extra.module').then((m) => m.ExtraModule),
+      },
     ],
   },
   {

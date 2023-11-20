@@ -1,120 +1,89 @@
 import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
-  {
-    navCap: 'Test',
-  },
-  {
-    displayName: 'managers',
-    iconName: 'layout-dashboard',
-    route: '/dashboard/managers',
-  },
-  {
-    navCap: 'Test 2',
-  },
-  {
-    displayName: 'nonManagers',
-    iconName: 'rosette',
-    route: '/dashboard/nonManagers',
-  },
-  {
-    displayName: 'nonAffectedCollabs',
-    iconName: 'poker-chip',
-    route: '/dashboard/GetnonAffectedCollabs',
-  },
-  {
-    displayName: 'MaleFemaleRatio',
-    iconName: 'list',
-    route: '/dashboard/MaleFemaleRatio',
-  },
-  {
-    displayName: 'ManagerWithoutAcc',
-    iconName: 'layout-navbar-expand',
-    route: '/dashboard/ManagerWithoutAcc',
-  },
-  {
-    displayName: 'VisualizeRatio',
-    iconName: 'tooltip',
-    route: '/dashboard/VisualizeRatio',
-  },
-  {
-    navCap: 'Test 3',
-  },
-  {
-    displayName: 'PourcentageEcole',
-    iconName: 'lock',
-    route: '/dashboard/PourcentageEcole',
-  },
-  {
-    displayName: 'recruitment',
-    iconName: 'user-plus',
-    route: '/dashboard/recruitment',
-  },
-  {
-    navCap: 'Hadchi zwin',
-  },
-  {
-    displayName: 'collaborateurs',
-    iconName: 'mood-smile',
-    route: '/dashboard/collaborateurs',
-  },
-  {
-    displayName: 'diplomeRatio',
-    iconName: 'aperture',
-    route: '/dashboard/diplomeRatio',
-  },
-  {
-    displayName: 'salaryEvolution',
-    iconName: 'aperture',
-    route: '/dashboard/salaryEvolution/:id',
-  },
-  {
-    displayName: 'TurnOver',
-    iconName: 'aperture',
-    route: '/dashboard/TurnOver',
-  },
-  {
-    displayName: 'Technologies',
-    iconName: 'aperture',
-    route: '/dashboard/Technologies',
-  },
-  {
-    displayName: 'salaryEvolution',
-    iconName: 'aperture',
-    route: '/dashboard/salaryEvolution',
-  },
-  {
-    displayName: 'AffectedCollabs',
-    iconName: 'poker-chip',
-    route: '/dashboard/AffectedCollabs',},
-  {
-    displayName: 'Add collaboarteur',
-    iconName: 'poker-chip',
-    route: '/dashboard/add',
-  },
-  {
-    displayName: 'collaborateurs list',
-    iconName: 'list',
-    route: '/dashboard/listofcollaboratorstoupdate',
-  }
-  ,
-  {
-    displayName: 'Managers RH Activated',
-    iconName: 'list',
-    route: '/dashboard/ManagersRH/Activated',
-  }
-  ,
-  {
-    displayName: 'Managers RH Desactivated',
-    iconName: 'list',
-    route: '/dashboard/ManagersRH/Desactivated',
-  }
-  ,
-  {
-    displayName: 'Importer ou Exporter',
-    iconName: 'tooltip',
-    route: '/dashboard/Import_Export/Excel',
-  }
 
+    {
+        navCap: 'Espace Admin',
+    },
+    {
+        displayName: 'Dashboard',
+        iconName: 'home',
+        route: '/dashboard/home',
+    },
+    {
+         displayName: 'Clubs',
+         iconName: 'home',
+         route: '/dashboard/clubs',
+    },
+    {
+        displayName: 'Members',
+        iconName: 'money',
+        route: '/dashboard/members',
+    },
+    {
+        displayName: 'Finance management',
+        iconName: 'calendar',
+        route: '/dashboard/finance',
+    },
+    {
+        displayName: 'Events',
+        iconName: 'people',
+        route: '/dashboard/events',
+    },
+    {
+        displayName: 'Validation Page',
+        iconName: 'link',
+        route: '/dashboard/validation',
+    },
 
-];
+    // ====================================
+    {
+      navCap: 'Home',
+    },
+    {
+      displayName: 'Dashboard',
+      iconName: 'layout-dashboard',
+      route: '/dashboard/dash',
+    },
+    {
+      navCap: 'Ui Components',
+    },
+    {
+      displayName: 'Badge',
+      iconName: 'rosette',
+      route: '/ui-components/badge',
+    },
+    {
+      displayName: 'Chips',
+      iconName: 'poker-chip',
+      route: '/ui-components/chips',
+    },
+    {
+      displayName: 'Lists',
+      iconName: 'list',
+      route: '/ui-components/lists',
+    },
+    {
+      displayName: 'Menu',
+      iconName: 'layout-navbar-expand',
+      route: '/ui-components/menu',
+    },
+    {
+      displayName: 'Tooltips',
+      iconName: 'tooltip',
+      route: '/ui-components/tooltips',
+    },
+    {
+      navCap: 'Extra',
+    },
+    {
+      displayName: 'Icons',
+      iconName: 'mood-smile',
+      route: '/extra/icons',
+    },
+    {
+      displayName: 'Sample Page',
+      iconName: 'aperture',
+      route: '/extra/sample-page',
+    },
+]

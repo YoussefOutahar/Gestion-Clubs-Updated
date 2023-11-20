@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { pageRoutes } from './pages.routing';
 
+import { TablerIconsModule } from 'angular-tabler-icons';
+import * as TablerIcons from 'angular-tabler-icons/icons';
+
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 import { ClubsComponent } from './Components/clubs/clubs.component';
@@ -18,11 +21,12 @@ import { EventsComponent } from './Components/events/events.component';
 import { ValidationComponent } from './Components/validation/validation.component';
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { AppDashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
     DashboardPageComponent,
+    AppDashboardComponent,
     // ================================ //
 
     // ========== Componenets ========== //
@@ -49,8 +53,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     NgApexchartsModule,
     RouterModule.forChild(pageRoutes),
-    
+    TablerIconsModule.pick(TablerIcons),
   ],
-  exports: [],
+  exports: [TablerIconsModule],
 })
 export class PagesModule {}
