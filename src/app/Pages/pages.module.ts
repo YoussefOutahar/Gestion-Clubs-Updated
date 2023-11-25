@@ -24,6 +24,8 @@ import { ValidationComponent } from './Components/validation/validation.componen
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -59,5 +61,6 @@ import { AppDashboardComponent } from './dashboard/dashboard.component';
     TablerIconsModule.pick(TablerIcons),
   ],
   exports: [TablerIconsModule],
+  providers: [DatePipe],
 })
 export class PagesModule {}

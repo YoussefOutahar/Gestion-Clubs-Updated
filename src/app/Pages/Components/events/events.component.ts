@@ -1,46 +1,104 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
+import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
 import { Event } from 'src/app/DataBase/Models/club';
 import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
 
+import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import { INITIAL_EVENTS, createEventId } from './events-utils';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
+  events: Event[] = [];
 
-    events: Event[] = [];
+  calendarVisible = signal(true);
+  calendarOptions = signal<CalendarOptions>({
+    plugins: [
+      interactionPlugin,
+      dayGridPlugin,
+      timeGridPlugin,
+      listPlugin,
+    ],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    initialView: 'dayGridMonth',
+    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this)
+    /* you can update a remote database when these fire:
+    eventAdd:
+    eventChange:
+    eventRemove:
+    */
+  });
+  currentEvents = signal<EventApi[]>([]);
 
-    calendarOptions: CalendarOptions = {
-      initialView: 'dayGridMonth',
-      plugins: [dayGridPlugin]
-    };
-
-    constructor(
-        private clubsService: ClubsService
-      ) { }
+  constructor(private clubsService: ClubsService,private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getEvents();
   }
 
-  getEvents(){
-    this.clubsService.getEvents().then(events => {
-        this.events = events;
-        
-      console.log(this.events);
-      });
-      console.log(this.events);
+  getEvents() {
+    this.clubsService.getEvents().then((events) => {
+      this.events = events;
+    });
   }
 
   showDetails(club: Event) {
     console.log(club);
   }
 
-  deleteClub(club: Event) {
+  handleCalendarToggle() {
+    this.calendarVisible.update((bool) => !bool);
   }
 
+  handleWeekendsToggle() {
+    this.calendarOptions.mutate((options) => {
+      options.weekends = !options.weekends;
+    });
+  }
+
+  handleDateSelect(selectInfo: DateSelectArg) {
+    const title = prompt('Please enter a new title for your event');
+    const calendarApi = selectInfo.view.calendar;
+
+    calendarApi.unselect(); // clear date selection
+
+    if (title) {
+      calendarApi.addEvent({
+        id: createEventId(),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+      });
+    }
+  }
+
+  handleEventClick(clickInfo: EventClickArg) {
+    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
+    }
+  }
+
+  handleEvents(events: EventApi[]) {
+    this.currentEvents.set(events);
+    this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
+  }
 }
