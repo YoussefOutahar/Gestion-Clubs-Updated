@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/core';
 import { Event } from 'src/app/DataBase/Models/club';
 import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'app-events',
@@ -10,6 +13,11 @@ import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
 export class EventsComponent implements OnInit {
 
     events: Event[] = [];
+
+    calendarOptions: CalendarOptions = {
+      initialView: 'dayGridMonth',
+      plugins: [dayGridPlugin]
+    };
 
     constructor(
         private clubsService: ClubsService

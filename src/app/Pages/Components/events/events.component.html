@@ -1,4 +1,7 @@
 <!-- Add a container div for the ngFor loop -->
+
+<full-calendar [options]="calendarOptions"></full-calendar>
+
 <div *ngFor="let event of events" class="event-card">
     <img [src]="event.img" alt="{{ event.name }}" class="event-logo">
     <h3>{{ event.name }}</h3>
