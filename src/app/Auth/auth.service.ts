@@ -56,20 +56,15 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean | UrlTree> {
-    // return !!this.supabase.auth.getSession().then((session) => {
-    //   if (session) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // });
     return this._currentUser.pipe(
       filter((val) => val !== null), // Filter out initial Behaviour subject value
       take(1), // Otherwise the Observable doesn't complete!
       map((isAuthenticated) => {
         if (isAuthenticated) {
+          console.log('isAuthenticated', isAuthenticated)
           return true
         } else {
+          console.log('isAuthenticated', isAuthenticated)
           return this.router.createUrlTree(['/session/authenticate'])
         }
       })
