@@ -29,17 +29,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
               "src/assets/scss/style.scss"
             ],
             "scripts": [
-              "src/assets/js/app.min.js",
-              "src/assets/js/dashboard.js",
-              "src/assets/js/sidebarmenu.js",
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
             "serviceWorker": true,
@@ -100,8 +96,7 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/assets"
             ],
             "inlineStyleLanguage": "scss",
             "styles": [
