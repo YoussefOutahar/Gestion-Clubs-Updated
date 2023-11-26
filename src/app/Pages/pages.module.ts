@@ -6,6 +6,7 @@ import { pageRoutes } from './pages.routing';
 import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
+import { MatIconModule } from '@angular/material/icon';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -26,6 +27,7 @@ import { MemberDeleteDialogComponent } from './Components/Membershandling/member
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 import { DatePipe } from '@angular/common';
+import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -36,6 +38,9 @@ import { DatePipe } from '@angular/common';
     // ========== Componenets ========== //
     // ================================ //
     ClubsComponent,
+
+    // ========== Finance ========== //
+    AdminFinanceComponent,
     
     // ========== Members ========== //
     MembersComponent,
@@ -54,6 +59,7 @@ import { DatePipe } from '@angular/common';
     MaterialModule,
     MatCommonModule,
     FormsModule,
+    MatIconModule,
     ReactiveFormsModule,
     NgApexchartsModule,
     FullCalendarModule,

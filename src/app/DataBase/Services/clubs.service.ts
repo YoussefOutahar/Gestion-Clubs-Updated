@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from 'src/environments/environment';
 
-import { Club, Category, Event, Meeting, Forum, ForumMessage } from '../Models/club';
+import { Club, Category, Event, Meeting, Forum, ForumMessage ,Budget } from '../Models/club';
 import { TableNames } from 'src/app/Config/constants';
 
 @Injectable({
@@ -67,7 +67,7 @@ export class ClubsService {
     }
     return data ? data : [];
   }
-  
+
   async validateClub(club: Club): Promise<Club[]> {
     const updatedClub: Club = { ...club, state: 'active' };
     const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedClub).eq('id', club.id);
@@ -239,4 +239,89 @@ export class ClubsService {
     return data ? data : [];
   }
 
+  async getTotalSupplementaryBudget(): Promise<number> {
+    const { data, error } = await this.supabase.from(TableNames.Events).select('supp_budget');
+    if (error) {
+      throw error;
+    }
+    
+    // Summing up the supp_budget values
+    const totalSupplementaryBudget = data ? data.reduce((acc, event) => acc + event.supp_budget, 0) : 0;
+    return totalSupplementaryBudget;
+  }
+
+  async getTotalSupplementaryBudgetByClub(clubId: number): Promise<number> {
+    // Fetch events related to the club
+    const { data: events, error: eventsError } = await this.supabase.from(TableNames.Events).select('supp_budget').eq('id_club', clubId);
+    if (eventsError) {
+      throw eventsError;
+    }
+
+    // Calculate the total supplementary budget for the club
+    const totalSupplementaryBudget = events ? events.reduce((acc, event) => acc + event.supp_budget, 0) : 0;
+
+    return totalSupplementaryBudget;
+  }
+
+  async getTotalSuppEarningsByClub(clubId: number): Promise<number> {
+    // Fetch events related to the club
+    const { data: events, error: eventsError } = await this.supabase.from(TableNames.Events).select('earnings').eq('id_club', clubId);
+    if (eventsError) {
+      throw eventsError;
+    }
+    // Calculate the total supplementary earnings for the club
+    const totalSuppEarnings = events ? events.reduce((acc, event) => acc + event.earnings, 0) : 0;
+    return totalSuppEarnings;
+  }
+
+
+  // ============== Budget ============== //
+
+  async addBudget(budget: Budget): Promise<Budget[]> {
+    const { data, error } = await this.supabase.from(TableNames.Budget).insert([budget]);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async getBudgets(): Promise<Budget[]> {
+    const { data, error } = await this.supabase.from(TableNames.Budget).select('*');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getBudgetByClub(id: number): Promise<Budget[]> {
+    const { data, error } = await this.supabase.from(TableNames.Budget).select('*').eq('id_club', id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getBudgetByYear(year: number): Promise<Budget[]> {
+    const { data, error } = await this.supabase.from(TableNames.Budget).select('*').eq('year', year);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getTotalBudgetByYear(year: number): Promise<number> {
+    const { data: budgets, error } = await this.supabase.from(TableNames.Budget).select('budget').eq('year', year);
+    if (error) {
+      throw error;
+    }
+  
+    if (budgets && budgets.length > 0) {
+      // Calculate the total budget for the given year
+      const totalBudget = budgets.reduce((sum, budget) => sum + budget.budget, 0);
+      return totalBudget;
+    }
+  
+    // Return 0 if there are no budgets for the given year
+    return 0;
+  }
 }

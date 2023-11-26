@@ -81,3 +81,12 @@ export interface Event {
     article_for_newsletter: string;
     state: string;
 }
+
+export interface Budget {
+    id: number;
+    id_club: number;
+    source: string;
+    budget: number;
+    rest: number;
+    year: number;
+}
