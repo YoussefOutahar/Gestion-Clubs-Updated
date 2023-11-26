@@ -8,6 +8,7 @@ import { EventsComponent } from './Components/events/events.component';
 
 import { authGuard } from '../Auth/auth.guard';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 
 export const pageRoutes: Routes = [
@@ -33,7 +34,7 @@ export const pageRoutes: Routes = [
   },
   {
     path: 'finance',
-    component: DashboardPageComponent,
+    component: AdminFinanceComponent,
     canActivate: [authGuard],
   },
   {

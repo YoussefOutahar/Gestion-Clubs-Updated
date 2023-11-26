@@ -1,0 +1,41 @@
+<!-- app/admin-finance/admin-finance.component.html -->
+
+<h1>Admin Finance Management</h1>
+
+<div class="finance-cards">
+  <div class="finance-card" *ngFor="let card of cardList">
+    <h2>{{ card.name }}</h2>
+    <p>{{ card.amount }} DH</p>
+    <mat-icon>{{ card.icon }}</mat-icon>
+  </div>
+</div>
+
+<div class="assign-budget-button">
+  <button mat-raised-button color="primary" routerLink="/AssignBudget">Assign Budget</button>
+</div>
+
+<div class="charges-table">
+  <h2>Charges Table</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Club Name</th>
+          <th>Assigned Budget</th>
+          <th>Total Supplementary Budget</th>
+          <th>Total Earned Budget</th>
+          <th>Rest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let club of clubs">
+          <td>{{ club.name }}</td>
+          <td>{{ club.budget }}</td>
+          <td>{{ club.supp_budget }}</td>
+          <td>{{ club.earnings }}</td>
+          <td>{{ club.rest }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
