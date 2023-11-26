@@ -7,19 +7,14 @@ import { ValidationComponent } from './Components/validation/validation.componen
 import { EventsComponent } from './Components/events/events.component';
 
 import { authGuard } from '../Auth/auth.guard';
-import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 
 export const pageRoutes: Routes = [
   {
     path: 'home',
     component: DashboardPageComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'dash',
-    component: AppDashboardComponent,
     canActivate: [authGuard],
   },
   {
@@ -45,6 +40,11 @@ export const pageRoutes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'meetings',
+    component: MeetingsComponent,
     canActivate: [authGuard],
   },
   {

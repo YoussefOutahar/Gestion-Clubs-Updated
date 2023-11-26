@@ -36,18 +36,23 @@ export class NavService {
     },
     {
       displayName: 'Members',
-      iconName: 'money',
+      iconName: 'users',
       route: '/dashboard/members',
     },
     {
       displayName: 'Finance management',
-      iconName: 'calendar',
+      iconName: 'pig-money',
       route: '/dashboard/finance',
     },
     {
       displayName: 'Events',
-      iconName: 'people',
+      iconName: 'speakerphone',
       route: '/dashboard/events',
+    },
+    {
+      displayName: 'Meetingss',
+      iconName: 'calendar-time',
+      route: '/dashboard/meetings',
     },
     {
       displayName: 'Validation Page',
@@ -58,11 +63,6 @@ export class NavService {
     // ====================================
     {
       navCap: 'Home',
-    },
-    {
-      displayName: 'Dashboard',
-      iconName: 'layout-dashboard',
-      route: '/dashboard/dash',
     },
     {
       navCap: 'Ui Components',

@@ -1,20 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
-import { Event } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
-
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { INITIAL_EVENTS, createEventId } from './events-utils';
+import { INITIAL_EVENTS, createEventId } from './meetings-utils';
 
 @Component({
-  selector: 'app-events',
-  templateUrl: './events.component.html',
+  selector: 'app-meetings',
+  templateUrl: './meetings.component.html',
 })
-export class EventsComponent implements OnInit {
-  events: Event[] = [];
+export class MeetingsComponent implements OnInit {
 
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
@@ -39,7 +35,8 @@ export class EventsComponent implements OnInit {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this)
-    /* you can update a remote database when these fire:
+    /* you can update a remote data
+    base when these fire:
     eventAdd:
     eventChange:
     eventRemove:
@@ -47,16 +44,10 @@ export class EventsComponent implements OnInit {
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private clubsService: ClubsService,private changeDetector: ChangeDetectorRef) {}
+
+  constructor(private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.getEvents();
-  }
-
-  getEvents() {
-    this.clubsService.getEvents().then((events) => {
-      this.events = events;
-    });
   }
 
   showDetails(club: Event) {
@@ -100,4 +91,5 @@ export class EventsComponent implements OnInit {
     this.currentEvents.set(events);
     this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
   }
+
 }
