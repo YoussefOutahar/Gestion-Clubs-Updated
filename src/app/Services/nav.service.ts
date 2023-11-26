@@ -50,6 +50,11 @@ export class NavService {
       route: '/dashboard/events',
     },
     {
+      displayName: 'Meetingss',
+      iconName: 'people',
+      route: '/dashboard/meetings',
+    },
+    {
       displayName: 'Validation Page',
       iconName: 'link',
       route: '/dashboard/validation',

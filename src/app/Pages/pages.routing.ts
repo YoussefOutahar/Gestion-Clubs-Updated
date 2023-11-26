@@ -8,6 +8,7 @@ import { EventsComponent } from './Components/events/events.component';
 
 import { authGuard } from '../Auth/auth.guard';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { MeetingsComponent } from './Components/meetings/meetings.component';
 
 export const pageRoutes: Routes = [
   {
@@ -38,6 +39,11 @@ export const pageRoutes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'meetings',
+    component: MeetingsComponent,
     canActivate: [authGuard],
   },
   {

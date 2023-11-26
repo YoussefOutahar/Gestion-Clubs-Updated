@@ -26,27 +26,26 @@ import { MemberDeleteDialogComponent } from './Components/Membershandling/member
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 import { DatePipe } from '@angular/common';
+import { MeetingsComponent } from './Components/meetings/meetings.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
     DashboardPageComponent,
     AppDashboardComponent,
-    // ================================ //
 
     // ========== Componenets ========== //
-    // ================================ //
     ClubsComponent,
     
     // ========== Members ========== //
     MembersComponent,
     MemberEditDialogComponent,
     MemberDeleteDialogComponent,
+    // ========== Meetings ========== //
+    MeetingsComponent,
     // ================================ //
-
     EventsComponent,
     ValidationComponent,
     ForumComponent,
-    
     // ================================ //
   ],
   imports: [
