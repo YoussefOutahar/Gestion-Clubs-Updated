@@ -12,7 +12,6 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
   events: Event[] = [];

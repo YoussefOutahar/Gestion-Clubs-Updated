@@ -24,7 +24,6 @@ import { EventsComponent } from './Components/events/events.component';
 import { ValidationComponent } from './Components/validation/validation.component';
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
-import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 import { DatePipe } from '@angular/common';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
@@ -33,7 +32,6 @@ import { MeetingsComponent } from './Components/meetings/meetings.component';
   declarations: [
     // ========== Pages ========== //
     DashboardPageComponent,
-    AppDashboardComponent,
 
     // ========== Componenets ========== //
     ClubsComponent,
