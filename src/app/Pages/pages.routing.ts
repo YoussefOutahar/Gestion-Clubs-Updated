@@ -9,6 +9,7 @@ import { EventsComponent } from './Components/events/events.component';
 import { authGuard } from '../Auth/auth.guard';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 
 export const pageRoutes: Routes = [
   {
@@ -34,6 +35,11 @@ export const pageRoutes: Routes = [
   {
     path: 'finance',
     component: AdminFinanceComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'assignBudget',
+    component: AssignBudgetComponent,
     canActivate: [authGuard],
   },
   {

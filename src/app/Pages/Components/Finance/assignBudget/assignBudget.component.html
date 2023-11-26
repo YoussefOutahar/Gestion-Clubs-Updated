@@ -1,0 +1,29 @@
+<!-- assignBudget.component.html -->
+
+<div>
+  <h2>Assign Budget to Clubs</h2>
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Club Name</th>
+          <th>Budget</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let club of clubs">
+          <td>{{ club.name }}</td>
+          <td>
+            <mat-form-field floatLabel="always">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" formControlName="{{ club.id }}" class="example-right-align" placeholder="0">
+              <span matTextPrefix>$&nbsp;</span>
+              <span matTextSuffix>.00</span>
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Assign Budget</button>
+  </form>
+</div>

@@ -28,6 +28,9 @@ import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 import { DatePipe } from '@angular/common';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -41,6 +44,7 @@ import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.co
 
     // ========== Finance ========== //
     AdminFinanceComponent,
+    AssignBudgetComponent,
     
     // ========== Members ========== //
     MembersComponent,
@@ -60,6 +64,8 @@ import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.co
     MatCommonModule,
     FormsModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule,
     NgApexchartsModule,
     FullCalendarModule,
