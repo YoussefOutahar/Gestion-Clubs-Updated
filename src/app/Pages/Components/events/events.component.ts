@@ -1,5 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventApi,
+  EventClickArg,
+} from '@fullcalendar/core';
 import { Event } from 'src/app/DataBase/Models/club';
 import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
 
@@ -14,23 +19,20 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
   templateUrl: './events.component.html',
 })
 export class EventsComponent implements OnInit {
-  events: Event[] = [];
-
   calendarVisible = signal(true);
+
+  currentEvents = signal<EventApi[]>([]);
+
   calendarOptions = signal<CalendarOptions>({
-    plugins: [
-      interactionPlugin,
-      dayGridPlugin,
-      timeGridPlugin,
-      listPlugin,
-    ],
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    // events: this.currentEvents,
     weekends: true,
     editable: true,
     selectable: true,
@@ -38,26 +40,42 @@ export class EventsComponent implements OnInit {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
     eventRemove:
     */
   });
-  currentEvents = signal<EventApi[]>([]);
 
-  constructor(private clubsService: ClubsService,private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private clubsService: ClubsService,
+    private changeDetector: ChangeDetectorRef
+  ) {
+    
+  }
 
   ngOnInit() {
-    this.getEvents();
+    this.clubsService.getEvents().then((events) => {
+      const convertedEvents = events.map((event) => ({
+        id: createEventId(),
+        title: event.name,
+        start: event.date,
+      }));
+  
+      this.calendarOptions.update((options) => {
+        options.initialEvents = [...INITIAL_EVENTS, ...convertedEvents];
+        return options;
+      });
+    });
+    this.changeDetector.detectChanges();
   }
 
-  getEvents() {
-    this.clubsService.getEvents().then((events) => {
-      this.events = events;
-    });
-  }
+  // getEvents() {
+  //   this.clubsService.getEvents().then((events) => {
+  //     this.events = events;
+  //   });
+  // }
 
   showDetails(club: Event) {
     console.log(club);
@@ -85,13 +103,17 @@ export class EventsComponent implements OnInit {
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        allDay: selectInfo.allDay
+        allDay: selectInfo.allDay,
       });
     }
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    if (
+      confirm(
+        `Are you sure you want to delete the event '${clickInfo.event.title}'`
+      )
+    ) {
       clickInfo.event.remove();
     }
   }

@@ -17,6 +17,7 @@ export class NavService {
   }
 
   getNavItems = (): NavItem[] => {
+    // TODO: add logic to get nav items based on user role
     return this.navItems;
   };
 
@@ -61,9 +62,6 @@ export class NavService {
     },
 
     // ====================================
-    {
-      navCap: 'Home',
-    },
     {
       navCap: 'Ui Components',
     },
