@@ -18,6 +18,7 @@ h1 {
   
   .assign-budget-button {
     margin-top: 20px;
+    float: right;
   }
   
   .charges-table {

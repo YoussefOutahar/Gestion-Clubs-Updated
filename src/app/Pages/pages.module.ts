@@ -28,6 +28,9 @@ import { MemberDeleteDialogComponent } from './Components/Membershandling/member
 import { DatePipe } from '@angular/common';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -38,6 +41,7 @@ import { MeetingsComponent } from './Components/meetings/meetings.component';
 
     // ========== Finance ========== //
     AdminFinanceComponent,
+    AssignBudgetComponent,
     
     // ========== Members ========== //
     MembersComponent,
@@ -57,6 +61,8 @@ import { MeetingsComponent } from './Components/meetings/meetings.component';
     MatCommonModule,
     FormsModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule,
     NgApexchartsModule,
     FullCalendarModule,
