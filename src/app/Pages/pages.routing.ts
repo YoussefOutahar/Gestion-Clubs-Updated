@@ -10,6 +10,7 @@ import { authGuard } from '../Auth/auth.guard';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
+import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
 
 export const pageRoutes: Routes = [
   {
@@ -30,6 +31,11 @@ export const pageRoutes: Routes = [
   {
     path: 'finance',
     component: AdminFinanceComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'clubFinance',
+    component: ClubFinanceComponent,
     canActivate: [authGuard],
   },
   {

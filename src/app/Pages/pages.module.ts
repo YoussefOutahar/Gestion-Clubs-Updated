@@ -27,10 +27,11 @@ import { MemberDeleteDialogComponent } from './Components/Membershandling/member
 
 import { DatePipe } from '@angular/common';
 import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
+import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -42,6 +43,7 @@ import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignB
     // ========== Finance ========== //
     AdminFinanceComponent,
     AssignBudgetComponent,
+    ClubFinanceComponent,
     
     // ========== Members ========== //
     MembersComponent,

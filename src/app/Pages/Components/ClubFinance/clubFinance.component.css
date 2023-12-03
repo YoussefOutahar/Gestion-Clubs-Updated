@@ -1,0 +1,51 @@
+/* app/admin-finance/admin-finance.component.css */
+
+h1 {
+    margin-bottom: 20px;
+  }
+  
+  .finance-cards {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .finance-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .supp-Budget-button {
+    margin-top: 20px;
+    float: left;
+  }
+
+  .add-charge-button {
+    margin-top: 20px;
+    float: right;
+  }
+  
+  .charges-table {
+    margin-top: 60px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }

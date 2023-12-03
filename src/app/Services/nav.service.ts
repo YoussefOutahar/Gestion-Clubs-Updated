@@ -46,6 +46,11 @@ export class NavService {
       route: '/dashboard/finance',
     },
     {
+      displayName: 'Club Finance management',
+      iconName: 'pig-money',
+      route: '/dashboard/clubFinance',
+    },
+    {
       displayName: 'Events',
       iconName: 'speakerphone',
       route: '/dashboard/events',

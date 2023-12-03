@@ -42,7 +42,7 @@ export class AssignBudgetComponent implements OnInit {
       // Create an array of promises for all budgets
       const budgetPromises = this.clubs.map(async (club) => {
 
-        const currentRest = await this.clubsService.getBudgetRestByClub(club.id);
+        const currentRest = await this.clubsService.getRestBudgetByClub(club.id);
 
         const budgetData = {
           id_club: club.id,
