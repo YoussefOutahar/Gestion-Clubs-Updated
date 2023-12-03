@@ -324,4 +324,19 @@ export class ClubsService {
     // Return 0 if there are no budgets for the given year
     return 0;
   }
+  
+  async getBudgetRestByClub(clubId: number): Promise<number> {
+    const { data: latestBudget, error } = await this.supabase
+      .from(TableNames.Budget)
+      .select('rest')
+      .eq('id_club', clubId)
+      .order('year', { ascending: false })
+      .limit(1);
+
+    if (error) {
+      throw error;
+    }
+
+    return latestBudget && latestBudget.length > 0 ? latestBudget[0].rest : 0;
+  }
 }

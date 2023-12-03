@@ -83,7 +83,6 @@ export interface Event {
 }
 
 export interface Budget {
-    id: number;
     id_club: number;
     source: string;
     budget: number;
