@@ -37,15 +37,38 @@ export class AssignBudgetComponent implements OnInit {
 
   handleSubmit(): void {
     if (this.form.valid) {
-      // Perform actions with the form data, for example, sending it to the server
       const formData = this.form.value;
-      console.log(formData);
 
-      // Add your logic here to send the form data to the server or perform other actions
-      // Example: this.clubsService.assignBudgets(formData).then(() => {});
+      // Create an array of promises for all budgets
+      const budgetPromises = this.clubs.map(async (club) => {
 
-      // Reset the form if needed
-      this.form.reset();
+        const currentRest = await this.clubsService.getRestBudgetByClub(club.id);
+
+        const budgetData = {
+          id_club: club.id,
+          source: 'DVE',
+          budget: formData[club.id],
+          rest: currentRest,
+          year: this.date.getFullYear(),
+        };
+
+        // Return the promise for addBudget
+        return this.clubsService.addBudget(budgetData);
+      });
+
+      // Wait for all budgets to be added before redirecting
+      Promise.all(budgetPromises)
+        .then(() => {
+          // Reset the form after adding budgets
+          this.form.reset();
+
+          // Redirect to the desired route after submitting the form
+          this.router.navigate(['/dashboard/finance']);
+        })
+        .catch((error) => {
+          console.error('Error adding budgets', error);
+          // Handle errors if needed
+        });
     }
   }
 }

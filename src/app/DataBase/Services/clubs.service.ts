@@ -206,8 +206,8 @@ export class ClubsService {
     return data;
   }
 
-  async getClubEvents(club: Club): Promise<Event[]> {
-    const { data, error } = await this.supabase.from(TableNames.Events).select('*').eq('id_club', club.id);
+  async getClubEvents(id: number): Promise<Event[]> {
+    const { data, error } = await this.supabase.from(TableNames.Events).select('*').eq('id_club',id);
     if (error) {
       throw error;
     }
@@ -301,12 +301,43 @@ export class ClubsService {
     return data;
   }
 
+  async getClubBudget(id: number): Promise<number> {
+    try {
+      const currentYear = new Date().getFullYear();
+  
+      // Fetch budgets for the given club and current year
+      const { data, error } = await this.supabase
+        .from(TableNames.Budget)
+        .select('budget')
+        .eq('id_club', id)
+        .eq('year', currentYear);
+  
+      if (error) {
+        throw error;
+      }
+  
+      return data.length > 0 ? data[0].budget : 0;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getBudgetByYear(year: number): Promise<Budget[]> {
     const { data, error } = await this.supabase.from(TableNames.Budget).select('*').eq('year', year);
     if (error) {
       throw error;
     }
     return data;
+  }
+
+  async getRestBudgetByClub(id: number): Promise<number> {
+    const currentYear = new Date().getFullYear();
+
+    const { data, error } = await this.supabase.from(TableNames.Budget).select('rest').eq('id_club', id).eq('year', currentYear);
+    if (error) {
+      throw error;
+    }
+    return data.length > 0 ? data[0].rest : 0;
   }
 
   async getTotalBudgetByYear(year: number): Promise<number> {

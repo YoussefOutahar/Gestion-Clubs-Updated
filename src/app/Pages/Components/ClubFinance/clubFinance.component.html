@@ -1,0 +1,46 @@
+<!-- app/admin-finance/admin-finance.component.html -->
+
+<h1>Admin Finance Management</h1>
+
+<div class="finance-cards">
+  <div class="finance-card" *ngFor="let card of cardList">
+    <h2>{{ card.name }}</h2>
+    <p>{{ card.amount }} DH</p>
+    <mat-icon>{{ card.icon }}</mat-icon>
+  </div>
+</div>
+
+<div class="supp-Budget-button">
+  <button mat-raised-button color="primary" (click)="navigateToASuppBudget()">Request a supplementary budget</button>
+</div>
+
+<div class="add-charge-button">
+    <button mat-raised-button color="primary" (click)="navigateToAddCharget()">Add an event charge
+    </button>
+  </div>
+
+<div class="charges-table">
+  <h2>Charges Table</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Date</th>
+          <th>Cost</th>
+          <th>Earned</th>
+          <th>Supplimentary budget</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of events">
+          <td>{{ data.name }}</td>
+          <td>{{ formatDate(data.date) }}</td>
+          <td>{{ data.cost }}</td>
+          <td>{{ data.earnings }}</td>
+          <td>{{ data.supp_budget }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

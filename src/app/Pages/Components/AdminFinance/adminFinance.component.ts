@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class AdminFinanceComponent implements OnInit {
 
     constructor(
         private clubsService: ClubsService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -68,5 +70,10 @@ export class AdminFinanceComponent implements OnInit {
             console.error('Error fetching club data', error);
         }
     }
+
+    navigateToAssignBudget() {
+       // Use the Angular Router to navigate to the 'assignBudget' route
+    this.router.navigate(['/dashboard/assignBudget']);
+      }
 
 }
