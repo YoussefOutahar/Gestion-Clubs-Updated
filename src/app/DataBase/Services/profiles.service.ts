@@ -54,10 +54,10 @@ export class ProfilesService {
   }
 
   async getProfileRole(id: string): Promise<string> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).select('role').eq('id', id);
+    const { data, error } = await this.supabase.from(TableNames.Profiles).select('role_club').eq('id', id);
     if (error) {
       throw error;
     }
-    return data[0].role;
+    return data[0].role_club;
   }
 }

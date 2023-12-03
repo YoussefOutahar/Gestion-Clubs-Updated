@@ -12,6 +12,7 @@ export class NavService {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private profilesService: ProfilesService
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -20,9 +21,22 @@ export class NavService {
     });
   }
 
-  getNavItems = (): NavItem[] => {
-   console.log(this.authService.currentUser);
-    return this.navItems;
+  getNavItems = async (): Promise<NavItem[]> => {
+    let privilege = this.authService.currentUser.getValue().user_metadata.role;
+
+    if (privilege == 'admin') {
+      return Promise.resolve(this.navItems);
+    } else {
+      let id = this.authService.currentUser.getValue().user.id;
+      let club_role = await this.profilesService.getProfileRole(id);
+      switch (club_role) {
+        case 'president':
+          break;
+        default:
+          break;
+      }
+      return Promise.resolve(this.navItems);
+    }
   };
 
   navItems: NavItem[] = [
