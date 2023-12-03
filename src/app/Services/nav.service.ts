@@ -30,7 +30,23 @@ export class NavService {
       let id = this.authService.currentUser.getValue().user.id;
       let club_role = await this.profilesService.getProfileRole(id);
       switch (club_role) {
-        case 'president':
+        case 'President':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Dashboard' ||
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss' ||
+              item.displayName == 'Validation Page'
+          );
+          break;
+        case 'Secretary':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss'
+          );
           break;
         default:
           break;

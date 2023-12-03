@@ -11,6 +11,7 @@ import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.co
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
+import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 
 export const pageRoutes: Routes = [
   {
@@ -58,4 +59,10 @@ export const pageRoutes: Routes = [
     component: ValidationComponent,
     canActivate: [authGuard],
   },
+  // ====================================
+  {
+    path: 'club/create',
+    component: ClubCreationComponent,
+    canActivate: [authGuard],
+  }
 ];

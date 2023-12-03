@@ -32,6 +32,7 @@ import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.compo
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -39,6 +40,7 @@ import { MatInputModule } from '@angular/material/input';
 
     // ========== Componenets ========== //
     ClubsComponent,
+    ClubCreationComponent,
 
     // ========== Finance ========== //
     AdminFinanceComponent,
