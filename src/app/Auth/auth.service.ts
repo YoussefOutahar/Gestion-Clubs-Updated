@@ -75,6 +75,6 @@ export class AuthService {
   }
 
   get currentUser() {
-    return this._currentUser.asObservable();
+    return this._currentUser;
   }
 }

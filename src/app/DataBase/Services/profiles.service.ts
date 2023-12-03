@@ -6,13 +6,15 @@ import { supabaseEnvironment } from 'src/environments/environment';
 import { Profile, PendingProfile } from '../Models/profile';
 import { TableNames } from 'src/app/Config/constants';
 
+import { AuthService } from 'src/app/Auth/auth.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProfilesService {
   private supabase: SupabaseClient;
 
-  constructor() {
+  constructor(private AuthService: AuthService) {
     this.supabase = createClient(
       supabaseEnvironment.supabaseUrl,
       supabaseEnvironment.supabaseKey
@@ -49,5 +51,13 @@ export class ProfilesService {
       throw error;
     }
     return data ? data : [];
+  }
+
+  async getProfileRole(id: string): Promise<string> {
+    const { data, error } = await this.supabase.from(TableNames.Profiles).select('role').eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data[0].role;
   }
 }

@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map, take } from 'rxjs';
 import { NavItem } from '../Layout/Components/side-bar/nav-item/nav-item';
 import { AuthService } from '../Auth/auth.service';
+import { ProfilesService } from '../DataBase/Services/profiles.service';
 
 @Injectable({ providedIn: 'root' })
 export class NavService {
   public currentUrl = new BehaviorSubject<any>(undefined);
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl.next(event.urlAfterRedirects);
@@ -17,7 +21,7 @@ export class NavService {
   }
 
   getNavItems = (): NavItem[] => {
-    // TODO: add logic to get nav items based on user role
+   console.log(this.authService.currentUser);
     return this.navItems;
   };
 
