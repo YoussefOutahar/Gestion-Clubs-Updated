@@ -12,7 +12,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { createEventId } from './events-utils';
 
 @Component({
   selector: 'app-events',
@@ -20,6 +19,7 @@ import { createEventId } from './events-utils';
   styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
+
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
@@ -28,8 +28,7 @@ export class EventsComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    events: [
-    ],
+    events: [],
     // eventsSet: this.handleEvents.bind(this),
     weekends: true,
     selectable: true,
@@ -55,6 +54,21 @@ export class EventsComponent implements OnInit {
       console.log(this.formatEvents(events));
       this.calendarOptions.events = this.formatEvents(events);
     });
+  }
+
+  formatEvents(events: Event[]) {
+    return events.map((event): EventInput => ({
+      id: event.id.toString(),
+      title: `${event.name}`,
+      date: event.date,
+      color: this.darkColorRandomizerGenerator(),
+    }));
+  }
+  darkColorRandomizerGenerator() {
+    const red = Math.floor(Math.random() * 128);
+    const green = Math.floor(Math.random() * 128);
+    const blue = Math.floor(Math.random() * 128);
+    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
@@ -88,19 +102,4 @@ export class EventsComponent implements OnInit {
   //   this.currentEvents.set(events);
   //   this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
   // }
-
-  formatEvents(events: Event[]) {
-    return events.map((event): EventInput => ({
-      id: event.id.toString(),
-      title: `${event.name}`,
-      date: event.date,
-      color: this.darkColorRandomizerGenerator(),
-    }));
-  }
-  darkColorRandomizerGenerator() {
-    const red = Math.floor(Math.random() * 128);
-    const green = Math.floor(Math.random() * 128);
-    const blue = Math.floor(Math.random() * 128);
-    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
-  }
 }
