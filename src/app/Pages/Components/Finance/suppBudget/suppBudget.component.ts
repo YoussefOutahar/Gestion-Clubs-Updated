@@ -21,6 +21,7 @@ export class SuppBudgetComponent implements OnInit {
         this.suppBudgetForm = this.fb.group({
             eventId: ['', Validators.required],
             totalCost: ['', Validators.required],
+            description: ['', Validators.required],
         });
     }
 
@@ -42,12 +43,8 @@ export class SuppBudgetComponent implements OnInit {
             const event = await this.clubsService.getEventById(eventId);
 
             const request = "Supplementary budget request to : " + event[0].name;
-            const description = "Request an amount of " +cost+" DH to the event "+event[0].name;
+            const description = "Request an amount of " +cost+" DH to the event "+event[0].name +"\n "+ this.suppBudgetForm.value.description;
             const receivedDate = new Date().toISOString();
-
-            console.log('Request:', request);
-            console.log('Description:', description);
-            console.log('Received Date:', receivedDate);
 
             const document: Document = {
                 name: request,

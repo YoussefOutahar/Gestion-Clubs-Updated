@@ -31,7 +31,7 @@ export class AddChargeComponent implements OnInit {
     async onSubmit() {
         // Handle form submission here
         if (this.chargeForm.valid) {
-            const eventName = this.chargeForm.value.eventName;
+            const eventId = this.chargeForm.value.eventId;
             const totalCost = this.chargeForm.value.totalCost;
             const earnings = this.chargeForm.value.earnings;
             const fileControl = this.chargeForm.get('file');
@@ -40,45 +40,40 @@ export class AddChargeComponent implements OnInit {
                 const file: File = fileControl.value;
                 console.log('File name:', file.name);
 
-                const matchingEvents = await this.clubsService.getClubByName(eventName);
-                if (matchingEvents.length > 0) {
-                    const selectedEvent = matchingEvents[0];
+                try {
 
-                    console.log('Selected event id:', selectedEvent.id);
+                    // Upload the file and get the URL
+                    await this.uploadService.uploadEventBudget(file);
 
-                    try {
+                    // Assuming you have a method in clubsService to handle file upload
+                    const FileUrl = "https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Budget_event/${file.name}";
 
-                        // Upload the file and get the URL
-                        await this.uploadService.uploadEventBudget(file);
+                    // Update the event with the new values
+                    const updatedEvent = {
+                        earnings: earnings,
+                        cost: totalCost,
+                        url: FileUrl,
+                        file_name: file.name,
+                    };
 
-                        // Assuming you have a method in clubsService to handle file upload
-                        const FileUrl = "https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Budget_event/${file.name}";
+                    await this.clubsService.updateEvent(eventId, updatedEvent);
 
-                        // Update the event with the new values
-                        const updatedEvent = {
-                            earnings: earnings,
-                            cost: totalCost,
-                            url: FileUrl,
-                            file_name: file.name,
-                        };
+                    // Update successful, do any additional logic if needed
+                } catch (error) {
+                    console.error('Error updating event:', error);
+                    // Handle the error as needed
+                } finally {
+                    this.router.navigate(['/dashboard/clubFinance']);
 
-                        await this.clubsService.updateEvent(selectedEvent.id, updatedEvent);
-
-                        // Update successful, do any additional logic if needed
-                    } catch (error) {
-                        console.error('Error updating event:', error);
-                        // Handle the error as needed
-                    } finally {
-                        this.router.navigate(['/dashboard/clubFinance']);
-
-                    }
                 }
+
             } else {
                 // Handle the case where no file is selected
                 console.error('Please select a file.');
             }
         }
     }
+
 
     loadEvents() {
         // Assuming ClubsService has a method to fetch events from the database
