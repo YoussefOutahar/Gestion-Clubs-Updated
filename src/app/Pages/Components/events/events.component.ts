@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import {
   CalendarOptions,
   DateSelectArg,
-  EventApi,
   EventClickArg,
+  EventInput,
 } from '@fullcalendar/core';
 import { Event } from 'src/app/DataBase/Models/club';
 import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
@@ -12,18 +12,15 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { INITIAL_EVENTS, createEventId } from './events-utils';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
+  styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
-  calendarVisible = signal(true);
 
-  currentEvents = signal<EventApi[]>([]);
-
-  calendarOptions = signal<CalendarOptions>({
+  calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
       left: 'prev,next today',
@@ -31,95 +28,78 @@ export class EventsComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    // events: this.currentEvents,
+    events: [],
+    // eventsSet: this.handleEvents.bind(this),
     weekends: true,
-    editable: true,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
-  });
+  };
 
   constructor(
     private clubsService: ClubsService,
     private changeDetector: ChangeDetectorRef
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit() {
-    this.clubsService.getEvents().then((events) => {
-      const convertedEvents = events.map((event) => ({
-        id: createEventId(),
-        title: event.name,
-        start: event.date,
-      }));
-  
-      this.calendarOptions.update((options) => {
-        options.initialEvents = [...INITIAL_EVENTS, ...convertedEvents];
-        return options;
-      });
-    });
+    this.loadEvents();
     this.changeDetector.detectChanges();
   }
 
-  // getEvents() {
-  //   this.clubsService.getEvents().then((events) => {
-  //     this.events = events;
-  //   });
-  // }
-
-  showDetails(club: Event) {
-    console.log(club);
-  }
-
-  handleCalendarToggle() {
-    this.calendarVisible.update((bool) => !bool);
-  }
-
-  handleWeekendsToggle() {
-    this.calendarOptions.mutate((options) => {
-      options.weekends = !options.weekends;
+  loadEvents() {
+    this.clubsService.getEvents().then((events) => {
+      console.log(events);
+      console.log(this.formatEvents(events));
+      this.calendarOptions.events = this.formatEvents(events);
     });
   }
 
+  formatEvents(events: Event[]) {
+    return events.map((event): EventInput => ({
+      id: event.id.toString(),
+      title: `${event.name}`,
+      date: event.date,
+      color: this.darkColorRandomizerGenerator(),
+    }));
+  }
+  darkColorRandomizerGenerator() {
+    const red = Math.floor(Math.random() * 128);
+    const green = Math.floor(Math.random() * 128);
+    const blue = Math.floor(Math.random() * 128);
+    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+  }
+
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
+    // const title = prompt('Please enter a new title for your event');
+    // const calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+    // calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
+    // if (title) {
+    //   calendarApi.addEvent({
+    //     id: createEventId(),
+    //     title,
+    //     start: selectInfo.startStr,
+    //     end: selectInfo.endStr,
+    //     allDay: selectInfo.allDay,
+    //   });
+    // }
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      clickInfo.event.remove();
-    }
+    // if (
+    //   confirm(
+    //     `Are you sure you want to delete the event '${clickInfo.event.title}'`
+    //   )
+    // ) {
+    //   clickInfo.event.remove();
+    // }
   }
 
-  handleEvents(events: EventApi[]) {
-    this.currentEvents.set(events);
-    this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
-  }
+  // handleEvents(events: EventApi[]) {
+  //   this.currentEvents.set(events);
+  //   this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
+  // }
 }

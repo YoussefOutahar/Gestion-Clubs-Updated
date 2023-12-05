@@ -34,6 +34,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
+import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -41,6 +42,7 @@ import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.
 
     // ========== Componenets ========== //
     ClubsComponent,
+    ClubCreationComponent,
 
     // ========== Finance ========== //
     AdminFinanceComponent,

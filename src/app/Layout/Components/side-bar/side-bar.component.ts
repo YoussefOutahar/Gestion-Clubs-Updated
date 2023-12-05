@@ -11,8 +11,16 @@ export class SideBarComponent implements OnInit {
   navItems: NavItem[];
 
   constructor(public navService: NavService) {
-    this.navItems = this.navService.getNavItems();
+    this.navItems = [];
   }
 
-  ngOnInit(): void {} 
+  ngOnInit(): void {
+    this.loadNavItems();
+  } 
+
+  loadNavItems() {
+    this.navService.getNavItems().then((navItems) => {
+      this.navItems = navItems;
+    });
+  }
 }

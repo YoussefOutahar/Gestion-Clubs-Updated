@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map, take } from 'rxjs';
 import { NavItem } from '../Layout/Components/side-bar/nav-item/nav-item';
 import { AuthService } from '../Auth/auth.service';
+import { ProfilesService } from '../DataBase/Services/profiles.service';
 
 @Injectable({ providedIn: 'root' })
 export class NavService {
   public currentUrl = new BehaviorSubject<any>(undefined);
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private profilesService: ProfilesService
+  ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl.next(event.urlAfterRedirects);
@@ -16,9 +21,38 @@ export class NavService {
     });
   }
 
-  getNavItems = (): NavItem[] => {
-    // TODO: add logic to get nav items based on user role
-    return this.navItems;
+  getNavItems = async (): Promise<NavItem[]> => {
+    let privilege = this.authService.currentUser.getValue().user_metadata.role;
+
+    if (privilege == 'admin') {
+      return Promise.resolve(this.navItems);
+    } else {
+      let id = this.authService.currentUser.getValue().user.id;
+      let club_role = await this.profilesService.getProfileRole(id);
+      switch (club_role) {
+        case 'President':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Dashboard' ||
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss' ||
+              item.displayName == 'Validation Page'
+          );
+          break;
+        case 'Secretary':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss'
+          );
+          break;
+        default:
+          break;
+      }
+      return Promise.resolve(this.navItems);
+    }
   };
 
   navItems: NavItem[] = [

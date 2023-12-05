@@ -13,6 +13,7 @@ import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignB
 import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
+import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 
 export const pageRoutes: Routes = [
   {
@@ -70,4 +71,10 @@ export const pageRoutes: Routes = [
     component: ValidationComponent,
     canActivate: [authGuard],
   },
+  // ====================================
+  {
+    path: 'club/create',
+    component: ClubCreationComponent,
+    canActivate: [authGuard],
+  }
 ];

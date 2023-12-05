@@ -36,7 +36,6 @@ export class AuthService {
         this._currentUser.next(session?.user);
       } else {
         this._currentUser.next(false);
-        router.navigate(['/session/authenticate']);
       }
     });
   }
@@ -65,7 +64,7 @@ export class AuthService {
           return true
         } else {
           console.log('isAuthenticated', isAuthenticated)
-          return this.router.createUrlTree(['/session/authenticate'])
+          return false
         }
       })
     )
@@ -76,6 +75,6 @@ export class AuthService {
   }
 
   get currentUser() {
-    return this._currentUser.asObservable();
+    return this._currentUser;
   }
 }
