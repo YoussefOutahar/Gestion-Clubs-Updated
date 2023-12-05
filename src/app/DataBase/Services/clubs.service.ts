@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from 'src/environments/environment';
 
-import { Club, Category, Event, Meeting, Forum, ForumMessage ,Budget } from '../Models/club';
+import { Club, Category, Event, Meeting, Forum, ForumMessage ,Budget, UpdatedEvent, Document } from '../Models/club';
 import { TableNames } from 'src/app/Config/constants';
 
 @Injectable({
@@ -46,6 +46,14 @@ export class ClubsService {
 
   async getClubById(id: string): Promise<Club[]> {
     const { data, error } = await this.supabase.from(TableNames.Clubs).select('*').eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getClubByName(name: string): Promise<Club[]> {
+    const { data, error } = await this.supabase.from(TableNames.Clubs).select('*').eq('name', name);
     if (error) {
       throw error;
     }
@@ -231,6 +239,19 @@ export class ClubsService {
     return data ? data : [];
   }
 
+  async updateEvent(id: number, event:UpdatedEvent): Promise<Event[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Events)
+      .update(event)
+      .eq('id', id);
+  
+    if (error) {
+      throw error;
+    }
+  
+    return data ? data : [];
+  }
+
   async deleteEventById(id: number): Promise<Event[]> {
     const { data, error } = await this.supabase.from(TableNames.Events).delete().eq('id', id);
     if (error) {
@@ -273,7 +294,14 @@ export class ClubsService {
     const totalSuppEarnings = events ? events.reduce((acc, event) => acc + event.earnings, 0) : 0;
     return totalSuppEarnings;
   }
+   // ============== Documents ============== //
 
+   async addDocument(doc: Document): Promise<void> {
+    const { data, error } = await this.supabase.from(TableNames.Documents).insert([doc]);
+    if (error) {
+      throw error;
+    }
+  }
 
   // ============== Budget ============== //
 

@@ -49,12 +49,12 @@ export class ClubFinanceComponent implements OnInit {
 
     navigateToASuppBudget() {
         // Use the Angular Router to navigate to the 'assignBudget' route
-        this.router.navigate(['/dashboard/assignBudget']);
+        this.router.navigate(['/dashboard/suppBudget']);
     }
 
     navigateToAddCharget() {
         // Use the Angular Router to navigate to the 'assignBudget' route
-        this.router.navigate(['/dashboard/assignBudget']);
+        this.router.navigate(['/dashboard/addCharge']);
     }
 
     formatDate(date: string): string {

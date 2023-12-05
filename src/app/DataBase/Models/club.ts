@@ -82,10 +82,26 @@ export interface Event {
     state: string;
 }
 
+export interface UpdatedEvent {
+    cost: number;
+    earnings: number;
+    url: string;
+    file_name: string;
+}
+
 export interface Budget {
     id_club: number;
     source: string;
     budget: number;
     rest: number;
     year: number;
+}
+
+export interface Document {
+    name: string;
+    id_activity: number;
+    ref_validation: boolean;
+    dve_validation: boolean;
+    description: string;
+    received_date: string;
 }

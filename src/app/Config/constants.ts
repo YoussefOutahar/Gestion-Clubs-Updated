@@ -28,3 +28,8 @@ export class TableNames {
   public static readonly ClubActivity: string = "club_activity";
   public static readonly Budget: string = "Budget";
 }
+
+export class StorageNames {
+  public static readonly BudgetEvent: string = "Budget_event";
+
+}
