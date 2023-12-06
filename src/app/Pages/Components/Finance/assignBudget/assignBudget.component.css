@@ -1,5 +1,16 @@
 .assign-budget-button {
-    margin-top: 20px;
-    float: right;
-  }
-  
+  margin-top: 20px;
+  float: right;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+table{
+  margin-left: 20px;
+}
+
+thead{
+  margin-bottom: 15px;
+}

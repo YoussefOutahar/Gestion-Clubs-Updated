@@ -1,10 +1,8 @@
 <!-- charge-form.component.html -->
 
+<h1>Add New Event Charge</h1>
 <mat-card class="form">
-  <mat-card-header>
-    <mat-card-title>Add New Event Charge</mat-card-title>
-  </mat-card-header>
-  <form [formGroup]="chargeForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <form [formGroup]="chargeForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="charge-form">
     <div>
       <label for="eventName">Event Name:</label>
       <mat-form-field appearance="fill">

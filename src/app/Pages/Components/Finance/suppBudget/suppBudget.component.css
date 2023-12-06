@@ -33,3 +33,7 @@ button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
 }
+
+.suppBudget-form {
+    margin-inline: 40px;
+}

@@ -1,7 +1,7 @@
 <h1>Request a supplementary budget</h1>
 <mat-card class="form">
     <div>
-        <form *ngIf="suppBudgetForm" [formGroup]="suppBudgetForm" (ngSubmit)="handleSubmit()">
+        <form *ngIf="suppBudgetForm" [formGroup]="suppBudgetForm" (ngSubmit)="handleSubmit()" class="suppBudget-form">
             <div>
                 <label for="eventName">Event Name</label>
                 <mat-form-field appearance="fill">

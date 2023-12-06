@@ -1,5 +1,8 @@
 /* charge-form.component.css */
 
+h1 {
+  margin-bottom: 30px;
+}
 
 form {
   display: grid;
@@ -31,4 +34,8 @@ button {
 button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+}
+
+.charge-form{
+  margin-inline: 30px;
 }
