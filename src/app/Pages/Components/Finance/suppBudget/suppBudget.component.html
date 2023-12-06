@@ -1,4 +1,9 @@
 <h1>Request a supplementary budget</h1>
+
+<div *ngIf="successMessage" class="successMessage">
+    <h2>{{ successMessage }}</h2>
+</div>
+
 <mat-card class="form">
     <div>
         <form *ngIf="suppBudgetForm" [formGroup]="suppBudgetForm" (ngSubmit)="handleSubmit()" class="suppBudget-form">

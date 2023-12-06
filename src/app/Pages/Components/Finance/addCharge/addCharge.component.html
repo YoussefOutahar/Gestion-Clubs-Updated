@@ -1,14 +1,15 @@
 <!-- charge-form.component.html -->
 
 <h1>Add New Event Charge</h1>
+
 <mat-card class="form">
   <form [formGroup]="chargeForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="charge-form">
     <div>
       <label for="eventName">Event Name:</label>
       <mat-form-field appearance="fill">
         <mat-select formControlName="eventId">
-          <mat-option *ngFor="let event of events" [value]="event.id">
-            {{ event.name }}
+          <mat-option *ngFor="let activity of events" [value]="activity.id">
+            {{ activity.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>

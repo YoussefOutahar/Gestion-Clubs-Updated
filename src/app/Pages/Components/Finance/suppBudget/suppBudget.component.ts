@@ -15,7 +15,7 @@ import { NotificationsService } from 'src/app/DataBase/Services/notifications.se
 export class SuppBudgetComponent implements OnInit {
     suppBudgetForm!: FormGroup;
     events: any[] = [];
-
+    successMessage: string | null = null; 
 
     constructor(private router: Router, private clubsService: ClubsService, private fb: FormBuilder, private notificationsService: NotificationsService) {
         this.suppBudgetForm = this.fb.group({
@@ -59,7 +59,12 @@ export class SuppBudgetComponent implements OnInit {
 
             await this.clubsService.addDocument(document);
 
-            this.router.navigate(['/dashboard/clubFinance']);
+            // Set success message after successful submission
+            this.successMessage = 'Request sent successfully';
+
+            setTimeout(() => {
+                this.router.navigate(['/dashboard/clubFinance']);
+            }, 2000); // Navigate after 2 seconds
 
             /*const notification = {
               heading: 'Request',
