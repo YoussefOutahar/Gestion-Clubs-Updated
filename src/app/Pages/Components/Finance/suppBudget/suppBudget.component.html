@@ -26,8 +26,13 @@
             <div>
                 <label for="earnings">Additional information :</label>
                 <input type="text" id="description" formControlName="description" />
-              </div>
-              
+            </div>
+
+            <div>
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" formControlName="file" (change)="onFileChange($event)" />
+            </div>
+
             <mat-card-actions>
                 <button mat-button mat-raised-button color="primary" type="submit">Submit</button>
             </mat-card-actions>

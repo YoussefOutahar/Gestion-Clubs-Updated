@@ -98,10 +98,20 @@ export interface Budget {
 }
 
 export interface Document {
+    id: number;
     name: string;
-    id_activity: number;
-    ref_validation: boolean;
-    dve_validation: boolean;
+    id_event: number;
+    state: string;
     description: string;
     received_date: string;
+    path: string | null;
+}
+
+export interface NewDocument {
+    name: string;
+    id_event: number;
+    state: string;
+    description: string;
+    received_date: string;
+    path: string | null;
 }

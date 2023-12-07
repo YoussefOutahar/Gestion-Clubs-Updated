@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from 'src/environments/environment';
 
-import { Club, Category, Event, Meeting, Forum, ForumMessage ,Budget, UpdatedEvent, Document } from '../Models/club';
+import { Club, Category, Event, Meeting, Forum, ForumMessage ,Budget, UpdatedEvent, Document ,NewDocument} from '../Models/club';
 import { TableNames } from 'src/app/Config/constants';
 
 @Injectable({
@@ -52,14 +52,6 @@ export class ClubsService {
     return data;
   }
 
-  async getClubByName(name: string): Promise<Club[]> {
-    const { data, error } = await this.supabase.from(TableNames.Clubs).select('*').eq('name', name);
-    if (error) {
-      throw error;
-    }
-    return data;
-  }
-
   async updateClubById(id: string, club: Club): Promise<Club[]> {
     const { data, error } = await this.supabase.from(TableNames.Clubs).update(club).eq('id', id);
     if (error) {
@@ -76,8 +68,17 @@ export class ClubsService {
     return data ? data : [];
   }
 
-  async validateClub(club: Club): Promise<Club[]> {
+  async validateClubByDve(club: Club): Promise<Club[]> {
     const updatedClub: Club = { ...club, state: 'active' };
+    const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedClub).eq('id', club.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async validateClubByRef(club: Club): Promise<Club[]> {
+    const updatedClub: Club = { ...club, state: 'waiting dve validation' };
     const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedClub).eq('id', club.id);
     if (error) {
       throw error;
@@ -168,6 +169,7 @@ export class ClubsService {
 
 
   // ============== Messages ============== //
+
   async getMessages(): Promise<ForumMessage[]> {
     const { data, error } = await this.supabase.from(TableNames.Messages).select('*');
     if (error) {
@@ -230,8 +232,17 @@ export class ClubsService {
     return data;
   }
 
-  async validateEvent(event: Event): Promise<Event[]> {
+  async validateEventByDve(event: Event): Promise<Event[]> {
     const updatedEvent: Event = { ...event, state: 'active' };
+    const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedEvent).eq('id', event.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async validateEventByRef(event: Event): Promise<Event[]> {
+    const updatedEvent: Event = { ...event, state: 'waiting dve validation' };
     const { data, error } = await this.supabase.from(TableNames.Clubs).update(updatedEvent).eq('id', event.id);
     if (error) {
       throw error;
@@ -280,7 +291,6 @@ export class ClubsService {
 
     // Calculate the total supplementary budget for the club
     const totalSupplementaryBudget = events ? events.reduce((acc, event) => acc + event.supp_budget, 0) : 0;
-
     return totalSupplementaryBudget;
   }
 
@@ -294,13 +304,41 @@ export class ClubsService {
     const totalSuppEarnings = events ? events.reduce((acc, event) => acc + event.earnings, 0) : 0;
     return totalSuppEarnings;
   }
+
+
    // ============== Documents ============== //
 
-   async addDocument(doc: Document): Promise<void> {
+   async addDocument(doc: NewDocument): Promise<void> {
     const { data, error } = await this.supabase.from(TableNames.Documents).insert([doc]);
     if (error) {
       throw error;
     }
+  }
+
+  async validateRequestByDve(doc: Document): Promise<Document[]> {
+    const updatedRequest: Document = { ...doc, state: 'active' };
+    const { data, error } = await this.supabase.from(TableNames.Documents).update(updatedRequest).eq('id', doc.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async validateRequestByRef(doc: Document): Promise<Document[]> {
+    const updatedRequest: Document = { ...doc, state: 'waiting dve validation' };
+    const { data, error } = await this.supabase.from(TableNames.Documents).update(updatedRequest).eq('id', doc.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async getPendingDocuments(): Promise<Document[]> {
+    const { data, error } = await this.supabase.from(TableNames.Documents).select('*').eq('state', 'pending');
+    if (error) {
+      throw error;
+    }
+    return data;
   }
 
   // ============== Budget ============== //
@@ -334,16 +372,9 @@ export class ClubsService {
       const currentYear = new Date().getFullYear();
   
       // Fetch budgets for the given club and current year
-      const { data, error } = await this.supabase
-        .from(TableNames.Budget)
-        .select('budget')
-        .eq('id_club', id)
-        .eq('year', currentYear);
+      const { data, error } = await this.supabase.from(TableNames.Budget).select('budget').eq('id_club', id).eq('year', currentYear);
   
-      if (error) {
-        throw error;
-      }
-  
+      if (error) {throw error;}
       return data.length > 0 ? data[0].budget : 0;
     } catch (error) {
       throw error;

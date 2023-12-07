@@ -46,7 +46,7 @@ export class AddChargeComponent implements OnInit {
                     await this.uploadService.uploadEventBudget(file);
 
                     // Assuming you have a method in clubsService to handle file upload
-                    const FileUrl = "https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Budget_event/"+ file.name;
+                    const FileUrl = "https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Budget_event/" + file.name;
 
                     // Update the event with the new values
                     const updatedEvent = {
@@ -66,7 +66,6 @@ export class AddChargeComponent implements OnInit {
                     this.router.navigate(['/dashboard/clubFinance']);
 
                 }
-
             } else {
                 // Handle the case where no file is selected
                 console.error('Please select a file.');
@@ -74,29 +73,29 @@ export class AddChargeComponent implements OnInit {
         }
     }
 
-
     loadEvents() {
         // Assuming ClubsService has a method to fetch events from the database
         this.clubsService.getEvents().then(events => { this.events = events; console.log(this.events); });
 
     }
+
     onFileChange(event: any) {
         const fileInput = event.target;
 
-    if (fileInput.files && fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const fileControl = this.chargeForm.get('file');
+        if (fileInput.files && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const fileControl = this.chargeForm.get('file');
 
 
-        // Update the form control with the selected file
-        this.chargeForm.patchValue({
-            file: file
-        });
+            // Update the form control with the selected file
+            this.chargeForm.patchValue({
+                file: file
+            });
 
-        // Trigger change detection to update the view
-        if (fileControl) {
-            fileControl.updateValueAndValidity();
+            // Trigger change detection to update the view
+            if (fileControl) {
+                fileControl.updateValueAndValidity();
+            }
         }
-    }
     }
 }
