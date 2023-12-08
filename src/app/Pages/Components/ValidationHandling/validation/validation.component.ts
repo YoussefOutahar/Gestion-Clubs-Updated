@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Club, Event, Document } from "src/app/DataBase/Models/club";
+import { User } from "@supabase/supabase-js";
+import { AuthService } from "src/app/Auth/auth.service";
 import { ClubsService } from "src/app/DataBase/Services/clubs.service";
+import { Club, Event, Document } from "src/app/DataBase/Models/club";
+import { MatDialog } from '@angular/material/dialog';
+import { ValidationDetailstDialogComponent } from "../validation-showDetails-dialog/validation-showDetails.component";
 
 @Component({
   selector: 'app-validation',
@@ -9,19 +13,27 @@ import { ClubsService } from "src/app/DataBase/Services/clubs.service";
 })
 
 export class ValidationComponent implements OnInit {
-
+  currentUser: boolean | User | any;
   clubs: Club[] = [];
   events: Event[] = [];
   requests: Document[] = [];
 
   constructor(
-    private clubsService: ClubsService
+    private clubsService: ClubsService,
+    private authService: AuthService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    // Get the current user data
+    this.currentUser = this.authService.currentUser.value;
+
     this.getPendingClubs();
     this.getPendingEvents();
     this.getPendingRequests();
+
+    console.log(this.currentUser.role);
+
   }
 
   getPendingClubs() {
@@ -47,11 +59,12 @@ export class ValidationComponent implements OnInit {
   }
 
   validateClub(club: Club) {
-    this.clubsService.validateClubByDve(club).then((updatedClubs) => {
-      // Optionally, update the local 'clubs' array with the updated data
-      this.clubs = updatedClubs;
-      console.log('Club validated:', club);
-    });
+    // Check the role of the current user
+    if (this.currentUser && this.currentUser.role === 'admin') {
+      this.clubsService.validateClubByDve(club);
+    } else if (this.currentUser && this.currentUser.role === 'supervisor') {
+      this.clubsService.validateClubByRef(club);
+    }
   }
 
   cancelClub(club: Club) {
@@ -63,14 +76,27 @@ export class ValidationComponent implements OnInit {
   }
 
   showClubDetail(club: Club) {
+    const dialogRef = this.dialog.open(ValidationDetailstDialogComponent, {
+      width: '400px',
+      data: club,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle the result after the dialog is closed, e.g., update user details
+      if (result) {
+        console.log('User details saved:', result);
+        // Implement logic to update user details in the database
+      }
+    });
   }
 
   validateEvent(event: Event) {
-    this.clubsService.validateEventByDve(event).then((updatedEvent) => {
-      // Optionally, update the local 'clubs' array with the updated data
-      this.events = updatedEvent;
-      console.log('Event validated:', event);
-    });
+    // Check the role of the current user
+    if (this.currentUser && this.currentUser.role === 'admin') {
+      this.clubsService.validateEventByDve(event);
+    } else if (this.currentUser && this.currentUser.role === 'supervisor') {
+      this.clubsService.validateEventByRef(event);
+    }
   }
 
   cancelEvent(event: Event) {
@@ -88,11 +114,12 @@ export class ValidationComponent implements OnInit {
   }
 
   validateRequest(request: Document) {
-    this.clubsService.validateRequestByDve(request).then((updatedRequest) => {
-      // Optionally, update the local 'clubs' array with the updated data
-      this.requests = updatedRequest;
-      console.log('Request validated:', request);
-    });
+    // Check the role of the current user
+    if (this.currentUser && this.currentUser.role === 'admin') {
+      this.clubsService.validateRequestByDve(request);
+    } else if (this.currentUser && this.currentUser.role === 'supervisor') {
+      this.clubsService.validateRequestByRef(request);
+    }
   }
 
   cancelRequest(request: Document) {

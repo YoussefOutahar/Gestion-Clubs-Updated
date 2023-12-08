@@ -21,7 +21,7 @@ import { MembersComponent } from './Components/Membershandling/members/members.c
 import { ForumComponent } from './Components/forum/forum.component';
 
 import { EventsComponent } from './Components/events/events.component';
-import { ValidationComponent } from './Components/validation/validation.component';
+import { ValidationComponent } from './Components/ValidationHandling/validation/validation.component';
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
 
@@ -35,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { ValidationDetailstDialogComponent } from './Components/ValidationHandling/validation-showDetails-dialog/validation-showDetails.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -50,16 +51,19 @@ import { ClubCreationComponent } from './Components/clubCreation/clubCreation.co
     ClubFinanceComponent,
     AddChargeComponent,
     SuppBudgetComponent,
-    
+
     // ========== Members ========== //
     MembersComponent,
     MemberEditDialogComponent,
     MemberDeleteDialogComponent,
     // ========== Meetings ========== //
     MeetingsComponent,
+    // =========== Validation ============= //
+    ValidationComponent,
+    ValidationDetailstDialogComponent,
+
     // ================================ //
     EventsComponent,
-    ValidationComponent,
     ForumComponent,
     // ================================ //
   ],
@@ -80,4 +84,4 @@ import { ClubCreationComponent } from './Components/clubCreation/clubCreation.co
   exports: [TablerIconsModule],
   providers: [DatePipe],
 })
-export class PagesModule {}
+export class PagesModule { }

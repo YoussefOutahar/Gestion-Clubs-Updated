@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+  <!-- Add form fields for editing user details -->
+  <p>Name: {{ data.name }}</p>
+  <p>Creation Date: {{ data.date_creation }}</p>
+  <p>Number of Members: {{ data.nb_member }}</p>
+  <p>Mission: {{ data.mission }}</p>
+  <p>State: {{ data.state }}</p>
+  <p>KPO: {{ data.kpo }}</p>
+  <p>Type: {{ data.type }}</p>
+  <img src="data.logo">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>
