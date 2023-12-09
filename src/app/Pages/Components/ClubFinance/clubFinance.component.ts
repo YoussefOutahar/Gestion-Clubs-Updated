@@ -49,18 +49,18 @@ export class ClubFinanceComponent implements OnInit {
 
     navigateToASuppBudget() {
         // Use the Angular Router to navigate to the 'assignBudget' route
-        this.router.navigate(['/dashboard/assignBudget']);
+        this.router.navigate(['/dashboard/suppBudget']);
     }
 
     navigateToAddCharget() {
         // Use the Angular Router to navigate to the 'assignBudget' route
-        this.router.navigate(['/dashboard/assignBudget']);
+        this.router.navigate(['/dashboard/addCharge']);
     }
 
     formatDate(date: string): string {
         // Parse the input string into a JavaScript Date object
         const parsedDate = new Date(date);
-    
+
         // Check if the parsedDate is a valid date
         if (!isNaN(parsedDate.getTime())) {
             // Format the date using the DatePipe
@@ -70,6 +70,11 @@ export class ClubFinanceComponent implements OnInit {
             return '';
         }
     }
-    
+
+    openFile(url: string): void {
+        console.log('Opening file with URL:', url);
+        // window.open to open the file in a new tab
+        window.open(url, '_blank');
+    }
 
 }

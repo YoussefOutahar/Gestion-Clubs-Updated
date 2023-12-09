@@ -21,7 +21,7 @@ import { MembersComponent } from './Components/Membershandling/members/members.c
 import { ForumComponent } from './Components/forum/forum.component';
 
 import { EventsComponent } from './Components/events/events.component';
-import { ValidationComponent } from './Components/validation/validation.component';
+import { ValidationComponent } from './Components/ValidationHandling/validation/validation.component';
 import { MemberEditDialogComponent } from './Components/Membershandling/member-edit-dialog/member-edit-dialog.component';
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
 
@@ -32,7 +32,10 @@ import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.compo
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
+import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { ValidationDetailstDialogComponent } from './Components/ValidationHandling/validation-showDetails-dialog/validation-showDetails.component';
 import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 @NgModule({
@@ -48,6 +51,8 @@ import { AddEventRequestComponent } from './Components/addEventRequest/addEventR
     AdminFinanceComponent,
     AssignBudgetComponent,
     ClubFinanceComponent,
+    AddChargeComponent,
+    SuppBudgetComponent,
 
     // ========== Members ========== //
     MembersComponent,
@@ -55,13 +60,16 @@ import { AddEventRequestComponent } from './Components/addEventRequest/addEventR
     MemberDeleteDialogComponent,
     // ========== Meetings ========== //
     MeetingsComponent,
+    // =========== Validation ============= //
+    ValidationComponent,
+    ValidationDetailstDialogComponent,
+
     AddMeetingRequestComponent,
     // ================================ //
     EventsComponent,
     AddEventRequestComponent,
 
     // ================================ //
-    ValidationComponent,
     ForumComponent,
     // ================================ //
   ],

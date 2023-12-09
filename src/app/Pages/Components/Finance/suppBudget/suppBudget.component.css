@@ -1,0 +1,45 @@
+form {
+    display: grid;
+    gap: 15px;
+    padding: 30px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.suppBudget-form {
+    margin-inline: 40px;
+}
+
+.successMessage {
+    color: #4caf50;
+    margin: 10px;
+
+}

@@ -1,0 +1,41 @@
+/* charge-form.component.css */
+
+h1 {
+  margin-bottom: 30px;
+}
+
+form {
+  display: grid;
+  gap: 15px;
+  padding: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.charge-form{
+  margin-inline: 30px;
+}

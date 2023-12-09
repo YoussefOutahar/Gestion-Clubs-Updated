@@ -15,9 +15,9 @@
 </div>
 
 <div class="add-charge-button">
-    <button mat-raised-button color="primary" (click)="navigateToAddCharget()">Add an event charge
-    </button>
-  </div>
+  <button mat-raised-button color="primary" (click)="navigateToAddCharget()">Add an event charge
+  </button>
+</div>
 
 <div class="charges-table">
   <h2>Charges Table</h2>
@@ -30,6 +30,7 @@
           <th>Cost</th>
           <th>Earned</th>
           <th>Supplimentary budget</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +40,9 @@
           <td>{{ data.cost }}</td>
           <td>{{ data.earnings }}</td>
           <td>{{ data.supp_budget }}</td>
+          <td>
+            <button mat-raised-button (click)="openFile(data.url)">Open File</button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -36,5 +36,20 @@
           (click)="showEventDetails(event)"><mat-icon>description</mat-icon>Details</button>
       </td>
     </tr>
+
+    <!-- Display pending events-->
+    <tr *ngFor="let request of requests">
+      <td>{{ 'New Request' }}</td>
+      <td>{{ request.name }}</td>
+      <td>
+        <button mat-raised-button class="green-button"
+          (click)="validateRequest(request)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
+        <button mat-raised-button class="red-button"
+          (click)="cancelRequest(request)"><mat-icon>delete</mat-icon>Cancel</button>
+        <button mat-raised-button color="primary"
+          (click)="showRequestDetails(request)"><mat-icon>description</mat-icon>Details</button>
+      </td>
+    </tr>
+
   </tbody>
 </table>
