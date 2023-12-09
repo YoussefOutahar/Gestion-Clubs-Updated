@@ -1,3 +1,63 @@
-<p>
-  addEventRequest works!
-</p>
+<form [formGroup]="eventFormGroup">
+  <mat-stepper orientation="horizontal" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Location</ng-template>
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Bat 3"
+          formControlName="location"
+          class="full-width"
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Date</ng-template>
+      <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          type="date"
+          placeholder=""
+          formControlName="date"
+          class="full-width"
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Description</ng-template>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder=""
+          formControlName="description"
+          class="full-width"
+        ></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>
