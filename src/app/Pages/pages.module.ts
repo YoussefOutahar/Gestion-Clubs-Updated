@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
 import { MatIconModule } from '@angular/material/icon';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -33,6 +33,8 @@ import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
+import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -46,15 +48,19 @@ import { ClubCreationComponent } from './Components/clubCreation/clubCreation.co
     AdminFinanceComponent,
     AssignBudgetComponent,
     ClubFinanceComponent,
-    
+
     // ========== Members ========== //
     MembersComponent,
     MemberEditDialogComponent,
     MemberDeleteDialogComponent,
     // ========== Meetings ========== //
     MeetingsComponent,
+    AddMeetingRequestComponent,
     // ================================ //
     EventsComponent,
+    AddEventRequestComponent,
+
+    // ================================ //
     ValidationComponent,
     ForumComponent,
     // ================================ //

@@ -12,6 +12,8 @@ import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
 import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
+import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
 
 export const pageRoutes: Routes = [
   {
@@ -64,5 +66,15 @@ export const pageRoutes: Routes = [
     path: 'club/create',
     component: ClubCreationComponent,
     canActivate: [authGuard],
-  }
+  },
+  {
+    path: 'meeting/create',
+    component: AddMeetingRequestComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'event/create',
+    component: AddEventRequestComponent,
+    canActivate: [authGuard],
+  },
 ];
