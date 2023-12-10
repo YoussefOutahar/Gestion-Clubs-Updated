@@ -36,6 +36,10 @@ import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.com
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 import { ValidationDetailstDialogComponent } from './Components/ValidationHandling/validation-showDetails-dialog/validation-showDetails.component';
+import { ImageSliderComponent } from './Components/LandingPage/LandingPage-component/image-slider/image-slider.component';
+import { LandingPage } from './Components/LandingPage/landingPage.component';
+import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-component/club-carousel/club-carousel.component';
+import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
 import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 @NgModule({
@@ -71,7 +75,11 @@ import { AddEventRequestComponent } from './Components/addEventRequest/addEventR
 
     // ================================ //
     ForumComponent,
-    // ================================ //
+    // ============ Landing Page ============ //
+    LandingPage,
+    ImageSliderComponent,
+    CarouselClubsComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,12 @@
+/* image-slider.component.css */
+.image-slider {
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.image-slider img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.5s ease-in-out;
+}
