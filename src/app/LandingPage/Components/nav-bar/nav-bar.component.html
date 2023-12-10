@@ -9,10 +9,14 @@
   <!-- Todo Add spacing -->
 
   <div class="navUnlisted">
-    <a class="linkStyle">test</a>
-    <a class="linkStyle">test</a>
-    <a class="linkStyle">test</a>
-    <a class="linkStyle">test</a>
-    <a class="linkStyle">test</a>
+    <a [routerLink]="['/dashboard/meeting/create']" class="linkStyle"
+      >Create Meeting</a
+    >
+    <a [routerLink]="['/dashboard/event/create']" class="linkStyle"
+      >Create Event</a
+    >
+    <a [routerLink]="['/dashboard/club/create']" class="linkStyle"
+      >Create Club</a
+    >
   </div>
 </div>
