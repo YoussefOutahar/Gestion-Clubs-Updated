@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './Layout/layout.component';
 import { BlankComponent } from './Layout/blank/blank.component';
+import { LandingPage } from './Pages/Components/LandingPage/landingPage.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/session/authenticate', pathMatch: 'full' },
@@ -40,7 +41,8 @@ const routes: Routes = [
         loadChildren: () => import('./Auth/auth.module').then((m) => m.AuthModule),
       },
     ]
-  }
+  },
+  { path: 'landingPage', component: LandingPage },
 ];
 
 @NgModule({
