@@ -1,0 +1,24 @@
+.linkStyle {
+  margin: "1rem";
+  textdecoration: "none";
+  color: "white";
+  aligncontent: "center";
+  fontsize: "1rem";
+  fontweight: "bolder";
+  textfransform: "uppercase";
+  fontfamily: "sans-serif";
+}
+
+.navBarStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #013667;
+  color: #ffffff;
+  padding: 0rem 3rem 0rem;
+}
+
+.navUnlisted {
+  text-decoration: none;
+}

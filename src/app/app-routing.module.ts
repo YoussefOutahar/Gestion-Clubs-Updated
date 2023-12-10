@@ -3,10 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './Layout/layout.component';
 import { BlankComponent } from './Layout/blank/blank.component';
-import { LandingPage } from './Pages/Components/LandingPage/landingPage.component';
+import { LandingPageComponent } from './LandingPage/LandingPage.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/session/authenticate', pathMatch: 'full' },
+  { path: '', redirectTo: '/session/authenticate', pathMatch: 'full' },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'landing-page',
+        component: LandingPageComponent,
+      },
+    ],
+  },
   {
     path: '',
     component: LayoutComponent,
@@ -35,18 +45,22 @@ const routes: Routes = [
     path: '',
     component: BlankComponent,
     children: [
-      { path: 'session', redirectTo: '/session/authenticate', pathMatch: 'full' },
       {
         path: 'session',
-        loadChildren: () => import('./Auth/auth.module').then((m) => m.AuthModule),
+        redirectTo: '/session/authenticate',
+        pathMatch: 'full',
       },
-    ]
+      {
+        path: 'session',
+        loadChildren: () =>
+          import('./Auth/auth.module').then((m) => m.AuthModule),
+      },
+    ],
   },
-  { path: 'landingPage', component: LandingPage },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

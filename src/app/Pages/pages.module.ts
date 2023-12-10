@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { MaterialModule } from '../material.module';
 import { MatIconModule } from '@angular/material/icon';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -40,6 +40,8 @@ import { ImageSliderComponent } from './Components/LandingPage/LandingPage-compo
 import { LandingPage } from './Components/LandingPage/landingPage.component';
 import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-component/club-carousel/club-carousel.component';
 import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
+import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
+import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -66,8 +68,12 @@ import { FooterComponent } from './Components/LandingPage/LandingPage-component/
     ValidationComponent,
     ValidationDetailstDialogComponent,
 
+    AddMeetingRequestComponent,
     // ================================ //
     EventsComponent,
+    AddEventRequestComponent,
+
+    // ================================ //
     ForumComponent,
     // ============ Landing Page ============ //
     LandingPage,
@@ -92,4 +98,4 @@ import { FooterComponent } from './Components/LandingPage/LandingPage-component/
   exports: [TablerIconsModule],
   providers: [DatePipe],
 })
-export class PagesModule { }
+export class PagesModule {}
