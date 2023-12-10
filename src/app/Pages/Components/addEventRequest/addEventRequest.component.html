@@ -1,9 +1,9 @@
 <form [formGroup]="eventFormGroup">
   <mat-stepper orientation="horizontal" #stepper>
     <mat-step>
-      <ng-template matStepLabel>Location</ng-template>
+      <ng-template matStepLabel>General Info</ng-template>
       <mat-form-field>
-        <mat-label>Location</mat-label>
+        <mat-label>Name</mat-label>
         <input
           matInput
           placeholder="Ex. Bat 3"
@@ -11,14 +11,6 @@
           class="full-width"
         />
       </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>Date</ng-template>
       <mat-form-field>
         <mat-label>Date</mat-label>
         <input
