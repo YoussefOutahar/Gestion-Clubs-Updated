@@ -6,10 +6,9 @@ import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
 @Component({
   selector: 'app-clubs',
   templateUrl: './clubs.component.html',
-  styleUrls: ['./clubs.component.css']
+  styleUrls: ['./clubs.component.css'],
 })
 export class ClubsComponent implements OnInit {
-
   clubs: Club[] = [];
   showDetails: boolean = false;
   activeClub: Club | null = null;
@@ -17,16 +16,14 @@ export class ClubsComponent implements OnInit {
   clubToDelete: Club | null = null;
   openDeleteDialog: boolean = false;
 
-  constructor(
-    private clubsService: ClubsService
-  ) { }
+  constructor(private clubsService: ClubsService) {}
 
   ngOnInit() {
     this.getActiveClubs();
   }
 
   getActiveClubs() {
-    this.clubsService.getActiveClubs().then(clubs => {
+    this.clubsService.getActiveClubs().then((clubs) => {
       this.clubs = clubs;
       console.log(this.clubs);
     });
@@ -34,8 +31,8 @@ export class ClubsComponent implements OnInit {
 
   handleLearnMore(index: number) {
     this.activeClub = this.clubs[index];
-    this.clubsService.getClubCategory(this.clubs[index]).then(category => {
-      this.category = category.name;
+    this.clubsService.getClubCategory(this.clubs[index]).then((category) => {
+      this.category = category.category_name;
       this.showDetails = true;
     });
   }
@@ -58,7 +55,7 @@ export class ClubsComponent implements OnInit {
 
   async handleConfirmDelete() {
     if (this.clubToDelete) {
-      await this.clubsService.deleteClubById(this.clubToDelete.id);
+      await this.clubsService.deleteClubById(this.clubToDelete.id!);
       this.getActiveClubs();
     }
 
@@ -68,5 +65,4 @@ export class ClubsComponent implements OnInit {
   }
 
   // Other methods...
-
 }

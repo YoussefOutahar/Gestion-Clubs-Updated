@@ -22,7 +22,9 @@ export class ProfilesService {
   }
 
   async getProfiles(): Promise<Profile[]> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).select('*');
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .select('*');
     if (error) {
       throw error;
     }
@@ -30,15 +32,31 @@ export class ProfilesService {
   }
 
   async getProfileById(id: string): Promise<Profile[]> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).select('*').eq('id', id);
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .select('*')
+      .eq('id', id);
     if (error) {
       throw error;
     }
     return data;
   }
 
+  async addProfile(profile: PendingProfile): Promise<Profile[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .insert(profile);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
   async updateProfile(profile: Profile): Promise<Profile[]> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).update(profile).eq('id', profile.id);
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .update(profile)
+      .eq('id', profile.id);
     if (error) {
       throw error;
     }
@@ -46,7 +64,10 @@ export class ProfilesService {
   }
 
   async deleteProfile(profile: Profile): Promise<Profile[]> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).delete().eq('id', profile.id);
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .delete()
+      .eq('id', profile.id);
     if (error) {
       throw error;
     }
@@ -54,7 +75,10 @@ export class ProfilesService {
   }
 
   async getProfileRole(id: string): Promise<string> {
-    const { data, error } = await this.supabase.from(TableNames.Profiles).select('role_club').eq('id', id);
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .select('role_club')
+      .eq('id', id);
     if (error) {
       throw error;
     }

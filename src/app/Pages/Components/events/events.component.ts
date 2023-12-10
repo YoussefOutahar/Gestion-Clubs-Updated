@@ -19,7 +19,6 @@ import listPlugin from '@fullcalendar/list';
   styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
-
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
@@ -57,12 +56,14 @@ export class EventsComponent implements OnInit {
   }
 
   formatEvents(events: Event[]) {
-    return events.map((event): EventInput => ({
-      id: event.id.toString(),
-      title: `${event.name}`,
-      date: event.date,
-      color: this.darkColorRandomizerGenerator(),
-    }));
+    return events.map(
+      (event): EventInput => ({
+        id: event.id!.toString(),
+        title: `${event.name}`,
+        date: event.date,
+        color: this.darkColorRandomizerGenerator(),
+      })
+    );
   }
   darkColorRandomizerGenerator() {
     const red = Math.floor(Math.random() * 128);
@@ -74,9 +75,7 @@ export class EventsComponent implements OnInit {
   handleDateSelect(selectInfo: DateSelectArg) {
     // const title = prompt('Please enter a new title for your event');
     // const calendarApi = selectInfo.view.calendar;
-
     // calendarApi.unselect(); // clear date selection
-
     // if (title) {
     //   calendarApi.addEvent({
     //     id: createEventId(),
