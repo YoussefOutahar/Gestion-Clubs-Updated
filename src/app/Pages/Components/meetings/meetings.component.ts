@@ -56,7 +56,7 @@ export class MeetingsComponent implements OnInit {
   formatEvents(meetings: Meeting[]) {
     return meetings.map(
       (meeting): EventInput => ({
-        id: meeting.id.toString(),
+        id: meeting.id!.toString(),
         title: `${meeting.location}`,
         date: meeting.date,
         color: this.darkColorRandomizerGenerator(),

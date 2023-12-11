@@ -1,17 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { User } from "@supabase/supabase-js";
-import { AuthService } from "src/app/Auth/auth.service";
-import { ClubsService } from "src/app/DataBase/Services/clubs.service";
-import { Club, Event, Document } from "src/app/DataBase/Models/club";
+import { Component, OnInit } from '@angular/core';
+import { User } from '@supabase/supabase-js';
+import { AuthService } from 'src/app/Auth/auth.service';
+import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { Club, Event, Document } from 'src/app/DataBase/Models/club';
 import { MatDialog } from '@angular/material/dialog';
-import { ValidationDetailstDialogComponent } from "../validation-showDetails-dialog/validation-showDetails.component";
+import { ValidationDetailstDialogComponent } from '../validation-showDetails-dialog/validation-showDetails.component';
 
 @Component({
   selector: 'app-validation',
   templateUrl: './validation.component.html',
-  styleUrls: ['./validation.component.css']
+  styleUrls: ['./validation.component.css'],
 })
-
 export class ValidationComponent implements OnInit {
   currentUser: boolean | User | any;
   clubs: Club[] = [];
@@ -22,7 +21,7 @@ export class ValidationComponent implements OnInit {
     private clubsService: ClubsService,
     private authService: AuthService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     // Get the current user data
@@ -33,11 +32,10 @@ export class ValidationComponent implements OnInit {
     this.getPendingRequests();
 
     console.log(this.currentUser.role);
-
   }
 
   getPendingClubs() {
-    this.clubsService.getPendingClubs().then(clubs => {
+    this.clubsService.getPendingClubs().then((clubs) => {
       this.clubs = clubs;
 
       console.log(this.clubs);
@@ -45,14 +43,14 @@ export class ValidationComponent implements OnInit {
   }
 
   getPendingEvents() {
-    this.clubsService.getPendingEvents().then(events => {
+    this.clubsService.getPendingEvents().then((events) => {
       this.events = events;
       console.log(this.events);
     });
   }
 
   getPendingRequests() {
-    this.clubsService.getPendingDocuments().then(requests => {
+    this.clubsService.getPendingDocuments().then((requests) => {
       this.requests = requests;
       console.log(this.requests);
     });
@@ -68,9 +66,9 @@ export class ValidationComponent implements OnInit {
   }
 
   cancelClub(club: Club) {
-    this.clubsService.deleteClubById(club.id).then(() => {
+    this.clubsService.deleteClubById(club.id!).then(() => {
       // Optionally, update the local 'clubs' array after deletion
-      this.clubs = this.clubs.filter(c => c.id !== club.id);
+      this.clubs = this.clubs.filter((c) => c.id !== club.id);
       console.log('Club canceled:', club);
     });
   }
@@ -81,7 +79,7 @@ export class ValidationComponent implements OnInit {
       data: club,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       // Handle the result after the dialog is closed, e.g., update user details
       if (result) {
         console.log('User details saved:', result);
@@ -100,9 +98,9 @@ export class ValidationComponent implements OnInit {
   }
 
   cancelEvent(event: Event) {
-    this.clubsService.deleteEventById(event.id).then(() => {
+    this.clubsService.deleteEventById(event.id!).then(() => {
       // Optionally, update the local 'events' array after deletion
-      this.events = this.events.filter(e => e.id !== event.id);
+      this.events = this.events.filter((e) => e.id !== event.id);
       console.log('Event canceled:', event);
     });
   }
@@ -123,9 +121,9 @@ export class ValidationComponent implements OnInit {
   }
 
   cancelRequest(request: Document) {
-    this.clubsService.deleteEventById(request.id).then(() => {
+    this.clubsService.deleteEventById(request.id!).then(() => {
       // Optionally, update the local 'events' array after deletion
-      this.requests = this.requests.filter(e => e.id !== request.id);
+      this.requests = this.requests.filter((e) => e.id !== request.id);
       console.log('Request canceled:', request);
     });
   }
@@ -137,5 +135,4 @@ export class ValidationComponent implements OnInit {
       window.open(request.path, '_blank');
     }
   }
-
 }
