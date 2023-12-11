@@ -1,5 +1,5 @@
 export interface Profile {
-  id: string | null;
+  id?: string | null;
   role: string;
   name: string;
   phone: string;
@@ -12,14 +12,13 @@ export interface Profile {
 }
 
 export interface PendingProfile {
-  id: string | null;
-  role: string;
+  id?: string | null;
   name: string;
   phone: string;
   email: string;
-  avatar: string;
   field: string;
   year: string;
   id_club: number;
   role_club: string;
+  state: string;
 }

@@ -1,4 +1,4 @@
-<mat-stepper orientation="horizontal" #stepper>
+<mat-stepper orientation="horizontal" [linear]="true" #stepper>
   <mat-step [stepControl]="clubFormGroup">
     <form [formGroup]="clubFormGroup">
       <ng-template matStepLabel>Fill out club Information</ng-template>

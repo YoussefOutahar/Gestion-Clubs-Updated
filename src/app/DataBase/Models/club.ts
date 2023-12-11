@@ -2,7 +2,7 @@ import { Time } from '@angular/common';
 import { Timestamp } from 'rxjs';
 
 export interface Club {
-  id: number | null;
+  id?: number | null;
   name: string;
   date_creation: string;
   nb_member: number;
@@ -15,12 +15,12 @@ export interface Club {
 }
 
 export interface Category {
-  id: number | null;
+  id?: number | null;
   category_name: string;
 }
 
 export interface Event {
-  id: number | null;
+  id?: number | null;
   name: string;
   date: string;
   cost: number;
@@ -40,14 +40,14 @@ export interface Event {
 }
 
 export interface Meeting {
-  id: number | null;
+  id?: number | null;
   id_club: number;
   location: string;
   date: string;
 }
 
 export interface Forum {
-  id: number | null;
+  id?: number | null;
   club_id: number;
   name: string;
   description: string;
@@ -55,32 +55,32 @@ export interface Forum {
 }
 
 export interface ForumMessage {
-  id: number | null;
+  id?: number | null;
   created_at: string;
   forum_id: number;
   user_id: string;
   content: string;
 }
 
-export interface Event {
-  id: number | null;
-  name: string;
-  date: string;
-  cost: number;
-  img: string;
-  earnings: number;
-  supp_budget: number;
-  url: string;
-  id_club: number;
-  description: string;
-  location: string;
-  file_name: string;
-  aimed_target: string;
-  time: string;
-  funding_method: string;
-  article_for_newsletter: string;
-  state: string;
-}
+// export interface Event {
+//   id?: number | null;
+//   name: string;
+//   date: string;
+//   cost: number;
+//   img: string;
+//   earnings: number;
+//   supp_budget: number;
+//   url: string;
+//   id_club: number;
+//   description: string;
+//   location: string;
+//   file_name: string;
+//   aimed_target: string;
+//   time: string;
+//   funding_method: string;
+//   article_for_newsletter: string;
+//   state: string;
+// }
 
 export interface UpdatedEvent {
   cost: number | null;
@@ -98,7 +98,7 @@ export interface Budget {
 }
 
 export interface Document {
-  id: number | null;
+  id?: number | null;
   name: string;
   id_event: number;
   state: string;

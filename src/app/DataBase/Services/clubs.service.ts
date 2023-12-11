@@ -41,14 +41,14 @@ export class ClubsService {
     return data;
   }
 
-  async addClub(club: Club): Promise<Club[]> {
+  async addClub(club: Club): Promise<Club | null> {
     const { data, error } = await this.supabase
       .from(TableNames.Clubs)
       .insert([club]);
     if (error) {
       throw error;
     }
-    return data ? data : [];
+    return data ? data[0] : null;
   }
 
   async getActiveClubs(): Promise<Club[]> {

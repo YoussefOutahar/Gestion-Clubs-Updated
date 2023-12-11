@@ -42,14 +42,13 @@ export class ProfilesService {
     return data;
   }
 
-  async addProfile(profile: PendingProfile): Promise<Profile[]> {
-    const { data, error } = await this.supabase
-      .from(TableNames.Profiles)
+  async addProfile(profile: PendingProfile) {
+    const { error } = await this.supabase
+      .from(TableNames.PendingProfiles)
       .insert(profile);
     if (error) {
       throw error;
     }
-    return data ? data : [];
   }
 
   async updateProfile(profile: Profile): Promise<Profile[]> {
