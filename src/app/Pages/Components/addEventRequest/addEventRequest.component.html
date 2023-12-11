@@ -2,7 +2,7 @@
   <mat-stepper orientation="horizontal" #stepper>
     <mat-step>
       <ng-template matStepLabel>General Info</ng-template>
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Name</mat-label>
         <input
           matInput
@@ -11,7 +11,7 @@
           class="full-width"
         />
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
         <!-- <mat-label>Date</mat-label>
         <input
           matInput
@@ -24,6 +24,9 @@
         <input matInput [matDatepicker]="picker" />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
+          appearance="outline"
+          class="w-100"
+          color="primary"
           matIconSuffix
           [for]="picker"
         ></mat-datepicker-toggle>
