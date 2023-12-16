@@ -2,51 +2,105 @@
 
 h1 {
   margin-bottom: 20px;
+  color: #333;
 }
 
 .finance-cards {
   display: flex;
   gap: 20px;
+  justify-content: space-around;
 }
 
 .finance-card {
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ddd;
   border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.supp-Budget-button,
+.add-charge-button {
+  margin-top: 20px;
   text-align: center;
 }
 
-.supp-Budget-button {
-  margin-top: 20px;
-  float: left;
+.supp-Budget-button button,
+.add-charge-button button {
+  width: 300px;
+  padding: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.add-charge-button {
-  margin-top: 20px;
-  float: right;
+.supp-Budget-button button {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.add-charge-button button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.supp-Budget-button button:hover,
+.add-charge-button button:hover {
+  background-color: #0e77ca;
 }
 
 .charges-table {
-  margin-top: 60px;
+  margin-top: 40px;
+}
+
+h2 {
+  color: #333;
 }
 
 .table-container {
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
 }
 
 table {
-  width: 100%;
+  width: 90%; /* Adjust the width as needed */
   border-collapse: collapse;
   margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-th,
-td {
+thead {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+th, td {
   border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  padding: 12px;
+  text-align: center; /* Center align the content */
 }
 
-th {
-  background-color: #f2f2f2;
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #e0f7fa;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0e77ca;
+  color: #fff;
 }
