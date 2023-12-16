@@ -32,7 +32,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
@@ -95,7 +97,9 @@
             "inlineStyleLanguage": "scss",
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           }
