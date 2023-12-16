@@ -7,13 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { LayoutComponent } from './layout.component'
+import { LayoutComponent } from './layout.component';
 import { SideBarComponent } from './Components/side-bar/side-bar.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { AppNavItemComponent } from './Components/side-bar/nav-item/nav-item.component';
 import { BrandingComponent } from './Components/side-bar/branding.component';
 import { BlankComponent } from './blank/blank.component';
-
+import { PrimeNgModule } from '../primeNg.module';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { BlankComponent } from './blank/blank.component';
     AppRoutingModule,
     CommonModule,
     MaterialModule,
+    PrimeNgModule,
     BrowserAnimationsModule,
     TablerIconsModule.pick(TablerIcons),
   ],
@@ -30,7 +31,7 @@ import { BlankComponent } from './blank/blank.component';
     HeaderComponent,
     AppNavItemComponent,
     BrandingComponent,
-    BlankComponent
-  ]
+    BlankComponent,
+  ],
 })
-export class LayoutModule { }
+export class LayoutModule {}

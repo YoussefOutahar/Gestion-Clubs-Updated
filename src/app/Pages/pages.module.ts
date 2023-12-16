@@ -42,6 +42,7 @@ import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-com
 import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
 import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
+import { PrimeNgModule } from '../primeNg.module';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
@@ -84,6 +85,7 @@ import { AddEventRequestComponent } from './Components/addEventRequest/addEventR
   imports: [
     CommonModule,
     MaterialModule,
+    PrimeNgModule,
     MatCommonModule,
     FormsModule,
     MatIconModule,
