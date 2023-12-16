@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { supabaseEnvironment } from 'src/environments/environment';
+import { supabaseEnvironment } from '../../../environments/environment';
 
-import { TableNames } from 'src/app/Config/constants';
+import { TableNames } from '../../Config/constants';
 
 import { Notification } from '../Models/notification';
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +21,9 @@ export class NotificationsService {
   }
 
   async getNotifications(): Promise<Notification[]> {
-    const { data, error } = await this.supabase.from(TableNames.Notifications).select('*');
+    const { data, error } = await this.supabase
+      .from(TableNames.Notifications)
+      .select('*');
     if (error) {
       throw error;
     }
@@ -31,23 +31,36 @@ export class NotificationsService {
   }
 
   async getNotificationById(id: string): Promise<Notification[]> {
-    const { data, error } = await this.supabase.from(TableNames.Notifications).select('*').eq('id', id);
+    const { data, error } = await this.supabase
+      .from(TableNames.Notifications)
+      .select('*')
+      .eq('id', id);
     if (error) {
       throw error;
     }
     return data;
   }
 
-  async updateNotification(notification: Notification): Promise<Notification[]> {
-    const { data, error } = await this.supabase.from(TableNames.Notifications).update(notification).eq('id', notification.id);
+  async updateNotification(
+    notification: Notification
+  ): Promise<Notification[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Notifications)
+      .update(notification)
+      .eq('id', notification.id);
     if (error) {
       throw error;
     }
     return data ? data : [];
   }
 
-  async deleteNotificationById(notification: Notification): Promise<Notification[]> {
-    const { data, error } = await this.supabase.from(TableNames.Notifications).delete().eq('id', notification.id);
+  async deleteNotificationById(
+    notification: Notification
+  ): Promise<Notification[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Notifications)
+      .delete()
+      .eq('id', notification.id);
     if (error) {
       throw error;
     }

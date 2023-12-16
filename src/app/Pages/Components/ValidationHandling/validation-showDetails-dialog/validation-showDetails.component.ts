@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Club } from 'src/app/DataBase/Models/club';
-import { Profile } from 'src/app/DataBase/Models/profile';
+import { Club } from '../../../../DataBase/Models/club';
+import { Profile } from '../../../../DataBase/Models/profile';
 
 @Component({
   selector: 'app-validation-showDetails',

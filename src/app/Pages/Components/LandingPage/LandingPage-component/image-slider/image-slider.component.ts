@@ -1,20 +1,20 @@
 // image-slider.component.ts
-import { Component, Input, OnInit } from "@angular/core";
-import { ClubsService } from "src/app/DataBase/Services/clubs.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { ClubsService } from '../../../../../DataBase/Services/clubs.service';
 @Component({
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',
-  styleUrls: ['./image-slider.component.css']
+  styleUrls: ['./image-slider.component.css'],
 })
 export class ImageSliderComponent implements OnInit {
   @Input() interval = 3000; // Time in milliseconds between slides
   images: string[] = []; // Assuming the image paths are strings
 
-  //Just to test and To delete later 
-  staticImage = 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Events_images/job%20fair%202.jpg';
+  //Just to test and To delete later
+  staticImage =
+    'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Events_images/job%20fair%202.jpg';
 
-
-  constructor(private clubService: ClubsService) { }
+  constructor(private clubService: ClubsService) {}
 
   ngOnInit() {
     this.loadImages();

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Profile } from 'src/app/DataBase/Models/profile';
+import { Profile } from '../../../../DataBase/Models/profile';
 
 @Component({
   selector: 'app-member-edit-dialog',

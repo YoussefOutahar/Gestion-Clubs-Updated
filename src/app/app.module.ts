@@ -16,17 +16,17 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { PrimeNgModule } from './primeNg.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     AuthModule,
     MaterialModule,
+    PrimeNgModule,
     MatGridListModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -36,6 +36,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
   ],
   exports: [TablerIconsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@supabase/supabase-js';
-import { AuthService } from 'src/app/Auth/auth.service';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
-import { Club, Event, Document } from 'src/app/DataBase/Models/club';
+import { AuthService } from '../../../../Auth/auth.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
+import { Club, Event, Document } from '../../../../DataBase/Models/club';
 import { MatDialog } from '@angular/material/dialog';
 import { ValidationDetailstDialogComponent } from '../validation-showDetails-dialog/validation-showDetails.component';
 

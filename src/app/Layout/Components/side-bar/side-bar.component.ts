@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavService } from 'src/app/Services/nav.service';
+import { NavService } from '../../../Services/nav.service';
 import { NavItem } from './nav-item/nav-item';
 // import { navItems } from './sidebar-data';
 
@@ -16,7 +16,7 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNavItems();
-  } 
+  }
 
   loadNavItems() {
     this.navService.getNavItems().then((navItems) => {
