@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 
 @Component({
   selector: 'app-assign-budget',
@@ -15,7 +15,11 @@ export class AssignBudgetComponent implements OnInit {
   clubs: any[] = [];
   form!: FormGroup;
 
-  constructor(private router: Router, private clubsService: ClubsService, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private clubsService: ClubsService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.getActiveClubs();
@@ -41,8 +45,9 @@ export class AssignBudgetComponent implements OnInit {
 
       // Create an array of promises for all budgets
       const budgetPromises = this.clubs.map(async (club) => {
-
-        const currentRest = await this.clubsService.getRestBudgetByClub(club.id);
+        const currentRest = await this.clubsService.getRestBudgetByClub(
+          club.id
+        );
 
         const budgetData = {
           id_club: club.id,

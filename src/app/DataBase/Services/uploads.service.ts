@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { supabaseEnvironment } from 'src/environments/environment';
+import { supabaseEnvironment } from '../../../environments/environment';
 
-import { StorageNames } from 'src/app/Config/constants';
-
-
+import { StorageNames } from '../../Config/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +30,4 @@ export class UploadsService {
     // You can handle the uploaded data if needed, but it's not clear what you want to do with it.
     console.log('Uploaded data:', data);
   }
-
 }

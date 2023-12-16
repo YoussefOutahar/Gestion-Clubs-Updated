@@ -5,8 +5,8 @@ import {
   EventClickArg,
   EventInput,
 } from '@fullcalendar/core';
-import { Event } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { Event } from '../../../DataBase/Models/club';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
 
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';

@@ -10,8 +10,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { Meeting } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { Meeting } from '../../../DataBase/Models/club';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
 
 @Component({
   selector: 'app-meetings',

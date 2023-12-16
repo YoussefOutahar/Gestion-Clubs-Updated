@@ -1,7 +1,7 @@
 // clubs.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Club } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { Club } from '../../../DataBase/Models/club';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
 
 @Component({
   selector: 'app-clubs',

@@ -1,23 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Forum, ForumMessage } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
+import { Forum, ForumMessage } from '../../../DataBase/Models/club';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.css']
+  styleUrls: ['./forum.component.css'],
 })
 export class ForumComponent implements OnInit {
-
   forums: Forum[];
   messages: String[];
   message: string;
 
-  selectedConversation: any
+  selectedConversation: any;
 
-  constructor(
-    private ClubsService: ClubsService,
-  ) {
+  constructor(private ClubsService: ClubsService) {
     this.forums = [];
     this.messages = [
       'euhcfskeufkd',
@@ -28,15 +25,13 @@ export class ForumComponent implements OnInit {
       'oeuhcfawuhcauw',
     ];
     this.message = '';
-   }
+  }
 
   ngOnInit() {
     this.ClubsService.getForums().then((forums) => {
       this.forums = forums;
     });
-
   }
 
   sendMessage() {}
-
 }

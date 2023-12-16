@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Auth/auth.service';
-import { NotificationsService } from 'src/app/DataBase/Services/notifications.service';
+import { AuthService } from './../../../Auth/auth.service';
+import { NotificationsService } from './../../../DataBase/Services/notifications.service';
 
-import { Notification } from 'src/app/DataBase/Models/notification';
+import { Notification } from './../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-header',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { supabaseEnvironment } from 'src/environments/environment';
+import { supabaseEnvironment } from '../../../environments/environment';
 
 import {
   Club,
@@ -14,7 +14,7 @@ import {
   Document,
   NewDocument,
 } from '../Models/club';
-import { TableNames } from 'src/app/Config/constants';
+import { TableNames } from '../..//Config/constants';
 
 @Injectable({
   providedIn: 'root',

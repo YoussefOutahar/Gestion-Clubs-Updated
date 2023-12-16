@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { Category, Club } from 'src/app/DataBase/Models/club';
-import { ClubsService } from 'src/app/DataBase/Services/clubs.service';
-import { ProfilesService } from 'src/app/DataBase/Services/profiles.service';
+import { Category, Club } from '../../../DataBase/Models/club';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { ProfilesService } from '../../../DataBase/Services/profiles.service';
 
 @Component({
   selector: 'app-clubCreation',

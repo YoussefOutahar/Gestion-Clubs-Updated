@@ -4,24 +4,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { MemberDeleteDialogComponent } from '../member-delete-dialog/member-delete-dialog.component';
 import { MemberEditDialogComponent } from '../member-edit-dialog/member-edit-dialog.component';
 
-import { Profile } from 'src/app/DataBase/Models/profile';
-import { ProfilesService } from 'src/app/DataBase/Services/profiles.service';
+import { Profile } from '../../../../DataBase/Models/profile';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
-  styleUrls: ['./members.component.css']
+  styleUrls: ['./members.component.css'],
 })
 export class MembersComponent implements OnInit {
-
   users: Profile[] = [];
-  
+
   displayedColumns: string[] = ['name', 'email', 'role', 'actions'];
 
   constructor(
     private profilesService: ProfilesService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -41,7 +40,7 @@ export class MembersComponent implements OnInit {
       data: user,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       // Handle the result after the dialog is closed, e.g., update user details
       if (result) {
         console.log('User details saved:', result);
@@ -56,7 +55,7 @@ export class MembersComponent implements OnInit {
       data: user,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       // Handle the result after the dialog is closed, e.g., delete user
       if (result) {
         console.log('User deleted:', result);
@@ -65,5 +64,4 @@ export class MembersComponent implements OnInit {
       }
     });
   }
-
 }
