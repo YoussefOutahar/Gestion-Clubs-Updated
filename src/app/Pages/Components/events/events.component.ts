@@ -12,6 +12,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { MatDialog } from '@angular/material/dialog';
+import { EventDetailsComponent } from './event-details-popup/event-details.component';
 
 @Component({
   selector: 'app-events',
@@ -39,8 +41,9 @@ export class EventsComponent implements OnInit {
 
   constructor(
     private clubsService: ClubsService,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+    private changeDetector: ChangeDetectorRef,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.loadEvents();
@@ -88,14 +91,30 @@ export class EventsComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    // if (
-    //   confirm(
-    //     `Are you sure you want to delete the event '${clickInfo.event.title}'`
-    //   )
-    // ) {
-    //   clickInfo.event.remove();
-    // }
+    const eventName = clickInfo.event.title;
+  
+    // Assuming that getEventByName returns a Promise<Event | null> based on the name
+    this.clubsService.getEventByName(eventName).then((event) => {
+      if (event) {
+        console.log("the selected event : ", event);
+        const dialogRef = this.dialog.open(EventDetailsComponent, {
+          data: {
+            name: event.name,
+            date: event.date,
+            img: event.img,
+            id_club: event.id_club,
+            description: event.description,
+            location: event.location,
+            aimed_target: event.aimed_target,
+            time: event.time,
+          },
+        });
+      } else {
+        console.error(`Event with name ${eventName} not found.`);
+      }
+    });
   }
+
 
   // handleEvents(events: EventApi[]) {
   //   this.currentEvents.set(events);

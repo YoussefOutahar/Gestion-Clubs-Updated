@@ -1,0 +1,9 @@
+<h2>{{ data.name }}</h2>
+<div class="event-details">
+<p><strong>Date:</strong> {{ data.date | date: 'long' }}</p>
+<p><strong>Time:</strong> {{ data.time }}</p>
+<p><strong>Location:</strong> {{ data.location }}</p>
+<p><strong>Description:</strong> {{ data.description }}</p>
+<p><strong>Aimed Target:</strong> {{ data.aimed_target }}</p>
+<p><strong>Image:</strong> <img [src]="data.img" alt="Event Image" style="width: 200; border-radius: 8px 8px 0 0;"></p>
+</div>

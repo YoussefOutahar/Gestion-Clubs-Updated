@@ -16,11 +16,23 @@ import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
 import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
+import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
+import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
 
 export const pageRoutes: Routes = [
   {
     path: 'home',
     component: DashboardPageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'clubDashboard',
+    component: clubDashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent,
     canActivate: [authGuard],
   },
   {

@@ -299,6 +299,17 @@ export class ClubsService {
     return data;
   }
 
+  async getEventByName(name: string): Promise<Event | null> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Events)
+      .select('*')
+      .eq('name', name);
+    if (error) {
+      throw error;
+    }
+    return data ? data[0] : null;
+  }
+
   async validateEventByDve(event: Event): Promise<Event[]> {
     const updatedEvent: Event = { ...event, state: 'active' };
     const { data, error } = await this.supabase

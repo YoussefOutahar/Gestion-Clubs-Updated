@@ -43,11 +43,15 @@ import { FooterComponent } from './Components/LandingPage/LandingPage-component/
 import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
 import { PrimeNgModule } from '../primeNg.module';
+import { EventDetailsComponent } from './Components/events/event-details-popup/event-details.component';
+import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
+import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
 @NgModule({
   declarations: [
     // ========== Pages ========== //
     DashboardPageComponent,
-
+    clubDashboardComponent,
+    AdminDashboardComponent,
     // ========== Componenets ========== //
     ClubsComponent,
     ClubCreationComponent,
@@ -73,7 +77,7 @@ import { PrimeNgModule } from '../primeNg.module';
     // ================================ //
     EventsComponent,
     AddEventRequestComponent,
-
+    EventDetailsComponent,
     // ================================ //
     ForumComponent,
     // ============ Landing Page ============ //
