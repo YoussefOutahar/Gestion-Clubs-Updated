@@ -13,7 +13,22 @@
 
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef>Role</th>
-      <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+      <td mat-cell *matCellDef="let user">{{ user.role_club }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="field">
+      <th mat-header-cell *matHeaderCellDef>Field</th>
+      <td mat-cell *matCellDef="let user">{{ user.field }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef>Year</th>
+      <td mat-cell *matCellDef="let user">{{ user.year }}</td>
     </ng-container>
 
     <!-- Add more columns as needed -->
@@ -21,10 +36,10 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let user">
-        <button mat-icon-button (click)="openEditDialog(user)" matTooltip="Edit">
+        <button mat-icon-button (click)="openEditDialog(user)" *ngIf="canShowActions(user)" matTooltip="Edit">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button (click)="openDeleteDialog(user)" matTooltip="Delete">
+        <button mat-icon-button (click)="openDeleteDialog(user)" *ngIf="canShowActions(user)" matTooltip="Delete">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

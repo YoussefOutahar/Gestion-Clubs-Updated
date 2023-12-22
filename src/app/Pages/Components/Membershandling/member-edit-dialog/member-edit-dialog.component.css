@@ -1,0 +1,10 @@
+.dialog-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: space-between;
+}

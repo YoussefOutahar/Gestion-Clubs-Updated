@@ -83,4 +83,15 @@ export class ProfilesService {
     }
     return data[0].role_club;
   }
+
+  async getProfileByClub(id: string): Promise<Profile[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Profiles)
+      .select('*')
+      .eq('id_club', id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
 }

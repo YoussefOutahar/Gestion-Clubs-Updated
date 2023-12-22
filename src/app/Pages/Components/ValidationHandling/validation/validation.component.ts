@@ -5,6 +5,7 @@ import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { Club, Event, Document } from '../../../../DataBase/Models/club';
 import { MatDialog } from '@angular/material/dialog';
 import { ValidationDetailstDialogComponent } from '../validation-showDetails-dialog/validation-showDetails.component';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 
 @Component({
   selector: 'app-validation',
@@ -20,12 +21,17 @@ export class ValidationComponent implements OnInit {
   constructor(
     private clubsService: ClubsService,
     private authService: AuthService,
+    private profileService : ProfilesService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     // Get the current user data
-    this.currentUser = this.authService.currentUser.value;
+    const user = this.authService.currentUser.value;
+    this.currentUser = this.profileService.getProfileById(user.id).then((profile) => {
+      this.currentUser = profile[0]; // Assuming getProfileById returns an array
+      console.log('user : ', this.currentUser);
+    });
 
     this.getPendingClubs();
     this.getPendingEvents();
@@ -60,7 +66,7 @@ export class ValidationComponent implements OnInit {
     // Check the role of the current user
     if (this.currentUser && this.currentUser.role === 'admin') {
       this.clubsService.validateClubByDve(club);
-    } else if (this.currentUser && this.currentUser.role === 'supervisor') {
+    } else if (this.currentUser && this.currentUser.role_club === 'supervisor') {
       this.clubsService.validateClubByRef(club);
     }
   }
