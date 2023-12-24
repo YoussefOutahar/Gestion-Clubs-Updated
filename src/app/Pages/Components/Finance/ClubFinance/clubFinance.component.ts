@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { User } from '@supabase/supabase-js';
-import { AuthService } from '../../../Auth/auth.service';
-import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+import { AuthService } from '../../../../Auth/auth.service';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 
 
 @Component({

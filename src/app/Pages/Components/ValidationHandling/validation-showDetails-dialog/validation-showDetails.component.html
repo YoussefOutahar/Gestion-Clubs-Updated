@@ -8,7 +8,7 @@
   <p>State: {{ data.state }}</p>
   <p>KPO: {{ data.kpo }}</p>
   <p>Type: {{ data.type }}</p>
-  <img src="data.logo">
+  <img [src]="data.logo">
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

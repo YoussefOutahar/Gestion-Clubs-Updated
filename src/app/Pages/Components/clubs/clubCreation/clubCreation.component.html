@@ -1,23 +1,15 @@
 <mat-stepper orientation="horizontal" [linear]="true" #stepper>
   <mat-step [stepControl]="clubFormGroup">
     <form [formGroup]="clubFormGroup">
+
       <ng-template matStepLabel>Fill out club Information</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Club name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Ex. Club de soccer de l'UQAM"
-        />
+        <input matInput formControlName="name" placeholder="Ex. Club de soccer de l'UQAM" />
       </mat-form-field>
-
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Clubs Mission</mat-label>
-        <input
-          matInput
-          formControlName="mission"
-          placeholder="Ex. Club de soccer de l'UQAM"
-        />
+        <input matInput formControlName="mission" placeholder="Ex. Club de soccer de l'UQAM" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>KPO</mat-label>
@@ -49,278 +41,164 @@
       </mat-form-field> -->
       <div>
         <label for="file">Upload File:</label>
-        <input
-          type="file"
-          formControlName="logo"
-          (change)="onFileChange($event)"
-        />
+        <input type="file" formControlName="logo" (change)="onFileChange($event)" />
       </div>
       <div>
-        <button mat-button matStepperNext (click)="saveClub()">Next</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="supervisorFormGroup">
     <form [formGroup]="supervisorFormGroup">
       <ng-template matStepLabel>Supervisor infos</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Supervisor name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Enter supervisor name"
-        />
+        <input matInput formControlName="name" placeholder="Enter supervisor name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Supervisor email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="Enter supervisor email"
-        />
+        <input type="email" formControlName="email" placeholder="Enter supervisor email" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Supervisor phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          placeholder="Enter supervisor phone"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-100" color="primary">
-        <mat-label>Supervisor field</mat-label>
-        <input
-          matInput
-          formControlName="field"
-          placeholder="Enter supervisor field"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-100" color="primary">
-        <mat-label>Supervisor year</mat-label>
-        <input
-          matInput
-          formControlName="year"
-          placeholder="Enter supervisor year"
-        />
+        <input type="number" formControlName="phone" placeholder="Enter supervisor phone" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="saveSupervisor()">
-          Next
-        </button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="presidentFormGroup">
     <form [formGroup]="presidentFormGroup">
       <ng-template matStepLabel>President infos</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>President name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Enter president name"
-        />
+        <input matInput formControlName="name" placeholder="Enter president name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>President email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="Enter president email"
-        />
+        <input type="email" matInput formControlName="email" placeholder="Enter president email" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>President phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          placeholder="Enter president phone"
-        />
+        <input type="number" matInput formControlName="phone" placeholder="Enter president phone" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>President field</mat-label>
-        <input
-          matInput
-          formControlName="field"
-          placeholder="Enter president field"
-        />
+        <input matInput formControlName="field" placeholder="Enter president field" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>President year</mat-label>
-        <input
-          matInput
-          formControlName="year"
-          placeholder="Enter president year"
-        />
+        <input matInput formControlName="year" placeholder="Enter president year" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="savePresident()">
-          Next
-        </button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="vicePresidentFormGroup">
     <form [formGroup]="vicePresidentFormGroup">
       <ng-template matStepLabel>Vice president infos</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Vice president name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Enter Vice president name"
-        />
+        <input matInput formControlName="name" placeholder="Enter Vice president name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Vice president email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="Enter Vice president email"
-        />
+        <input type="email" matInput formControlName="email" placeholder="Enter Vice president email" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Vice president phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          placeholder="Enter Vice president phone"
-        />
+        <input type="number" matInput formControlName="phone" placeholder="Enter Vice president phone" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Vice president field</mat-label>
-        <input
-          matInput
-          formControlName="field"
-          placeholder="Enter Vice president field"
-        />
+        <input matInput formControlName="field" placeholder="Enter Vice president field" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Vice president year</mat-label>
-        <input
-          matInput
-          formControlName="year"
-          placeholder="Enter Vice president year"
-        />
+        <input matInput formControlName="year" placeholder="Enter Vice president year" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="saveVicePresident()">
-          Next
-        </button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="financierFormGroup">
     <form [formGroup]="financierFormGroup">
       <ng-template matStepLabel>Financier infos</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Financier name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Enter Financier name"
-        />
+        <input matInput formControlName="name" placeholder="Enter Financier name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Financier email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="Enter Financier email"
-        />
+        <input type="email" matInput formControlName="email" placeholder="Enter Financier email" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Financier phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          placeholder="Enter Financier phone"
-        />
+        <input type="number" matInput formControlName="phone" placeholder="Enter Financier phone" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Financier field</mat-label>
-        <input
-          matInput
-          formControlName="field"
-          placeholder="Enter Financier field"
-        />
+        <input matInput formControlName="field" placeholder="Enter Financier field" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Financier year</mat-label>
-        <input
-          matInput
-          formControlName="year"
-          placeholder="Enter Financier year"
-        />
+        <input matInput formControlName="year" placeholder="Enter Financier year" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="saveFinancier()">
-          Next
-        </button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="secretaryFormGroup">
     <form [formGroup]="secretaryFormGroup">
       <ng-template matStepLabel>Secretary infos</ng-template>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Secretary name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Enter Secretary name"
-        />
+        <input matInput formControlName="name" placeholder="Enter Secretary name" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Secretary email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-          placeholder="Enter Secretary email"
-        />
+        <input type="email" matInput formControlName="email" placeholder="Enter Secretary email" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Secretary phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          placeholder="Enter Secretary phone"
-        />
+        <input type="number" matInput formControlName="phone" placeholder="Enter Secretary phone" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Secretary field</mat-label>
-        <input
-          matInput
-          formControlName="field"
-          placeholder="Enter Secretary field"
-        />
+        <input matInput formControlName="field" placeholder="Enter Secretary field" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="w-100" color="primary">
         <mat-label>Secretary year</mat-label>
-        <input
-          matInput
-          formControlName="year"
-          placeholder="Enter Secretary year"
-        />
+        <input matInput formControlName="year" placeholder="Enter Secretary year" />
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="saveSecretary()">
-          Next
-        </button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
+    <p>Submit your request.</p>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary">Submit</button>
     </div>
   </mat-step>
+
 </mat-stepper>

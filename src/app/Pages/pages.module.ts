@@ -26,9 +26,9 @@ import { MemberEditDialogComponent } from './Components/Membershandling/member-e
 import { MemberDeleteDialogComponent } from './Components/Membershandling/member-delete-dialog/member-delete-dialog.component';
 
 import { DatePipe } from '@angular/common';
-import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { AdminFinanceComponent } from './Components/Finance/AdminFinance/adminFinance.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
-import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
+import { ClubFinanceComponent } from './Components/Finance/ClubFinance/clubFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,7 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
-import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { ClubCreationComponent } from './Components/clubs/clubCreation/clubCreation.component';
 import { ValidationDetailstDialogComponent } from './Components/ValidationHandling/validation-showDetails-dialog/validation-showDetails.component';
 import { ImageSliderComponent } from './Components/LandingPage/LandingPage-component/image-slider/image-slider.component';
 import { LandingPage } from './Components/LandingPage/landingPage.component';
@@ -47,10 +47,10 @@ import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequ
 import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
 import { PrimeNgModule } from '../primeNg.module';
 import { EventDetailsComponent } from './Components/events/event-details-popup/event-details.component';
-import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
-import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
+import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Page/clubDashboard.component';
+import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
-import { JoinFormComponent } from './Components/joinClub/joinClub.component';
+import { JoinFormComponent } from './Components/clubs/joinClub/joinClub.component';
 @NgModule({
   declarations: [
     // ========== Dashboards ========== //

@@ -7,17 +7,17 @@ import { ValidationComponent } from './Components/ValidationHandling/validation/
 import { EventsComponent } from './Components/events/events.component';
 
 import { authGuard } from '../Auth/auth.guard';
-import { AdminFinanceComponent } from './Components/AdminFinance/adminFinance.component';
+import { AdminFinanceComponent } from './Components/Finance/AdminFinance/adminFinance.component';
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignBudget.component';
-import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.component';
+import { ClubFinanceComponent } from './Components/Finance/ClubFinance/clubFinance.component';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
-import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
+import { ClubCreationComponent } from './Components/clubs/clubCreation/clubCreation.component';
 import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
 import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
-import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
-import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
+import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Page/clubDashboard.component';
+import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 
 export const pageRoutes: Routes = [

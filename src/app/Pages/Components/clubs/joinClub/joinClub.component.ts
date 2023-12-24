@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClubsService } from '../../../DataBase/Services/clubs.service';
-import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

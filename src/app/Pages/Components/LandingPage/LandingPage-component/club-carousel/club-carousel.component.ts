@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Club } from '../../../../../DataBase/Models/club';
 import { ClubsService } from '../../../../../DataBase/Services/clubs.service';
 import { MatDialog } from '@angular/material/dialog';
-import { JoinFormComponent } from '../../../joinClub/joinClub.component';
+import { JoinFormComponent } from '../../../clubs/joinClub/joinClub.component';
 
 @Component({
   selector: 'app-carousel-clubs',

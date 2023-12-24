@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 
 @Component({
   selector: 'app-adminFinance',

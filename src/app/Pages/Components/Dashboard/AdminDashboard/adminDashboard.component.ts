@@ -1,22 +1,19 @@
 import { Component, ViewChild } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
-import { DashboardService } from "../../../DataBase/Services/dashboard.service";
-import { ClubsService } from "../../../DataBase/Services/clubs.service";
-import { Router } from "@angular/router";
+import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
 
 @Component({
-  selector: 'app-clubDashboard-page',
-  templateUrl: './clubDashboard.component.html',
+  selector: 'app-adminDashboard-page',
+  templateUrl: './adminDashboard.component.html',
 })
 
-export class clubDashboardComponent {
+export class AdminDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
 
   public salesOverviewChart: any;
   public event: any; // Add this property to store the upcoming event
 
-  constructor(private dashboardService: DashboardService, private clubsService: ClubsService, private router: Router, // Inject Router
-  ) { }
+  constructor(private dashboardService: DashboardService) {}
 
   async ngOnInit() {
     const clubsWithEventCounts = await this.dashboardService.getClubsWithEventCounts();
@@ -62,21 +59,12 @@ export class clubDashboardComponent {
           },
         },
       ],
-    };// Load upcoming event
+    };
+    // Load upcoming event
     this.loadUpcomingEvent();
   }
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();
-  }
-
-  addNewEvent() {
-    // Redirect to addEventRequest component
-    this.router.navigate(['/dashboard/event/create']);
-  }
-
-  addNewMeeting() {
-    // Redirect to addMeetingRequest component
-    this.router.navigate(['/dashboard/meeting/create']);
   }
 }
