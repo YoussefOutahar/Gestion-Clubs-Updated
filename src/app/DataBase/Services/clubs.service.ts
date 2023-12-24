@@ -156,11 +156,11 @@ export class ClubsService {
 
   // ============== Meetings ============== //
 
-  async getClubMeetings(club: Club): Promise<Meeting[]> {
+  async getClubMeetings(id: Number): Promise<Meeting[]> {
     const { data, error } = await this.supabase
       .from(TableNames.Meetings)
       .select('*')
-      .eq('id_club', club.id);
+      .eq('id_club', id);
     if (error) {
       throw error;
     }
@@ -186,6 +186,15 @@ export class ClubsService {
       throw error;
     }
     return data;
+  }
+
+  async addMeeting(meeting: Meeting): Promise<void> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Meetings)
+      .insert([meeting]);
+    if (error) {
+      throw error;
+    }
   }
 
   // ============== Forums ============== //

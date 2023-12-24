@@ -34,6 +34,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
@@ -48,13 +49,14 @@ import { PrimeNgModule } from '../primeNg.module';
 import { EventDetailsComponent } from './Components/events/event-details-popup/event-details.component';
 import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 @NgModule({
   declarations: [
-    // ========== Pages ========== //
+    // ========== Dashboards ========== //
     DashboardPageComponent,
     clubDashboardComponent,
     AdminDashboardComponent,
-    // ========== Componenets ========== //
+    // ========== Clubs ========== //
     ClubsComponent,
     ClubCreationComponent,
 
@@ -69,19 +71,23 @@ import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashbo
     MembersComponent,
     MemberEditDialogComponent,
     MemberDeleteDialogComponent,
+
     // ========== Meetings ========== //
     MeetingsComponent,
+    AddMeetingRequestComponent,
+
     // =========== Validation ============= //
     ValidationComponent,
     ValidationDetailstDialogComponent,
 
-    AddMeetingRequestComponent,
-    // ================================ //
+    // ===========Events============= //
     EventsComponent,
     AddEventRequestComponent,
     EventDetailsComponent,
+
     // ================================ //
     ForumComponent,
+    ProfileComponent,
     // ============ Landing Page ============ //
     LandingPage,
     ImageSliderComponent,
@@ -97,6 +103,7 @@ import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashbo
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    NgxMaterialTimepickerModule,
     MatButtonModule,
     MatStepperModule,
     ReactiveFormsModule,

@@ -18,6 +18,7 @@ import { AddEventRequestComponent } from './Components/events/addEventRequest/ad
 import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
 import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 export const pageRoutes: Routes = [
   {
@@ -83,6 +84,11 @@ export const pageRoutes: Routes = [
   {
     path: 'validation',
     component: ValidationComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [authGuard],
   },
   // ====================================

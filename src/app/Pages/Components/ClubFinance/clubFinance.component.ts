@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { User } from '@supabase/supabase-js';
+import { AuthService } from '../../../Auth/auth.service';
+import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+
 
 @Component({
   selector: 'app-clubFinance',
@@ -9,6 +13,8 @@ import { ClubsService } from '../../../DataBase/Services/clubs.service';
   styleUrls: ['./clubFinance.component.css'],
 })
 export class ClubFinanceComponent implements OnInit {
+  currentUser: boolean | User | any;
+
   totalSuppBudget: number = 0;
   Budget: number = 0;
   totalDonations: number = 0;
@@ -20,15 +26,30 @@ export class ClubFinanceComponent implements OnInit {
   constructor(
     private clubsService: ClubsService,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private authService: AuthService,
+    private profilesService: ProfilesService,
   ) {}
 
   ngOnInit() {
-    this.fetchData();
+     // Get the current user data
+     const user = this.authService.currentUser.value;
+     this.profilesService.getProfileById(user.id)
+       .then((profile) => {
+         this.currentUser = profile[0]; // Assuming getProfileById returns an array
+         console.log('user : ', this.currentUser);
+
+         this.fetchData();
+
+       })
+       .catch((error) => {
+         console.error('Error fetching user profile:', error);
+       });
   }
 
   async fetchData() {
-    this.clubsService.getClubEvents(1).then((events) => {
+    //fetch the events of the current user's club
+    this.clubsService.getClubEvents(this.currentUser.id_club).then((events) => {
       this.events = events;
       console.log(this.events);
     });

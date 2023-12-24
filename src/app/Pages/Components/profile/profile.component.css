@@ -1,0 +1,39 @@
+/* profile.component.css */
+
+.profile-row {
+    margin: 20px;
+    margin-left: 40px;
+    display: grid;
+    grid-template-columns: 280px auto;
+    align-items: center;
+}
+
+.header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: xx-large;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+.profile-content {
+    text-align: left;
+    margin: 30px;
+}
+
+.info-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}

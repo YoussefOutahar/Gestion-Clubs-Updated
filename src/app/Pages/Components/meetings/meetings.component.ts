@@ -12,12 +12,17 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { Meeting } from '../../../DataBase/Models/club';
 import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { User } from '@supabase/supabase-js';
+import { AuthService } from '../../../Auth/auth.service';
+import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+
 
 @Component({
   selector: 'app-meetings',
   templateUrl: './meetings.component.html',
 })
 export class MeetingsComponent implements OnInit {
+  currentUser: boolean | User | any;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
@@ -37,16 +42,29 @@ export class MeetingsComponent implements OnInit {
 
   constructor(
     private clubService: ClubsService,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+    private changeDetector: ChangeDetectorRef,
+    private authService: AuthService,
+    private profilesService: ProfilesService,
+  ) { }
 
   ngOnInit() {
-    this.loadMeetings();
-    this.changeDetector.detectChanges();
+    // Get the current user data
+    const user = this.authService.currentUser.value;
+    this.profilesService.getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+
+        this.loadMeetings();
+        this.changeDetector.detectChanges();
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
   }
 
   loadMeetings() {
-    this.clubService.getMeetings().then((meetings) => {
+    this.clubService.getClubMeetings(this.currentUser.id_club).then((meetings) => {
       console.log(meetings);
       console.log(this.formatEvents(meetings));
       this.calendarOptions.events = this.formatEvents(meetings);

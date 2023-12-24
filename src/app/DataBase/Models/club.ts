@@ -53,9 +53,10 @@ export interface NewEvent {
 
 export interface Meeting {
   id?: number | null;
+  topic: string;
   id_club: number;
   location: string;
-  date: string;
+  date: Date;
 }
 
 export interface Forum {

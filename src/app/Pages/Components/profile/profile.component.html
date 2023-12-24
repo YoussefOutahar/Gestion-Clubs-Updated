@@ -1,0 +1,45 @@
+<!-- profile.component.html -->
+
+<!-- profile.component.html -->
+<mat-card>
+    <div class="profile-row">
+        <div class="profile-image">
+            <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover" width="200" />
+        </div>
+        <div class="profile-title">
+            <h1 class="header">My Profile</h1>
+        </div>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="profile-content">
+    <h1>My personnal information</h1>
+    <div class="info-container">
+        <div class="info-item">
+            <label>Name:</label>
+            <div>{{currentUser.name}}</div>
+        </div>
+        <div class="info-item">
+            <label>Field:</label>
+            <div>{{currentUser.field}}</div>
+        </div>
+        <div class="info-item">
+            <label>Year:</label>
+            <div>{{currentUser.year}}</div>
+        </div>
+        <div class="info-item">
+            <label>Email:</label>
+            <div>{{currentUser.email}}</div>
+        </div>
+        <div class="info-item">
+            <label>Phone:</label>
+            <div>{{currentUser.phone}}</div>
+        </div>
+        <div class="info-item">
+            <label>Role:</label>
+            <div>{{currentUser.role_club}}</div>
+        </div>
+    </div>
+</div>
+</mat-card>

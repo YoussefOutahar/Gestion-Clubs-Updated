@@ -5,6 +5,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { UploadsService } from '../../../../DataBase/Services/uploads.service';
+import { User } from '@supabase/supabase-js';
+import { AuthService } from '../../../../Auth/auth.service';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
+
 
 @Component({
   selector: 'app-assign-budget',
@@ -12,6 +16,7 @@ import { UploadsService } from '../../../../DataBase/Services/uploads.service';
   styleUrls: ['./addCharge.component.css'],
 })
 export class AddChargeComponent implements OnInit {
+  currentUser: boolean | User | any;
   chargeForm: FormGroup;
   events: any[] = [];
 
@@ -19,7 +24,9 @@ export class AddChargeComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private clubsService: ClubsService,
-    private uploadService: UploadsService
+    private uploadService: UploadsService,
+    private authService: AuthService,
+    private profilesService: ProfilesService,
   ) {
     this.chargeForm = this.fb.group({
       eventId: [null, Validators.required],
@@ -30,7 +37,19 @@ export class AddChargeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadEvents();
+    // Get the current user data
+    const user = this.authService.currentUser.value;
+    this.profilesService.getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+
+        this.loadEvents();
+
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
   }
 
   async onSubmit() {
@@ -80,7 +99,7 @@ export class AddChargeComponent implements OnInit {
 
   loadEvents() {
     // Assuming ClubsService has a method to fetch events from the database
-    this.clubsService.getEvents().then((events) => {
+    this.clubsService.getClubEvents(this.currentUser.id_club).then((events) => {
       this.events = events;
       console.log(this.events);
     });

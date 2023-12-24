@@ -59,4 +59,9 @@ export class HeaderComponent {
     this.router.navigate(['/session/authenticate']);
     console.log('logged out');
   }
+
+  async navigateToProfile() {
+    // Navigate to the profile component
+    this.router.navigate(['/dashboard/profile']);
+  }
 }
