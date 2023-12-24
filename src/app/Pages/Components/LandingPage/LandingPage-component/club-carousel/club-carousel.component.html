@@ -1,32 +1,19 @@
-<div *ngFor="let club of clubs" class="item-container">
-    <div class="img-container">
-        <img [src]="club.logo" alt="Club logo">
-    </div>
-
-    <div class="body-container">
-        <div class="overlay"></div>
-
-        <div class="event-info">
-            <p class="title">{{ club.name }}</p>
-            <div class="separator"></div>
-            <p class="info">{{ club.type }}</p>
-            <p class="price">{{ club.nb_member }}</p>
-
-            <div class="additional-info">
-                <p class="info">
-                    <i class="fas fa-map-marker-alt"></i>
-                    {{ club.mission }}
-                </p>
-                <p class="info">
-                    <i class="far fa-calendar-alt"></i>
-                    {{ club.kpo }}
-                </p>
-
-                <p class="info description">
-                    {{ club.mission }}
-                </p>
-            </div>
+<div class="container">
+    <div *ngFor="let club of clubs" class="item-container">
+        <div class="img-container">
+            <img [src]="club.logo" alt="Club logo">
         </div>
-        <button class="action">Join Us</button>
+
+        <div class="body-container">
+            <div class="overlay"></div>
+
+            <div class="event-info">
+                <p class="title">{{ club.name }}</p>
+                <div class="separator"></div>
+                <p class="info">{{ club.type }}</p>
+                <p class="price">{{ club.nb_member }}</p>
+            </div>
+            <button class="action" (click)="openJoinDialog(club.id!)">Join Us</button>
+        </div>
     </div>
 </div>

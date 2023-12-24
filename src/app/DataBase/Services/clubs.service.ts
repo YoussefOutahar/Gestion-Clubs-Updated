@@ -74,7 +74,7 @@ export class ClubsService {
     return data;
   }
 
-  async getClubById(id: string): Promise<Club[]> {
+  async getClubById(id: number): Promise<Club[]> {
     const { data, error } = await this.supabase
       .from(TableNames.Clubs)
       .select('*')

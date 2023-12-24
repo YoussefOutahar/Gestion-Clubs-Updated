@@ -50,6 +50,7 @@ import { EventDetailsComponent } from './Components/events/event-details-popup/e
 import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { JoinFormComponent } from './Components/joinClub/joinClub.component';
 @NgModule({
   declarations: [
     // ========== Dashboards ========== //
@@ -59,6 +60,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
     // ========== Clubs ========== //
     ClubsComponent,
     ClubCreationComponent,
+    JoinFormComponent,
 
     // ========== Finance ========== //
     AdminFinanceComponent,
