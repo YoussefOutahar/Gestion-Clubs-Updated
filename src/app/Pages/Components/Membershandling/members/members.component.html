@@ -1,4 +1,7 @@
-<div>
+
+<h1>List of members</h1>
+
+<mat-card>
   <table mat-table [dataSource]="users">
     <!-- Define your columns here, for example: -->
     <ng-container matColumnDef="name">
@@ -48,4 +51,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+</mat-card>

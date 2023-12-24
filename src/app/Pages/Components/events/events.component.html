@@ -38,11 +38,13 @@
     </div>
   </div> -->
 
+<h1>Events Calendar</h1>
+
 <full-calendar [options]="calendarOptions">
   <ng-template #eventContent let-arg>
     <div>
-    <b>{{ arg.event.title  }}</b>
-  </div>
+      <b>{{ arg.event.title }}</b>
+    </div>
   </ng-template>
 </full-calendar>
 

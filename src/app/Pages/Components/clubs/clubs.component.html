@@ -1,4 +1,5 @@
 <!-- clubs.component.html -->
+
 <div *ngIf="showDetails" class="details-container">
   <button mat-raised-button color="primary" (click)="handleBackToTop()" class="back-button">
     <mat-icon>arrow_back</mat-icon> Back to Club List
@@ -22,6 +23,7 @@
 </div>
 
 <div *ngIf="!showDetails">
+  <h1>List of clubs</h1>
   <mat-grid-list cols="4" rowHeight="200px" gutterSize="10">
     <mat-grid-tile *ngFor="let club of clubs" (click)="handleLearnMore(clubs.indexOf(club))" class="club-card">
       <img [src]="club.logo" alt="{{ club.name }}" style="width: 100%; border-radius: 8px 8px 0 0;">

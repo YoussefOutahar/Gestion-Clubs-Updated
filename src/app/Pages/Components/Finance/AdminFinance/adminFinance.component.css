@@ -7,41 +7,67 @@ h1 {
 .finance-cards {
   display: flex;
   gap: 20px;
+  justify-content: space-around;
 }
 
 .finance-card {
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ddd;
   border-radius: 8px;
   text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.assign-budget-button {
-  margin-top: 20px;
+.assign-budget-button button{
+  width: 200px;
+  padding: 8px;
+  margin: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #d0d700;
+  color: #013667;
   float: right;
 }
 
 .charges-table {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .table-container {
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
 }
 
 table {
-  width: 100%;
+  width: 90%; /* Adjust the width as needed */
   border-collapse: collapse;
   margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-th,
-td {
+thead {
+  background-color: #004789;
+  color: #fff;
+}
+
+th, td {
   border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  padding: 12px;
+  text-align: center; /* Center align the content */
 }
 
-th {
-  background-color: #f2f2f2;
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #eef8f9;
 }

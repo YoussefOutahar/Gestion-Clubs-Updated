@@ -1,8 +1,12 @@
 .custom-calendar {
-    font-size: 14px;
-    flex-grow: 1;
-    padding: 15px;
-    width: 900px;
-    height: 600px;
-    color : black;
-  }
+  font-size: 14px;
+  flex-grow: 1;
+  padding: 15px;
+  width: 900px;
+  height: 600px;
+  color: black;
+}
+
+h1 {
+  margin-bottom: 20px;
+}

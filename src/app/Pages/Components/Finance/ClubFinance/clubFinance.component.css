@@ -39,12 +39,12 @@ h1 {
 }
 
 .supp-Budget-button button {
-  background-color: #2196f3;
-  color: #fff;
+  background-color: #d0d700;
+  color: #004789;
 }
 
 .add-charge-button button {
-  background-color: #4caf50;
+  background-color: #004789;
   color: #fff;
 }
 
@@ -77,7 +77,7 @@ table {
 }
 
 thead {
-  background-color: #4caf50;
+  background-color: #004789;
   color: #fff;
 }
 
@@ -92,7 +92,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-  background-color: #e0f7fa;
+  background-color: #eef8f9;
 }
 
 button {
@@ -101,6 +101,6 @@ button {
 }
 
 button:hover {
-  background-color: #0e77ca;
+  background-color: rgba(156, 217, 250, 0.85);
   color: #fff;
 }
