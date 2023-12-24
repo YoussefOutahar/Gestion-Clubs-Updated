@@ -32,6 +32,8 @@ import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.compo
 import { MeetingsComponent } from './Components/meetings/meetings.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
@@ -40,8 +42,8 @@ import { ImageSliderComponent } from './Components/LandingPage/LandingPage-compo
 import { LandingPage } from './Components/LandingPage/landingPage.component';
 import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-component/club-carousel/club-carousel.component';
 import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
-import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
-import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
+import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
+import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
 import { PrimeNgModule } from '../primeNg.module';
 import { EventDetailsComponent } from './Components/events/event-details-popup/event-details.component';
 import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
@@ -95,6 +97,8 @@ import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashbo
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatStepperModule,
     ReactiveFormsModule,
     NgApexchartsModule,
     FullCalendarModule,
@@ -104,4 +108,4 @@ import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashbo
   exports: [TablerIconsModule],
   providers: [DatePipe],
 })
-export class PagesModule {}
+export class PagesModule { }

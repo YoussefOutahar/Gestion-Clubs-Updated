@@ -39,6 +39,18 @@ export interface Event {
   state: string;
 }
 
+export interface NewEvent {
+  name: string;
+  location: string;
+  date: string;
+  description: string;
+  aimed_target: string;
+  funding_method: string;
+  img: string;
+  id_club: number;
+  state: string;
+}
+
 export interface Meeting {
   id?: number | null;
   id_club: number;

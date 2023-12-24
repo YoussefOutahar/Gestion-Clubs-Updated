@@ -31,5 +31,6 @@ export class TableNames {
 
 export class StorageNames {
   public static readonly BudgetEvent: string = "Budget_event";
+  public static readonly EventImages: string = "Events_images";
 
 }

@@ -6,6 +6,7 @@ import {
   Club,
   Category,
   Event,
+  NewEvent,
   Meeting,
   Forum,
   ForumMessage,
@@ -332,6 +333,15 @@ export class ClubsService {
       throw error;
     }
     return data ? data : [];
+  }
+
+  async addEvent(event: NewEvent): Promise<void> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Events)
+      .insert([event]);
+    if (error) {
+      throw error;
+    }
   }
 
   async updateEvent(id: number, event: UpdatedEvent): Promise<Event[]> {

@@ -14,8 +14,8 @@ import { ClubFinanceComponent } from './Components/ClubFinance/clubFinance.compo
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
 import { ClubCreationComponent } from './Components/clubCreation/clubCreation.component';
-import { AddEventRequestComponent } from './Components/addEventRequest/addEventRequest.component';
-import { AddMeetingRequestComponent } from './Components/addMeetingRequest/addMeetingRequest.component';
+import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
+import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
 import { clubDashboardComponent } from './Components/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/AdminDashboard/adminDashboard.component';
 
