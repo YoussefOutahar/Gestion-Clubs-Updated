@@ -5,19 +5,33 @@
         <div class="d-flex w-100">
           <mat-card-title>Active clubs</mat-card-title>
         </div>
-        <apx-chart [series]="salesOverviewChart.series" [chart]="salesOverviewChart.chart"></apx-chart>
+        <apx-chart [series]="activeClubsChart.series" [chart]="activeClubsChart.chart"></apx-chart>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="col-lg-4">
-    <div class="col-lg-12 col-sm-6">
-      <div class="assign-budget-button">
-        <button mat-raised-button color="primary" (click)="addNewEvent()">Add new event</button>
+    <div class="row">
+      <div class="col-lg-12 col-sm-6">
+        <div class="redirection-button">
+          <button mat-raised-button color="primary" (click)="addNewEvent()">Add new event</button>
+        </div>
       </div>
-    </div>
-    <div class="col-lg-12 col-sm-6">
-      <div class="assign-budget-button">
-        <button mat-raised-button color="primary" (click)="addNewMeeting()">Add new meeting</button>
+      <div class="col-lg-12 col-sm-6">
+        <div class="redirection-button">
+          <button mat-raised-button color="primary" (click)="addNewMeeting()">Add new meeting</button>
+        </div>
+      </div>
+      <div class="col-lg-12 col-sm-6">
+        <mat-card class="cardWithShadow">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+            <mat-card-title>Events statistics</mat-card-title>
+          </mat-card-header>
+          <!--<apx-chart [series]="eventNumberChart.series" [chart]="eventNumberChart.chart"
+            [xaxis]="eventNumberChart.xaxis" [stroke]="eventNumberChart.stroke"
+            [dataLabels]="eventNumberChart.dataLabels" [yaxis]="eventNumberChart.yaxis"
+            [labels]="eventNumberChart.labels" [legend]="eventNumberChart.legend" [title]="eventNumberChart.title"
+            [subtitle]="eventNumberChart.subtitle"></apx-chart>-->
+        </mat-card>
       </div>
     </div>
   </div>

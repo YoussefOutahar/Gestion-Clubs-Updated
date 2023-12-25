@@ -65,4 +65,32 @@ export class DashboardService {
         return null;
     }
 
+    async getEventCountByYear(): Promise<{ year: string; eventCount: number }[]> {
+        const { data: events, error: eventsError } = await this.supabase
+          .from(TableNames.Events)
+          .select('id, date');
+      
+        if (eventsError) {
+          throw eventsError;
+        }
+      
+        const eventCountByYear: { [year: string]: number } = {};
+      
+        events.forEach((event) => {
+          const eventYear = new Date(event.date).getFullYear();
+          eventCountByYear[eventYear.toString()] = (eventCountByYear[eventYear.toString()] || 0) + 1;
+        });
+      
+        const result: { year: string; eventCount: number }[] = [];
+      
+        for (const year in eventCountByYear) {
+          if (eventCountByYear.hasOwnProperty(year)) {
+            result.push({ year, eventCount: eventCountByYear[year] });
+          }
+        }
+      
+        return result;
+      }
+      
+
 }

@@ -3,6 +3,7 @@ import { ChartComponent } from "ng-apexcharts";
 import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
 import { ClubsService } from "../../../../DataBase/Services/clubs.service";
 import { Router } from "@angular/router";
+import { ChartOptions } from "../../../../DataBase/Models/dashboard";
 
 @Component({
   selector: 'app-clubDashboard-page',
@@ -11,8 +12,8 @@ import { Router } from "@angular/router";
 
 export class clubDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
-
-  public salesOverviewChart: any;
+  public eventNumberChart!: Partial<ChartOptions>;
+  public activeClubsChart: any;
   public event: any; // Add this property to store the upcoming event
 
   constructor(private dashboardService: DashboardService, private clubsService: ClubsService, private router: Router, // Inject Router
@@ -26,7 +27,7 @@ export class clubDashboardComponent {
       y: club.eventCount,
     }));
 
-    this.salesOverviewChart = {
+    this.activeClubsChart = {
       series: [
         {
           name: 'Event Count',
@@ -62,13 +63,65 @@ export class clubDashboardComponent {
           },
         },
       ],
-    };// Load upcoming event
+    };
+    // Load upcoming event
     this.loadUpcomingEvent();
-  }
+
+    const eventCountByYear = await this.dashboardService.getEventCountByYear();
+    console.log("eventCountByYear : ",eventCountByYear);
+
+    this.eventNumberChart = {
+      series: [
+        {
+          name: 'Event Count',
+          data: eventCountByYear.map(item => item.eventCount),
+        },
+      ],
+
+      chart: {
+        type: 'area',
+        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        toolbar: {
+          show: false,
+        },
+        height: 60,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
+      },
+
+      title: {
+        text: "Fundamental Analysis of Stocks",
+        align: "left"
+      },
+      subtitle: {
+        text: "Price Movements",
+        align: "left"
+      },
+      labels: eventCountByYear.map(item => item.year),
+      xaxis: {
+        type: "datetime"
+      },
+      yaxis: {
+        opposite: true
+      },
+      legend: {
+        horizontalAlign: "left"
+      }
+    };
+  };
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();
   }
+
+
 
   addNewEvent() {
     // Redirect to addEventRequest component
@@ -79,4 +132,6 @@ export class clubDashboardComponent {
     // Redirect to addMeetingRequest component
     this.router.navigate(['/dashboard/meeting/create']);
   }
+
+
 }

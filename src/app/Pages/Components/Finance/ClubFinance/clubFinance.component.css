@@ -12,6 +12,7 @@ h1 {
 }
 
 .finance-card {
+  width: 25%; 
   padding: 20px;
   border: 2px solid #ddd;
   border-radius: 8px;

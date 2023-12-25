@@ -9,8 +9,24 @@ h1 {
 
 table{
   margin-left: 20px;
+  border-spacing: 50px 10px; 
 }
 
 thead{
   margin-bottom: 15px;
+}
+
+.assign-budget-button button{
+  width: 200px;
+  padding: 8px;
+  margin: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #013667;
+  color: #fff;
+  float: left;
 }

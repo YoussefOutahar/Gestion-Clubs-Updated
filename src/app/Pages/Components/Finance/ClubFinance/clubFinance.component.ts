@@ -70,18 +70,18 @@ export class ClubFinanceComponent implements OnInit {
     );
 
     this.cardList = [
-      { name: 'Budget', amount: `${this.Budget} DH`, icon: 'attach_money' },
+      { name: 'Budget', amount: `${this.Budget} MAD`, icon: 'attach_money' },
       {
         name: 'Total Supplementary Budget',
-        amount: `${this.totalSuppBudget} DH`,
+        amount: `${this.totalSuppBudget} MAD`,
         icon: 'attach_money',
       },
       {
         name: 'Total Donations',
-        amount: `${this.totalDonations} DH`,
+        amount: `${this.totalDonations} MAD`,
         icon: 'attach_money',
       },
-      { name: 'Rest', amount: `${this.rest} DH`, icon: 'attach_money' },
+      { name: 'Rest', amount: `${this.rest} MAD`, icon: 'attach_money' },
     ];
   }
 
