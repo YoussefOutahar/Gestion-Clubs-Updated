@@ -42,6 +42,16 @@ export class ProfilesService {
     return data;
   }
 
+  async getPendingProfiles(): Promise<PendingProfile[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.PendingProfiles)
+      .select('*');
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   async addProfile(profile: PendingProfile) {
     const { error } = await this.supabase
       .from(TableNames.PendingProfiles)
@@ -50,6 +60,8 @@ export class ProfilesService {
       throw error;
     }
   }
+
+  //TO-DO validate Pending Profiles and create accounts for them 
 
   async updateProfile(profile: Profile): Promise<Profile[]> {
     const { data, error } = await this.supabase

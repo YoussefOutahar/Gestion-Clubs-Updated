@@ -1,9 +1,10 @@
 // assign-budget.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClubsService } from '../../../../DataBase/Services/clubs.service';
+import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
+import { Notification } from '../../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-assign-budget',
@@ -18,7 +19,8 @@ export class AssignBudgetComponent implements OnInit {
   constructor(
     private router: Router,
     private clubsService: ClubsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notificationService: NotificationsService,
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +68,7 @@ export class AssignBudgetComponent implements OnInit {
         .then(() => {
           // Reset the form after adding budgets
           this.form.reset();
-
+          this.saveNotification();
           // Redirect to the desired route after submitting the form
           this.router.navigate(['/dashboard/finance']);
         })
@@ -75,5 +77,17 @@ export class AssignBudgetComponent implements OnInit {
           // Handle errors if needed
         });
     }
+  }
+
+  saveNotification() {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: 'Budget Assigned',
+      body: 'Budget has been assigned to your club.',
+      icon: 'attach_money',
+      to: 'clubs',
+    };
+  
+    this.notificationService.addNotification(notification);
   }
 }

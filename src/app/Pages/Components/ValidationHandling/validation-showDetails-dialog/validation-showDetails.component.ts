@@ -15,7 +15,5 @@ export class ValidationDetailstDialogComponent implements OnInit {
 
   ngOnInit() {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+
 }

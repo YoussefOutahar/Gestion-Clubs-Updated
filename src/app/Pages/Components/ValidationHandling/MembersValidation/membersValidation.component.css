@@ -1,0 +1,39 @@
+/* validation.component.css */
+h1 {
+    margin-bottom: 40px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .red-button {
+    background-color: rgba(255, 0, 0, 0.864);
+    color: white;
+    /* You may adjust the text color based on your preference */
+  }
+  
+  .green-button {
+    background-color: rgb(108, 193, 166);
+    color: white;
+    /* You may adjust the text color based on your preference */
+  }

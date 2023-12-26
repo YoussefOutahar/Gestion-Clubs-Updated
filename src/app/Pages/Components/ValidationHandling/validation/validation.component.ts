@@ -6,6 +6,8 @@ import { Club, Event, Document } from '../../../../DataBase/Models/club';
 import { MatDialog } from '@angular/material/dialog';
 import { ValidationDetailstDialogComponent } from '../validation-showDetails-dialog/validation-showDetails.component';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
+import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
+import { Notification } from '../../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-validation',
@@ -22,7 +24,8 @@ export class ValidationComponent implements OnInit {
     private clubsService: ClubsService,
     private authService: AuthService,
     private profileService : ProfilesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private notificationService: NotificationsService,
   ) {}
 
   ngOnInit() {
@@ -66,8 +69,11 @@ export class ValidationComponent implements OnInit {
     // Check the role of the current user
     if (this.currentUser && this.currentUser.role === 'admin') {
       this.clubsService.validateClubByDve(club);
+      this.saveNotification();
     } else if (this.currentUser && this.currentUser.role_club === 'supervisor') {
       this.clubsService.validateClubByRef(club);
+      this.saveNotification();
+
     }
   }
 
@@ -98,8 +104,10 @@ export class ValidationComponent implements OnInit {
     // Check the role of the current user
     if (this.currentUser && this.currentUser.role === 'admin') {
       this.clubsService.validateEventByDve(event);
+      this.saveNotification();
     } else if (this.currentUser && this.currentUser.role === 'supervisor') {
       this.clubsService.validateEventByRef(event);
+      this.saveNotification();
     }
   }
 
@@ -121,8 +129,10 @@ export class ValidationComponent implements OnInit {
     // Check the role of the current user
     if (this.currentUser && this.currentUser.role === 'admin') {
       this.clubsService.validateRequestByDve(request);
+      this.saveNotification();
     } else if (this.currentUser && this.currentUser.role === 'supervisor') {
       this.clubsService.validateRequestByRef(request);
+      this.saveNotification();
     }
   }
 
@@ -140,5 +150,18 @@ export class ValidationComponent implements OnInit {
       // window.open to open the file in a new tab
       window.open(request.path, '_blank');
     }
+  }
+
+  saveNotification() {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: '',
+      body: ``,
+      icon: '', // Use the appropriate icon related to events, for example, 'event' or 'calendar'
+      to: 'admin',
+      id_club: this.currentUser.id_club, 
+    };
+  
+    this.notificationService.addNotification(notification);
   }
 }

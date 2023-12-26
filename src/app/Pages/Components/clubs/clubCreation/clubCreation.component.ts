@@ -5,6 +5,8 @@ import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 import { UploadsService } from '../../../../DataBase/Services/uploads.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
+import { Notification } from '../../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-clubCreation',
@@ -64,7 +66,8 @@ export class ClubCreationComponent implements OnInit {
     private clubsService: ClubsService,
     private profilesService: ProfilesService,
     private uploadService: UploadsService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationsService,
   ) { }
 
   categories: Category[] = [];
@@ -236,6 +239,18 @@ export class ClubCreationComponent implements OnInit {
       state: 'pending',
     });
   }
+
+  saveNotification() {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: 'New club request',
+      body: 'A new club request has been submitted and is pending approval.',
+      icon: 'add', // Use 'add' for the plus icon
+      to: 'admin',
+    };
+  
+    this.notificationService.addNotification(notification); 
+  }
   
   async onSubmit() {
     this.saveClub();
@@ -244,5 +259,6 @@ export class ClubCreationComponent implements OnInit {
     this.saveVicePresident();
     this.saveFinancier();
     this.saveSecretary();
+    this.saveNotification();
   }
 }

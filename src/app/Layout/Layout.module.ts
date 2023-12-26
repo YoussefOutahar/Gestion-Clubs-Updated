@@ -14,6 +14,7 @@ import { AppNavItemComponent } from './Components/side-bar/nav-item/nav-item.com
 import { BrandingComponent } from './Components/side-bar/branding.component';
 import { BlankComponent } from './blank/blank.component';
 import { PrimeNgModule } from '../primeNg.module';
+import { NotificationDetailsDialogComponent } from './Components/notificationDialog/notification-dialog.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { PrimeNgModule } from '../primeNg.module';
     AppNavItemComponent,
     BrandingComponent,
     BlankComponent,
+    NotificationDetailsDialogComponent,
   ],
 })
 export class LayoutModule {}

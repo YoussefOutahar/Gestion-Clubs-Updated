@@ -3,6 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { UploadsService } from '../../../../DataBase/Services/uploads.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
+import { Notification } from '../../../../DataBase/Models/notification';
+import { User } from '@supabase/supabase-js';
+import { AuthService } from '../../../../Auth/auth.service';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 
 @Component({
   selector: 'app-addEventRequest',
@@ -10,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./addEventRequest.component.css'],
 })
 export class AddEventRequestComponent implements OnInit {
+  currentUser: boolean | User | any;
   event: any[] = [];
 
   firstFormGroup = this._formBuilder.group({
@@ -29,10 +35,25 @@ export class AddEventRequestComponent implements OnInit {
   });
 
 
-  constructor(private _formBuilder: FormBuilder, private clubService: ClubsService, private uploadService: UploadsService, private router: Router,
+  constructor(
+    private _formBuilder: FormBuilder, 
+    private clubService: ClubsService, 
+    private uploadService: UploadsService, 
+    private router: Router,
+    private notificationService: NotificationsService,
+    private authService: AuthService,
+    private profilesService: ProfilesService,
     ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    // Get the current user data
+    const user = this.authService.currentUser.value;
+    this.profilesService.getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+      })
+  }
 
   // File input change event handler
   onFileChange(event: any) {
@@ -82,11 +103,14 @@ export class AddEventRequestComponent implements OnInit {
             aimed_target: this.secondFormGroup.value.aimedTarget!,
             img: FileUrl,
             state: 'pending',
-            id_club: 1,
+            id_club: this.currentUser.id_club,
           };
 
           await this.clubService.addEvent(newEvent);
-
+          const club = await this.clubService.getClubById(this.currentUser.id_club);
+          if (club) {
+            this.saveNotification(newEvent.name, club[0].name);
+          }
           // Update successful, do any additional logic if needed
         } catch (error) {
           console.error('Error updating event:', error);
@@ -100,5 +124,19 @@ export class AddEventRequestComponent implements OnInit {
       }
     }
   }
+
+  saveNotification(eventName: string, clubName: string) {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: 'New Event Request',
+      body: `A new event "${eventName}" has been requested by ${clubName}. Please review and approve.`,
+      icon: 'calendar', // Use the appropriate icon related to events, for example, 'event' or 'calendar'
+      to: 'admin',
+      id_club: this.currentUser.id_club, 
+    };
+  
+    this.notificationService.addNotification(notification);
+  }
+  
 
 }

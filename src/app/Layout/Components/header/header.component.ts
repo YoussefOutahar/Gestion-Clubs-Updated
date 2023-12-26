@@ -11,6 +11,10 @@ import { AuthService } from './../../../Auth/auth.service';
 import { NotificationsService } from './../../../DataBase/Services/notifications.service';
 
 import { Notification } from './../../../DataBase/Models/notification';
+import { User } from '@supabase/supabase-js';
+import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+import { NotificationDetailsDialogComponent } from '../notificationDialog/notification-dialog.component';
+
 
 @Component({
   selector: 'app-header',
@@ -19,6 +23,8 @@ import { Notification } from './../../../DataBase/Models/notification';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
+  currentUser: boolean | User | any;
+
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
@@ -33,24 +39,46 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     private notificationsService: NotificationsService,
-    private router: Router
+    private router: Router,
+    private profilesService: ProfilesService,
   ) {}
 
   async ngOnInit() {
-    this.loadNotifications();
+    // Get the current user data
+    const user = this.auth.currentUser.value;
+    this.profilesService.getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+
+        this.loadNotifications();
+
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
   }
 
   async loadNotifications() {
     try {
-      this.notifications = await this.notificationsService.getNotifications();
+      this.notifications = await this.notificationsService.getClubAndNullNotifications(this.currentUser.id_club);
+      console.log('Notifications :', this.notifications);
     } catch (error) {
       console.error('Error loading notifications:', error);
     }
   }
 
   handleNotificationClick(notification: Notification) {
-    // Handle notification click, e.g., navigate to a specific page
-    console.log('Notification clicked:', notification);
+    // Open the notification details dialog
+    const dialogRef = this.dialog.open(NotificationDetailsDialogComponent, {
+      data: notification,
+    });
+
+    // You can subscribe to the afterClosed event if you want to do something after the dialog is closed
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle any result if needed
+      console.log('Dialog closed:', result);
+    });
   }
 
   async logout() {

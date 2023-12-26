@@ -10,7 +10,7 @@ import { UploadsService } from '../../../../DataBase/Services/uploads.service';
 import { User } from '@supabase/supabase-js';
 import { AuthService } from '../../../../Auth/auth.service';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
-
+import { Notification } from '../../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-suppBudget',
@@ -52,7 +52,8 @@ export class SuppBudgetComponent implements OnInit {
       })
       .catch((error) => {
         console.error('Error fetching user profile:', error);
-      });  }
+      });
+  }
 
   loadEvents() {
     // Assuming ClubsService has a method to fetch events from the database
@@ -111,7 +112,10 @@ export class SuppBudgetComponent implements OnInit {
 
       try {
         await this.clubsService.addDocument(document);
-
+        const club = await this.clubsService.getClubById(this.currentUser.id_club);
+        if (club) {
+          this.saveNotification(club[0].name);
+        }
         // Set success message after successful submission
         this.successMessage = 'Request sent successfully';
       } catch (error) {
@@ -122,30 +126,6 @@ export class SuppBudgetComponent implements OnInit {
           this.router.navigate(['/dashboard/clubFinance']);
         }, 2000); // Navigate after 2 seconds
       }
-
-      /*const notification = {
-              heading: 'Request',
-              title: 'Supplementary budget request',
-              subtitle: eventName,
-              timestamp: new Date(),
-              body: `Request an amount of ${cost} DH to the event ${eventName}`,
-              icon: {
-                name: 'Message',
-                color: 'primary',
-              },
-              // Adjust the path as needed
-              path: `validationPage/${cost}/${eventName}`,
-              // Assuming you have a method to get the clubId from the service
-              id_club: this.getClubId(),
-            };
-      
-            try {
-              // Assuming you have a method to add notifications in your service
-              //const result = this.notificationsService.addNotification(notification);
-              this.router.navigate(['/finance']);
-            } catch (error) {
-              console.error(error);
-            }*/
     }
   }
 
@@ -169,4 +149,17 @@ export class SuppBudgetComponent implements OnInit {
       }
     }
   }
+  saveNotification(clubName: string) {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: 'Supplementary Budget Request',
+      body: `A new supplementary budget request has been submitted by ${clubName}. Please review and approve.`,
+      icon: 'attach_money', // Use 'attach_money' for the money-related icon
+      to: 'admin',
+      id_club: this.currentUser.id_club, 
+    };
+
+    this.notificationsService.addNotification(notification);
+  }
+
 }

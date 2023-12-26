@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
+import { Notification } from '../../../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-join-form',
@@ -19,7 +21,8 @@ export class JoinFormComponent implements OnInit {
     private profileService: ProfilesService,
     private clubsService: ClubsService,
     public dialogRef: MatDialogRef<JoinFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: number
+    @Inject(MAT_DIALOG_DATA) public data: number,
+    private notificationService: NotificationsService,
 
   ) {
     this.joinForm = this.fb.group({
@@ -62,6 +65,7 @@ export class JoinFormComponent implements OnInit {
 
       try {
         await this.profileService.addProfile(user);
+        this.saveNotification();
         console.log('User added successfully!');
         this.dialogRef.close();
         // Optionally, you can close the dialog here
@@ -69,5 +73,18 @@ export class JoinFormComponent implements OnInit {
         console.error('Error adding user:', error);
       }
     }
+  }
+
+  saveNotification() {
+    const notification: Notification = {
+      date: new Date().toISOString(),
+      title: 'New Member Request',
+      body: 'A new member has requested to join the club. Please review and approve.',
+      icon: 'person',
+      to: 'clubs',
+      id_club: this.data ,
+    };
+  
+    this.notificationService.addNotification(notification); 
   }
 }

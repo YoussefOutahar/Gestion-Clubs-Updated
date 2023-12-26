@@ -1,0 +1,30 @@
+<!-- validation.component.html -->
+<h1>Requests Table</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Field</th>
+      <th>Year</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Display pending members -->
+    <tr *ngFor="let member of members">
+      <td>{{ member.name }}</td>
+      <td>{{ member.email }}</td>
+      <td>{{ member.phone }}</td>
+      <td>{{ member.field }}</td>
+      <td>{{ member.year }}</td>
+      <td>
+        <button mat-raised-button class="green-button"
+          (click)="validateMember(member)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
+        <button mat-raised-button class="red-button"
+          (click)="cancelMember(member)"><mat-icon>delete</mat-icon>Cancel</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
