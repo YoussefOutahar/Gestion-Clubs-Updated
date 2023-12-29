@@ -89,13 +89,28 @@ export class ProfilesService {
         },
         (error) => {
           console.log(error.text);
+          throw error;
         }
       );
 
-    const { error: error2 } = await this.supabase
+    const { data: data2, error: error2 } = await this.supabase
       .from(TableNames.PendingProfiles)
-      .delete()
+      .update({ state: 'accepted' })
       .eq('id', profile.id);
+    if (error2) {
+      throw error2;
+    }
+  }
+
+  async getClubPendingProfiles(id: string): Promise<PendingProfile[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.PendingProfiles)
+      .select('*')
+      .eq('id_club', id);
+    if (error) {
+      throw error;
+    }
+    return data;
   }
 
   async addProfile(profile: PendingProfile) {
