@@ -12,6 +12,7 @@ import {
 } from '@supabase/supabase-js';
 import { supabaseEnvironment } from '../../environments/environment';
 import { TableNames } from '../Config/constants';
+import { LocalStorage } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root',
@@ -90,20 +91,18 @@ export class AuthService {
     });
   }
 
-  isLoggedIn(): Observable<boolean | UrlTree> {
-    return this._currentUser.pipe(
-      filter((val) => val !== null), // Filter out initial Behaviour subject value
-      take(1), // Otherwise the Observable doesn't complete!
-      map((isAuthenticated) => {
-        if (isAuthenticated) {
-          console.log('isAuthenticated', isAuthenticated);
-          return true;
-        } else {
-          console.log('isAuthenticated', isAuthenticated);
-          return false;
-        }
-      })
-    );
+  isLoggedIn(): boolean {
+    var isLoggedIn: boolean = false;
+
+    this.supabase.auth.getSession().then((session) => {
+      if (session) {
+        isLoggedIn = true;
+      } else {
+        isLoggedIn = false;
+      }
+    });
+
+    return isLoggedIn;
   }
 
   logout() {
