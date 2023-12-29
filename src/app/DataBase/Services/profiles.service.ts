@@ -59,7 +59,7 @@ export class ProfilesService {
     const { data, error } = await this.supabase.auth.admin.createUser({
       email: profile.email,
       password: password,
-      app_metadata: {
+      user_metadata: {
         email: profile.email,
         role: profile.role_club,
         id_club: profile.id_club,
@@ -69,10 +69,13 @@ export class ProfilesService {
         field: profile.field,
         year: profile.year,
       },
+      email_confirm: true,
     });
     if (error) {
       throw error;
     }
+
+    emailjs.init('mwiq7Y19VrWl3ZI4K');
 
     const emailTemplateParams = {
       to_name: profile.name,

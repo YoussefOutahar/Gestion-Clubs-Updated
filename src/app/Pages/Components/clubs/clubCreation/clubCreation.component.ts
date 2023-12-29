@@ -185,7 +185,7 @@ export class ClubCreationComponent implements OnInit {
           state: 'pending',
         };
 
-        await this.clubsService.addClub(newClub);
+        this.createdClub = await this.clubsService.addClub(newClub);
 
         // Update successful, do any additional logic if needed
       } catch (error) {
