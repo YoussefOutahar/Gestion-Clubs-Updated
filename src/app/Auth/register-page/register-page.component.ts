@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
 })
 export class RegisterPageComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -21,12 +27,24 @@ export class RegisterPageComponent implements OnInit {
     year: new FormControl('', [Validators.required]),
   });
 
-  get f() {
-    return this.form.controls;
-  }
+  async submit() {
+    this.spinner.show();
+    const result = await this.authService.register(
+      this.form.value.username!,
+      this.form.value.email!,
+      this.form.value.password!,
+      this.form.value.phone!,
+      this.form.value.field!,
+      this.form.value.year!
+    );
 
-  submit() {
-    console.log(this.form.value);
+    this.spinner.hide();
+
+    if (result) {
+      this.router.navigate(['/dashboard/home']);
+    } else {
+      console.log('Login failed');
+    }
   }
 
   ngOnInit() {}

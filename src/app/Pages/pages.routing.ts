@@ -19,6 +19,7 @@ import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequ
 import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { ForumComponent } from './Components/forum/forum.component';
 
 export const pageRoutes: Routes = [
   {
@@ -84,6 +85,11 @@ export const pageRoutes: Routes = [
   {
     path: 'validation',
     component: ValidationComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'forum',
+    component: ForumComponent,
     canActivate: [authGuard],
   },
   {

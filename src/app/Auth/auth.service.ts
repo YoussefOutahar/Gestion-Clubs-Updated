@@ -11,6 +11,7 @@ import {
   createClient,
 } from '@supabase/supabase-js';
 import { supabaseEnvironment } from '../../environments/environment';
+import { TableNames } from '../Config/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,6 @@ export class AuthService {
         this._currentUser.next(user);
       } else {
         this._currentUser.next(false);
-        this.router.navigateByUrl('/', { replaceUrl: true });
       }
     });
 
@@ -54,6 +54,34 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.supabase.auth.signInWithPassword({ email, password });
+  }
+
+  register(
+    name: string,
+    email: string,
+    password: string,
+    phone: string,
+    field: string,
+    year: string
+  ) {
+    this.supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          role: 'user',
+          name: name,
+          email: email,
+          avatar: '',
+          phone: phone,
+          year: year,
+          role_club: 'Member',
+          field: field,
+        },
+      },
+    });
+
+    return this.login(email, password);
   }
 
   signInWithEmail(email: string) {
