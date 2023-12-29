@@ -11,8 +11,6 @@ import {
   createClient,
 } from '@supabase/supabase-js';
 import { supabaseEnvironment } from '../../environments/environment';
-import { TableNames } from '../Config/constants';
-import { LocalStorage } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root',
@@ -89,20 +87,6 @@ export class AuthService {
     return this.supabase.auth.signInWithOtp({
       email,
     });
-  }
-
-  isLoggedIn(): boolean {
-    var isLoggedIn: boolean = false;
-
-    this.supabase.auth.getSession().then((session) => {
-      if (session) {
-        isLoggedIn = true;
-      } else {
-        isLoggedIn = false;
-      }
-    });
-
-    return isLoggedIn;
   }
 
   logout() {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Category, Club } from '../../../../DataBase/Models/club';
 import { ClubsService } from '../../../../DataBase/Services/clubs.service';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
@@ -15,51 +20,77 @@ import { Notification } from '../../../../DataBase/Models/notification';
 })
 export class ClubCreationComponent implements OnInit {
   clubFormGroup = this._formBuilder.group({
-    name: ['', [Validators.required,]],
-    mission: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    kpo: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
+    name: ['', [Validators.required]],
+    mission: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    kpo: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
     type: ['Academic', [Validators.required]],
     category: ['', [Validators.required]],
     logo: [null, [Validators.required]],
   });
 
   supervisorFormGroup = this._formBuilder.group({
-    name: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    phone: [{ value: '', disabled: this.clubFormGroup.value.type === 'Non-Academic' }, [Validators.required,]],
-    email: [{ value: '', disabled: this.clubFormGroup.value.type === 'Non-Academic' }, [Validators.required,]],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    phone: [
+      { value: '', disabled: this.clubFormGroup.value.type === 'Non-Academic' },
+      [Validators.required],
+    ],
+    email: [
+      { value: '', disabled: this.clubFormGroup.value.type === 'Non-Academic' },
+      [Validators.required],
+    ],
   });
 
   presidentFormGroup = this._formBuilder.group({
-    name: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    field: ['', [Validators.required,]],
-    year: ['', [Validators.required,]],
-    phone: ['', [Validators.required,]],
-    email: ['', [Validators.required,]],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    field: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    email: ['', [Validators.required]],
   });
   vicePresidentFormGroup = this._formBuilder.group({
-    name: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    field: ['', [Validators.required,]],
-    year: ['', [Validators.required,]],
-    phone: ['', [Validators.required,]],
-    email: ['', [Validators.required,]],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    field: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    email: ['', [Validators.required]],
   });
 
   secretaryFormGroup = this._formBuilder.group({
-    name: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    field: ['', [Validators.required,]],
-    year: ['', [Validators.required,]],
-    phone: ['', [Validators.required,]],
-    email: ['', [Validators.required,]],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    field: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    email: ['', [Validators.required]],
   });
 
   financierFormGroup = this._formBuilder.group({
-    name: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(20),]],
-    field: ['', [Validators.required,]],
-    year: ['', [Validators.required,]],
-    phone: ['', [Validators.required,]],
-    email: ['', [Validators.required,]],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(20)],
+    ],
+    field: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    email: ['', [Validators.required]],
   });
-
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -67,8 +98,8 @@ export class ClubCreationComponent implements OnInit {
     private profilesService: ProfilesService,
     private uploadService: UploadsService,
     private router: Router,
-    private notificationService: NotificationsService,
-  ) { }
+    private notificationService: NotificationsService
+  ) {}
 
   categories: Category[] = [];
   categoryNames: string[] = [];
@@ -77,12 +108,12 @@ export class ClubCreationComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAvailableCategories();
-
-    // Add a listener to the 'type' FormControl
     this.clubFormGroup.get('type')?.valueChanges.subscribe((type) => {
-      const supervisorControls = ['name', 'phone', 'email'].map(controlName => this.supervisorFormGroup.get(controlName));
+      const supervisorControls = ['name', 'phone', 'email'].map((controlName) =>
+        this.supervisorFormGroup.get(controlName)
+      );
       if (supervisorControls) {
-        supervisorControls.forEach(control => {
+        supervisorControls.forEach((control) => {
           if (control) {
             if (type === 'Non-Academic') {
               control.disable();
@@ -149,7 +180,7 @@ export class ClubCreationComponent implements OnInit {
           nb_member: 4,
           id_category: this.categories.find(
             (category) =>
-              category.category_name === this.clubFormGroup.value.category!,
+              category.category_name === this.clubFormGroup.value.category!
           )?.id!,
           state: 'pending',
         };
@@ -248,10 +279,10 @@ export class ClubCreationComponent implements OnInit {
       icon: 'add', // Use 'add' for the plus icon
       to: 'admin',
     };
-  
-    this.notificationService.addNotification(notification); 
+
+    this.notificationService.addNotification(notification);
   }
-  
+
   async onSubmit() {
     this.saveClub();
     this.saveSupervisor();
