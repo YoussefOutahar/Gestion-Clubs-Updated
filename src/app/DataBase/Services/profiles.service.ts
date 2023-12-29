@@ -8,6 +8,8 @@ import { TableNames } from '../../Config/constants';
 
 import { AuthService } from '../../Auth/auth.service';
 
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -52,6 +54,50 @@ export class ProfilesService {
     return data;
   }
 
+  async validatePendingProfile(profile: PendingProfile) {
+    const password = Math.random().toString(36).slice(-8);
+    const { data, error } = await this.supabase.auth.admin.createUser({
+      email: profile.email,
+      password: password,
+      app_metadata: {
+        email: profile.email,
+        role: profile.role_club,
+        id_club: profile.id_club,
+        avatar: '',
+        name: profile.name,
+        phone: profile.phone,
+        field: profile.field,
+        year: profile.year,
+      },
+    });
+    if (error) {
+      throw error;
+    }
+
+    const emailTemplateParams = {
+      to_name: profile.name,
+      to_email: profile.email,
+      subject: 'Your account has been created',
+      message: `Your account has been created succesfully !!, your password is ${password}`,
+    };
+
+    emailjs
+      .send('service_bwaniep', 'template_x1tvi3j', emailTemplateParams)
+      .then(
+        (result: EmailJSResponseStatus) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+
+    const { error: error2 } = await this.supabase
+      .from(TableNames.PendingProfiles)
+      .delete()
+      .eq('id', profile.id);
+  }
+
   async addProfile(profile: PendingProfile) {
     const { error } = await this.supabase
       .from(TableNames.PendingProfiles)
@@ -61,7 +107,7 @@ export class ProfilesService {
     }
   }
 
-  //TO-DO validate Pending Profiles and create accounts for them 
+  //TO-DO validate Pending Profiles and create accounts for them
 
   async updateProfile(profile: Profile): Promise<Profile[]> {
     const { data, error } = await this.supabase
