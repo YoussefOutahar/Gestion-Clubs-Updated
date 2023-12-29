@@ -102,7 +102,7 @@ export class ProfilesService {
     }
   }
 
-  async getClubPendingProfiles(id: string): Promise<PendingProfile[]> {
+  async getClubPendingProfiles(id: number): Promise<PendingProfile[]> {
     const { data, error } = await this.supabase
       .from(TableNames.PendingProfiles)
       .select('*')
