@@ -56,18 +56,22 @@ export class ProfilesService {
 
   async validatePendingProfile(profile: PendingProfile) {
     const password = Math.random().toString(36).slice(-8);
+
+    console.log(profile);
+
     const { data, error } = await this.supabase.auth.admin.createUser({
       email: profile.email,
       password: password,
       user_metadata: {
         email: profile.email,
-        role: profile.role_club,
-        id_club: profile.id_club,
+        role: 'user',
         avatar: '',
         name: profile.name,
         phone: profile.phone,
         field: profile.field,
         year: profile.year,
+        role_club: profile.role_club,
+        id_club: profile.id_club.toString(),
       },
       email_confirm: true,
     });
