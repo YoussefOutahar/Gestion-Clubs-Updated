@@ -1,6 +1,6 @@
 .redirection-button button{
     width: 200px;
-    padding: 8px;
+    padding: 80px;
     margin: 20px;
     font-size: 16px;
     font-weight: bold;
@@ -11,4 +11,5 @@
     background-color: #d0d700;
     color: #013667;
     float: right;
+    margin-bottom: 20px;
   }

@@ -61,10 +61,15 @@ export class HeaderComponent {
 
   async loadNotifications() {
     try {
-      this.notifications = await this.notificationsService.getClubAndNullNotifications(this.currentUser.id_club);
-      console.log('Notifications :', this.notifications);
+      if (this.currentUser && this.currentUser.role === 'admin') {
+        // Load all profiles for admin users
+        this.notifications = await this.notificationsService.getAdminNotifications();
+      } else if (this.currentUser && this.currentUser.role === 'user') {
+        // Load profiles for regular users based on their club
+        this.notifications = await this.notificationsService.getClubsNotifications(this.currentUser.id_club);
+      }
     } catch (error) {
-      console.error('Error loading notifications:', error);
+      console.error('Error loading users:', error);
     }
   }
 

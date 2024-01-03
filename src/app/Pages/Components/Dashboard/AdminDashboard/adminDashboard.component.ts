@@ -1,6 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
 import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
+import { ClubsService } from "../../../../DataBase/Services/clubs.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-adminDashboard-page',
@@ -9,11 +11,12 @@ import { DashboardService } from "../../../../DataBase/Services/dashboard.servic
 
 export class AdminDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
-
-  public salesOverviewChart: any;
+  public eventNumberChart!: any;
+  public activeClubsChart: any;
   public event: any; // Add this property to store the upcoming event
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private clubsService: ClubsService, private router: Router, // Inject Router
+  ) { }
 
   async ngOnInit() {
     const clubsWithEventCounts = await this.dashboardService.getClubsWithEventCounts();
@@ -23,7 +26,7 @@ export class AdminDashboardComponent {
       y: club.eventCount,
     }));
 
-    this.salesOverviewChart = {
+    this.activeClubsChart = {
       series: [
         {
           name: 'Event Count',
@@ -62,9 +65,43 @@ export class AdminDashboardComponent {
     };
     // Load upcoming event
     this.loadUpcomingEvent();
-  }
+
+    const eventCountByYear = await this.dashboardService.getEventCountByYear();
+    console.log("eventCountByYear : ",eventCountByYear);
+
+    this.eventNumberChart = {
+      series: [
+        {
+          name: 'Event Count',
+          data: eventCountByYear.map(item => item.eventCount),
+        },
+      ],
+      chart: {
+        type: 'area',
+        height: 390,
+      },
+      xaxis: {
+        type: 'category',
+        categories: eventCountByYear.map(item => item.year),
+      },
+      yaxis: {
+        title: {
+          text: 'Event Count',
+        },
+      },
+
+    };
+  };
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();
   }
+
+
+
+  addNewEvent() {
+    // Redirect to addEventRequest component
+    this.router.navigate(['/dashboard/event/create']);
+  }
 }
+

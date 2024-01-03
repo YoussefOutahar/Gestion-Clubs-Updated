@@ -1,9 +1,11 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
 import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
 import { ClubsService } from "../../../../DataBase/Services/clubs.service";
 import { Router } from "@angular/router";
-import { ChartOptions } from "../../../../DataBase/Models/dashboard";
+import { User } from '@supabase/supabase-js';
+import { AuthService } from '../../../../Auth/auth.service';
+import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
 
 @Component({
   selector: 'app-clubDashboard-page',
@@ -12,14 +14,37 @@ import { ChartOptions } from "../../../../DataBase/Models/dashboard";
 
 export class clubDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
-  public eventNumberChart!: Partial<ChartOptions>;
+  currentUser: boolean | User | any;
+  public eventNumberChart!: any;
   public activeClubsChart: any;
+  public BudgetsChart: any;
   public event: any; // Add this property to store the upcoming event
 
-  constructor(private dashboardService: DashboardService, private clubsService: ClubsService, private router: Router, // Inject Router
+  constructor(
+    private dashboardService: DashboardService,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private authService: AuthService,
+    private profilesService: ProfilesService,
   ) { }
 
   async ngOnInit() {
+    // Get the current user data
+    const user = this.authService.currentUser.value;
+    this.profilesService.getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+
+        this.loadData();
+        this.changeDetector.detectChanges();
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
+  }
+
+  async loadData() {
     const clubsWithEventCounts = await this.dashboardService.getClubsWithEventCounts();
 
     const chartData = clubsWithEventCounts.map(club => ({
@@ -67,8 +92,8 @@ export class clubDashboardComponent {
     // Load upcoming event
     this.loadUpcomingEvent();
 
-    const eventCountByYear = await this.dashboardService.getEventCountByYear();
-    console.log("eventCountByYear : ",eventCountByYear);
+    const eventCountByYear = await this.dashboardService.getEventCountByYearByClub(this.currentUser.id_club);
+    console.log("eventCountByYear : ", eventCountByYear);
 
     this.eventNumberChart = {
       series: [
@@ -77,45 +102,87 @@ export class clubDashboardComponent {
           data: eventCountByYear.map(item => item.eventCount),
         },
       ],
-
       chart: {
         type: 'area',
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
-        toolbar: {
-          show: false,
+        height: 300,
+      },
+      labels: eventCountByYear.map(item => item.year),
+      xaxis: {
+        type: 'category',
+      },
+      tooltip: { theme: 'light' },
+
+
+    };
+
+
+    const clubBudgetsData = await this.dashboardService.getClubBudgetsByYears(this.currentUser.id_club);
+    const currentYearBudget = clubBudgetsData[clubBudgetsData.length - 1].budget;
+    const lastYearBudget = clubBudgetsData[clubBudgetsData.length - 2].budget;
+    const percentageDifference = ((currentYearBudget - lastYearBudget) / lastYearBudget) * 100;
+    console.log("clubBudgetsData : ", clubBudgetsData);
+
+    this.BudgetsChart = {
+      series: [
+        {
+          name: 'Budget',
+          data: clubBudgetsData.map(item => item.budget),
         },
-        height: 60,
+      ],
+      chart: {
+        type: 'area',
+        height: 100,
         sparkline: {
           enabled: true,
         },
       },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: "straight"
-      },
-
-      title: {
-        text: "Fundamental Analysis of Stocks",
-        align: "left"
-      },
-      subtitle: {
-        text: "Price Movements",
-        align: "left"
-      },
-      labels: eventCountByYear.map(item => item.year),
       xaxis: {
-        type: "datetime"
+        type: 'category',
+        categories: clubBudgetsData.map(item => item.year),
       },
-      yaxis: {
-        opposite: true
+      tooltip: {
+        theme: 'dark',
+        x: {
+          show: false,
+        },
       },
-      legend: {
-        horizontalAlign: "left"
-      }
+      fill: {
+        colors: ['#E8F7FF'],
+        type: 'solid',
+        opacity: 0.05,
+      },
+      markers: {
+        size: 0,
+      },
     };
-  };
+    // Update the displayed values
+    const budgetElement = document.querySelector('.mat-headline-5');
+    if (budgetElement) {
+      budgetElement.innerHTML = `${currentYearBudget.toFixed(2)} MAD`;
+    }
+
+    const percentageElement = document.querySelector('.m-l-12');
+    if (percentageElement) {
+      percentageElement.innerHTML = `${percentageDifference.toFixed(2)}%`;
+
+      // Update arrow icon based on the sign of percentageDifference
+      const arrowButton = document.querySelector('.bg-light-error.text-error.shadow-none.icon-27');
+
+      if (arrowButton) {
+        // Change the button class based on the percentageDifference
+        if (percentageDifference > 0) {
+          arrowButton.classList.remove('bg-light-error', 'text-error');
+          arrowButton.classList.add('bg-light-success', 'text-success');
+          arrowButton.innerHTML = '<i-tabler name="arrow-up-right" class="icon-20"></i-tabler>';
+        } else {
+          // If percentageDifference is not positive, keep the original class
+          arrowButton.classList.remove('bg-light-success', 'text-success');
+          arrowButton.classList.add('bg-light-error', 'text-error');
+          arrowButton.innerHTML = '<i-tabler name="arrow-down-right" class="icon-20"></i-tabler>';
+        }
+      }
+    }
+  }
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();

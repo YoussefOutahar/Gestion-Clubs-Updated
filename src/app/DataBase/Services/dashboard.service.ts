@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { supabaseEnvironment } from '../../../environments/environment';
 import { TableNames } from '../..//Config/constants';
-import { Club, Event } from '../Models/club';
+import { Budget, Club, Event } from '../Models/club';
 import { ClubsService } from './clubs.service';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class DashboardService {
             }
 
             clubsWithEventCounts.push({
-                clubName: club.name, // Assuming 'name' is the property containing the club name
+                clubName: club.name,
                 eventCount: events.length,
             });
         }
@@ -67,30 +67,96 @@ export class DashboardService {
 
     async getEventCountByYear(): Promise<{ year: string; eventCount: number }[]> {
         const { data: events, error: eventsError } = await this.supabase
-          .from(TableNames.Events)
-          .select('id, date');
-      
+            .from(TableNames.Events)
+            .select('id, date');
+
         if (eventsError) {
-          throw eventsError;
+            throw eventsError;
         }
-      
+
         const eventCountByYear: { [year: string]: number } = {};
-      
+
         events.forEach((event) => {
-          const eventYear = new Date(event.date).getFullYear();
-          eventCountByYear[eventYear.toString()] = (eventCountByYear[eventYear.toString()] || 0) + 1;
+            const eventYear = new Date(event.date).getFullYear();
+            eventCountByYear[eventYear.toString()] = (eventCountByYear[eventYear.toString()] || 0) + 1;
         });
-      
+
         const result: { year: string; eventCount: number }[] = [];
-      
+
         for (const year in eventCountByYear) {
-          if (eventCountByYear.hasOwnProperty(year)) {
-            result.push({ year, eventCount: eventCountByYear[year] });
-          }
+            if (eventCountByYear.hasOwnProperty(year)) {
+                result.push({ year, eventCount: eventCountByYear[year] });
+            }
         }
-      
+
         return result;
-      }
-      
+    }
+
+    async getEventCountByYearByClub(id: number): Promise<{ year: string; eventCount: number }[]> {
+        const { data: events, error: eventsError } = await this.supabase
+            .from(TableNames.Events)
+            .select('id, date')
+            .eq('id_club', id);
+
+        if (eventsError) {
+            throw eventsError;
+        }
+
+        const eventCountByYear: { [year: string]: number } = {};
+
+        events.forEach((event) => {
+            const eventYear = new Date(event.date).getFullYear();
+            eventCountByYear[eventYear.toString()] = (eventCountByYear[eventYear.toString()] || 0) + 1;
+        });
+
+        const result: { year: string; eventCount: number }[] = [];
+
+        for (const year in eventCountByYear) {
+            if (eventCountByYear.hasOwnProperty(year)) {
+                result.push({ year, eventCount: eventCountByYear[year] });
+            }
+        }
+
+        return result;
+    }
+    async getClubBudgetsByYearsv(id: number): Promise<{ year: string; budget: number }[]> {
+        const { data: budgets, error: eventsError } = await this.supabase
+            .from(TableNames.Budget)
+            .select('budget, year')
+            .eq('id_club', id);
+
+        if (eventsError) {
+            throw eventsError;
+        }
+
+        const budgetCountByYear: { [year: string]: number } = {};
+
+        budgets.forEach((event) => {
+            const eventYear = new Date(event.year).getFullYear();
+            budgetCountByYear[eventYear.toString()] = (budgetCountByYear[eventYear.toString()] || 0) + 1;
+        });
+
+        const result: { year: string; budget: number }[] = [];
+
+        for (const year in budgetCountByYear) {
+            if (budgetCountByYear.hasOwnProperty(year)) {
+                result.push({ year, budget: budgetCountByYear[year] });
+            }
+        }
+
+        return result;
+    }
+
+    async getClubBudgetsByYears(id: number): Promise<{ budget: number; year: string }[]> {
+        const { data, error } = await this.supabase
+            .from(TableNames.Budget)
+            .select('budget, year')
+            .eq('id_club', id)
+            .order('year', { ascending: true });
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
 
 }

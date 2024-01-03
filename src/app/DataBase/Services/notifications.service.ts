@@ -41,7 +41,7 @@ export class NotificationsService {
     return data;
   }
 
-  async getClubNotifications(id: number): Promise<Notification[]> {
+  async getNotificationsByClub(id: number): Promise<Notification[]> {
     const { data, error } = await this.supabase
       .from(TableNames.Notifications)
       .select('*')
@@ -53,7 +53,19 @@ export class NotificationsService {
     return data;
   }
 
-  async getClubAndNullNotifications(id: number): Promise<Notification[]> {
+  async getAdminNotifications(): Promise<Notification[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Notifications)
+      .select('*')
+      .eq('to', "admin");
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async getClubsNotifications(id: number): Promise<Notification[]> {
     const currentDate = new Date();
     const threeMonthsAgo = subMonths(currentDate, 3);
 
