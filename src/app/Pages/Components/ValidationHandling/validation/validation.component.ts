@@ -23,18 +23,20 @@ export class ValidationComponent implements OnInit {
   constructor(
     private clubsService: ClubsService,
     private authService: AuthService,
-    private profileService : ProfilesService,
+    private profileService: ProfilesService,
     public dialog: MatDialog,
-    private notificationService: NotificationsService,
+    private notificationService: NotificationsService
   ) {}
 
   ngOnInit() {
     // Get the current user data
     const user = this.authService.currentUser.value;
-    this.currentUser = this.profileService.getProfileById(user.id).then((profile) => {
-      this.currentUser = profile[0]; // Assuming getProfileById returns an array
-      console.log('user : ', this.currentUser);
-    });
+    this.currentUser = this.profileService
+      .getProfileById(user.id)
+      .then((profile) => {
+        this.currentUser = profile[0]; // Assuming getProfileById returns an array
+        console.log('user : ', this.currentUser);
+      });
 
     this.getPendingClubs();
     this.getPendingEvents();
@@ -69,11 +71,18 @@ export class ValidationComponent implements OnInit {
     // Check the role of the current user
     if (this.currentUser && this.currentUser.role === 'admin') {
       this.clubsService.validateClubByDve(club);
+      this.profileService.getClubPendingProfiles(club.id!).then((profiles) => {
+        profiles.forEach((profile) => {
+          this.profileService.validatePendingProfile(profile);
+        });
+      });
       this.saveNotification();
-    } else if (this.currentUser && this.currentUser.role_club === 'supervisor') {
+    } else if (
+      this.currentUser &&
+      this.currentUser.role_club === 'supervisor'
+    ) {
       this.clubsService.validateClubByRef(club);
       this.saveNotification();
-
     }
   }
 
@@ -159,9 +168,9 @@ export class ValidationComponent implements OnInit {
       body: ``,
       icon: '', // Use the appropriate icon related to events, for example, 'event' or 'calendar'
       to: 'admin',
-      id_club: this.currentUser.id_club, 
+      id_club: this.currentUser.id_club,
     };
-  
+
     this.notificationService.addNotification(notification);
   }
 }

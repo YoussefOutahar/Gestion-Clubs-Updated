@@ -27,7 +27,7 @@ export class NavService {
     if (privilege == 'admin') {
       return Promise.resolve(this.navItems);
     } else {
-      let id = this.authService.currentUser.getValue().user.id;
+      let id = this.authService.currentUser.getValue().id;
       let club_role = await this.profilesService.getProfileRole(id);
       switch (club_role) {
         case 'President':
@@ -37,6 +37,18 @@ export class NavService {
               item.displayName == 'Club Finance management' ||
               item.displayName == 'Events' ||
               item.displayName == 'Meetingss' ||
+              item.displayName == 'Forum' ||
+              item.displayName == 'Validation Page'
+          );
+          break;
+        case 'VicePresident':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Dashboard' ||
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss' ||
+              item.displayName == 'Forum' ||
               item.displayName == 'Validation Page'
           );
           break;
@@ -45,9 +57,28 @@ export class NavService {
             (item) =>
               item.displayName == 'Club Finance management' ||
               item.displayName == 'Events' ||
+              item.displayName == 'Forum' ||
               item.displayName == 'Meetingss'
           );
           break;
+        case 'Accountant':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Club Finance management' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Forum' ||
+              item.displayName == 'Meetingss'
+          );
+          break;
+        case 'Member':
+          this.navItems = this.navItems.filter(
+            (item) =>
+              item.displayName == 'Forum' ||
+              item.displayName == 'Events' ||
+              item.displayName == 'Meetingss'
+          );
+          break;
+
         default:
           break;
       }
@@ -93,6 +124,11 @@ export class NavService {
       displayName: 'Meetingss',
       iconName: 'calendar-time',
       route: '/dashboard/meetings',
+    },
+    {
+      displayName: 'Forum',
+      iconName: 'calendar-time',
+      route: '/dashboard/forum',
     },
     {
       displayName: 'Validation Page',

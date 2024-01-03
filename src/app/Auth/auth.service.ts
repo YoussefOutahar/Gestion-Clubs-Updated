@@ -31,7 +31,6 @@ export class AuthService {
         this._currentUser.next(user);
       } else {
         this._currentUser.next(false);
-        this.router.navigateByUrl('/', { replaceUrl: true });
       }
     });
 
@@ -56,26 +55,38 @@ export class AuthService {
     return this.supabase.auth.signInWithPassword({ email, password });
   }
 
+  register(
+    name: string,
+    email: string,
+    password: string,
+    phone: string,
+    field: string,
+    year: string
+  ) {
+    this.supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          role: 'user',
+          name: name,
+          email: email,
+          avatar: '',
+          phone: phone,
+          year: year,
+          role_club: 'Member',
+          field: field,
+        },
+      },
+    });
+
+    return this.login(email, password);
+  }
+
   signInWithEmail(email: string) {
     return this.supabase.auth.signInWithOtp({
       email,
     });
-  }
-
-  isLoggedIn(): Observable<boolean | UrlTree> {
-    return this._currentUser.pipe(
-      filter((val) => val !== null), // Filter out initial Behaviour subject value
-      take(1), // Otherwise the Observable doesn't complete!
-      map((isAuthenticated) => {
-        if (isAuthenticated) {
-          console.log('isAuthenticated', isAuthenticated);
-          return true;
-        } else {
-          console.log('isAuthenticated', isAuthenticated);
-          return false;
-        }
-      })
-    );
   }
 
   logout() {
