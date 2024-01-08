@@ -51,6 +51,7 @@ import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Pag
 import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { JoinFormComponent } from './Components/clubs/joinClub/joinClub.component';
+import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dialog/avatar-edit-dialog.component';
 @NgModule({
   declarations: [
     // ========== Dashboards ========== //
@@ -90,6 +91,7 @@ import { JoinFormComponent } from './Components/clubs/joinClub/joinClub.componen
     // ================================ //
     ForumComponent,
     ProfileComponent,
+    AvatarEditDialogComponent,
     // ============ Landing Page ============ //
     LandingPage,
     ImageSliderComponent,

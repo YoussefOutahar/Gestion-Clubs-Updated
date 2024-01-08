@@ -4,10 +4,11 @@
 <mat-card>
     <div class="profile-row">
         <div class="profile-image">
-            <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover" width="200" />
+            <img [src]="this.currentUser?.avatar" class="rounded-circle object-cover" width="200" />
         </div>
         <div class="profile-title">
             <h1 class="header">My Profile</h1>
+            <p (click)="editAvatar()">Edit avatar</p>
         </div>
     </div>
 </mat-card>

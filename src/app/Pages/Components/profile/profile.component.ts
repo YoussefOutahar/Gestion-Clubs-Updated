@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '@supabase/supabase-js';
 import { AuthService } from '../../../Auth/auth.service';
 import { ProfilesService } from '../../../DataBase/Services/profiles.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AvatarEditDialogComponent } from './profile-edit-dialog/avatar-edit-dialog.component';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class ProfileComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private profilesService: ProfilesService,
+        public dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -32,6 +35,20 @@ export class ProfileComponent implements OnInit {
             .catch((error) => {
                 console.error('Error fetching user profile:', error);
             });
+    }
+
+    editAvatar(): void {
+        // Open a dialog or navigate to another component for avatar editing
+        const dialogRef = this.dialog.open(AvatarEditDialogComponent, {
+            width: '300px', 
+            height: '400px', 
+            data: this.currentUser , 
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            // Handle the result if needed
+        });
     }
 
 }

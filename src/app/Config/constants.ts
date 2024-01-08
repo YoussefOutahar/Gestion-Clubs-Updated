@@ -33,5 +33,6 @@ export class StorageNames {
   public static readonly BudgetEvent: string = "Budget_event";
   public static readonly EventImages: string = "Events_images";
   public static readonly ClubsLogo: string = "Clubs_Logo";
+  public static readonly Avatars: string = "Avatars";
 
 }

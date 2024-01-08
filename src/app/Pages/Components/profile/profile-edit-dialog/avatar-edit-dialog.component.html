@@ -1,0 +1,14 @@
+<!-- avatar-edit-dialog.component.html -->
+<div class="dialog-container">
+    <h1>Edit Avatar</h1>
+
+    <!-- Add relevant UI elements for avatar editing -->
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <img *ngIf="selectedFile" [src]="selectedFileUrl" class="rounded-circle object-cover" width="200"
+        alt="Selected Avatar" />
+
+    <div>
+        <button mat-button mat-raised-button color="primary" (click)="saveAvatar()">Save</button>
+        <button mat-button mat-raised-button (click)="cancel()">Cancel</button>
+    </div>
+</div>

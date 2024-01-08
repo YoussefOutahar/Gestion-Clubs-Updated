@@ -174,4 +174,15 @@ export class ProfilesService {
     }
     return data;
   }
+
+  async updateProfileAvatar(id: string, avatar: string): Promise<Profile[]> {
+    const { data, error } = await this.supabase
+        .from(TableNames.Profiles)
+        .update({ avatar })
+        .eq('id', id);
+    if (error) {
+        throw error;
+    }
+    return data ? data : [];
+}
 }

@@ -276,7 +276,7 @@ export class ClubCreationComponent implements OnInit {
       date: new Date().toISOString(),
       title: 'New club request',
       body: 'A new club request has been submitted and is pending approval.',
-      icon: 'add', // Use 'add' for the plus icon
+      icon: 'group', // Use 'add' for the plus icon
       to: 'admin',
     };
 

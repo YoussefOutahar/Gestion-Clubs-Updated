@@ -56,4 +56,17 @@ export class UploadsService {
     // You can handle the uploaded data if needed, but it's not clear what you want to do with it.
     console.log('Uploaded data:', data);
   }
+
+  async uploadAvatar(selectedFile: File): Promise<void> {
+    const { data, error } = await this.supabase.storage
+      .from(StorageNames.Avatars)
+      .upload(selectedFile.name, selectedFile);
+
+    if (error) {
+      throw error;
+    }
+
+    // You can handle the uploaded data if needed, but it's not clear what you want to do with it.
+    console.log('Uploaded data:', data);
+  }
 }
