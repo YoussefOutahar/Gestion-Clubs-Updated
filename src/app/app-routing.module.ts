@@ -7,23 +7,23 @@ import { LandingPageComponent } from './LandingPage/LandingPage.component';
 import { LandingPage } from './Pages/Components/LandingPage/landingPage.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/session/authenticate', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
+  // {
+  //   path: '',
+  //   component: BlankComponent,
+  //   children: [
+  //     {
+  //       path: 'landing-page',
+  //       component: LandingPageComponent,
+  //     },
+  //   ],
+  // },
   {
     path: '',
     component: BlankComponent,
     children: [
       {
         path: 'landing-page',
-        component: LandingPageComponent,
-      },
-    ],
-  },
-  {
-    path: '',
-    component: BlankComponent,
-    children: [
-      {
-        path: 'landingPage',
         component: LandingPage,
       },
     ],

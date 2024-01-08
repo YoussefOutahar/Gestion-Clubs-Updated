@@ -7,7 +7,9 @@ h1 {
 }
 
 .club-card:hover {
-  transform: scale(1.05); /* Adjust the scale factor for the desired pop-up effect */
+  transform: scale(
+    1.05
+  ); /* Adjust the scale factor for the desired pop-up effect */
 }
 
 .back-button {
@@ -36,9 +38,8 @@ h1 {
   margin-right: 20px;
   max-width: 450px;
   max-height: 300px;
-
 }
-.club-details-card{
+.club-details-card {
   flex: 1;
   max-width: 50%;
   max-height: 50%;

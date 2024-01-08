@@ -1,34 +1,89 @@
 <!-- clubs.component.html -->
 
 <div *ngIf="showDetails" class="details-container">
-  <button mat-raised-button color="primary" (click)="handleBackToTop()" class="back-button">
+  <h1>Club Details</h1>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="handleBackToTop()"
+    class="back-button"
+  >
     <mat-icon>arrow_back</mat-icon> Back to Club List
   </button>
-  <h2>{{ activeClub?.name }}</h2>
-  <div class="details-row">
-    <div class="image-container">
-      <img [src]="activeClub?.logo" alt="{{ activeClub?.name }}" style="width: 100%;">
+  <p-image
+    [src]="activeClub?.logo"
+    alt="{{ activeClub?.name }}"
+    width="100%"
+    [preview]="true"
+    class="mb-6"
+  ></p-image>
+  <h2 class="mb-6">{{ activeClub?.name }}</h2>
+  <div class="grid">
+    <div class="col mr-3">
+      <p-card header="Information" class="mr-3">
+        <h5>Creation date:</h5>
+        <div class="flex flex-wrap gap-2">
+          <p-tag>{{ activeClub?.date_creation }}</p-tag>
+        </div>
+
+        <h5>Number of Members</h5>
+        <div class="flex flex-wrap gap-2">
+          <p-tag>{{ activeClub?.nb_member }}</p-tag>
+        </div>
+
+        <h5>Category</h5>
+        <div class="flex flex-wrap gap-2">
+          <p-tag>{{ category }}</p-tag>
+        </div>
+
+        <h5>Mission</h5>
+        <div class="flex flex-wrap gap-2">
+          <p-tag>{{ activeClub?.mission }}</p-tag>
+        </div>
+      </p-card>
     </div>
-    <div class="club-details-card">
-      <p>Creation date: {{ activeClub?.date_creation }}</p>
-      <p>Number of Members: {{ activeClub?.nb_member }}</p>
-      <p>Category: {{ category }}</p>
-      <p>Mission: {{ activeClub?.mission }}</p>
-      <p>description: {{ activeClub?.kpo }}</p>
-      <button mat-raised-button color="warn" (click)="handleDelete(activeClub)">Delete</button>
+    <div class="col mr-3">
+      <p-fieldset legend="KPO">
+        <p class="m-0">
+          {{ activeClub?.kpo }}
+        </p>
+      </p-fieldset>
     </div>
   </div>
-  <div>
-    <!-- Add dialog for delete confirmation -->
+  <div class="flex">
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <p-button
+      label="Edit"
+      icon="pi pi-pencil"
+      class="mr-3"
+      (click)="handleEdit($event, activeClub)"
+    ></p-button>
+    <p-button
+      label="Delete"
+      icon="pi pi-trash"
+      class="mr-3"
+      severity="danger"
+      (click)="handleDelete($event, activeClub)"
+    ></p-button>
   </div>
+  <div></div>
 </div>
 
 <div *ngIf="!showDetails">
   <h1>List of clubs</h1>
   <mat-grid-list cols="4" rowHeight="200px" gutterSize="10">
-    <mat-grid-tile *ngFor="let club of clubs" (click)="handleLearnMore(clubs.indexOf(club))" class="club-card">
-      <img [src]="club.logo" alt="{{ club.name }}" style="width: 100%; border-radius: 8px 8px 0 0;">
-      <mat-grid-tile-footer style="padding: 8px; border-radius: 0 0 8px 8px;">
+    <mat-grid-tile
+      *ngFor="let club of clubs"
+      (click)="handleLearnMore(clubs.indexOf(club))"
+      class="club-card"
+    >
+      <img
+        [src]="club.logo"
+        alt="{{ club.name }}"
+        style="width: 100%; border-radius: 8px 8px 0 0"
+      />
+      <mat-grid-tile-footer style="padding: 8px; border-radius: 0 0 8px 8px">
         <h3>{{ club.name }}</h3>
       </mat-grid-tile-footer>
     </mat-grid-tile>

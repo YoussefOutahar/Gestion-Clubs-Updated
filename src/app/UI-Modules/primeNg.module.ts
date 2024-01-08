@@ -26,6 +26,14 @@ import { PanelModule } from 'primeng/panel';
 
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
+import { ImageModule } from 'primeng/image';
+import { FieldsetModule } from 'primeng/fieldset';
+import { TagModule } from 'primeng/tag';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   declarations: [],
   exports: [
@@ -53,6 +61,13 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     PanelModule,
 
     DynamicDialogModule,
+    ImageModule,
+    FieldsetModule,
+    TagModule,
+    ConfirmDialogModule,
+    ToastModule,
+    ProgressSpinnerModule,
+    TableModule,
   ],
 })
 export class PrimeNgModule {}
