@@ -1,6 +1,8 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
-<div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
+<div
+  class="blank-layout-container justify-content-center align-items-center bg-light-primary"
+>
   <div
     class="position-relative row w-100 h-100 bg-gredient justify-content-center"
   >
@@ -11,13 +13,13 @@
             <a [routerLink]="['/dashboard']">
               <img
                 src="./assets/images/logos/UIR logo.webp"
-                class="align-middle m-2"
+                class="align-middle m-2 h-10rem"
                 alt="logo"
               />
             </a>
           </div>
 
-          <div class="row m-t-24 custom-row">
+          <!-- <div class="row m-t-24 custom-row">
             <div class="col-12 col-sm-6">
               <button mat-stroked-button class="w-100">
                 <div class="d-flex align-items-center">
@@ -47,11 +49,15 @@
                 </div>
               </button>
             </div>
-          </div>
+          </div> -->
 
-          <div class="or-border m-t-30">or sign in with</div>
+          <div class="or-border m-t-30">Sign in</div>
 
-          <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()" class="m-t-30">
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onFormSubmit()"
+            class="m-t-30"
+          >
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
               >Email</mat-label
             >
@@ -63,7 +69,7 @@
               >Password</mat-label
             >
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" formControlName="password">
+              <input matInput type="password" formControlName="password" />
             </mat-form-field>
 
             <div class="d-flex align-items-center m-b-12">
@@ -79,11 +85,19 @@
             </button>
             <!-- input -->
 
-            <mat-error *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
-              <span *ngIf="loginForm.get('email')?.errors"> an error occured</span>
+            <mat-error
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.dirty ||
+                  loginForm.get('email')?.touched)
+              "
+            >
+              <span *ngIf="loginForm.get('email')?.errors">
+                an error occured</span
+              >
             </mat-error>
           </form>
-          <span class="d-block f-w-500 text-center m-t-24"
+          <!-- <span class="d-block f-w-500 text-center m-t-24"
             >New to Modernize?
             <a
               [routerLink]="['/session/register']"
@@ -91,7 +105,7 @@
             >
               Create an account</a
             >
-          </span>
+          </span> -->
         </mat-card-content>
       </mat-card>
     </div>
