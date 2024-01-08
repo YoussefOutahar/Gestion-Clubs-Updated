@@ -1,0 +1,15 @@
+/* avatar-edit-dialog.component.css */
+.dialog-container {
+    justify-content: center;  /* Center items vertically */
+    margin: 8px;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+button {
+    margin-right: 10px;
+}

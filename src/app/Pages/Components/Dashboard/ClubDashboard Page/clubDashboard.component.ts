@@ -131,7 +131,7 @@ export class clubDashboardComponent {
       ],
       chart: {
         type: 'area',
-        height: 100,
+        height: 60,
         sparkline: {
           enabled: true,
         },
