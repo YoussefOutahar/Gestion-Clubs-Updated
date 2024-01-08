@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './UI-Modules/material.module';
 
 import { LayoutModule } from './Layout/Layout.module';
 import { AuthModule } from './Auth/auth.module';
@@ -16,7 +16,7 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { PrimeNgModule } from './primeNg.module';
+import { PrimeNgModule } from './UI-Modules/primeNg.module';
 
 @NgModule({
   declarations: [AppComponent],

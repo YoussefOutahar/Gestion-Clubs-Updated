@@ -5,7 +5,7 @@ import { pageRoutes } from './pages.routing';
 
 import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../UI-Modules/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +45,7 @@ import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-com
 import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
 import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
-import { PrimeNgModule } from '../primeNg.module';
+import { PrimeNgModule } from '../UI-Modules/primeNg.module';
 import { EventDetailsComponent } from './Components/events/event-details-popup/event-details.component';
 import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
@@ -119,4 +119,4 @@ import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dia
   exports: [TablerIconsModule],
   providers: [DatePipe],
 })
-export class PagesModule { }
+export class PagesModule {}

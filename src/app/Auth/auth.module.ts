@@ -4,10 +4,10 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { RouterModule } from '@angular/router';
 import { AuthRoutes } from './auth.routing';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../UI-Modules/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -19,11 +19,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    RouterModule.forChild(AuthRoutes)
+    RouterModule.forChild(AuthRoutes),
   ],
-  declarations: [
-    AuthPageComponent,
-    RegisterPageComponent
-  ],
+  declarations: [AuthPageComponent, RegisterPageComponent],
 })
-export class AuthModule { }
+export class AuthModule {}
