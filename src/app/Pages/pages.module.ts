@@ -52,6 +52,7 @@ import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/a
 import { ProfileComponent } from './Components/profile/profile.component';
 import { JoinFormComponent } from './Components/clubs/joinClub/joinClub.component';
 import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dialog/avatar-edit-dialog.component';
+import { MembersValidationComponent } from './Components/ValidationHandling/MembersValidation/membersValidation.component';
 @NgModule({
   declarations: [
     // ========== Dashboards ========== //
@@ -82,6 +83,7 @@ import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dia
     // =========== Validation ============= //
     ValidationComponent,
     ValidationDetailstDialogComponent,
+    MembersValidationComponent,
 
     // ===========Events============= //
     EventsComponent,

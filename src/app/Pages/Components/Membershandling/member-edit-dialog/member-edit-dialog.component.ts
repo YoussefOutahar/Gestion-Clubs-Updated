@@ -2,12 +2,22 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Profile } from '../../../../DataBase/Models/profile';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 @Component({
   selector: 'app-member-edit-dialog',
   templateUrl: './member-edit-dialog.component.html',
+  styleUrls: ['./member-edit-dialog.component.css'],
 })
 export class MemberEditDialogComponent implements OnInit {
+  roleOptions = [
+    { label: 'President', value: 'President' },
+    { label: 'Vice-President', value: 'Vice-President' },
+    { label: 'Accountant', value: 'Accountant' },
+    { label: 'Secretary', value: 'Secretary' },
+    { label: 'Member', value: 'Member' }
+  ];
   constructor(
     public dialogRef: MatDialogRef<MemberEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Profile,

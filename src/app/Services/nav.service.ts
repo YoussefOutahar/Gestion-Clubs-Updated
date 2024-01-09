@@ -38,7 +38,7 @@ export class NavService {
               item.displayName == 'Events' ||
               item.displayName == 'Meetingss' ||
               item.displayName == 'Forum' ||
-              item.displayName == 'Validation Page'
+              item.displayName == 'Members Validation'
           );
           break;
         case 'VicePresident':
@@ -49,7 +49,7 @@ export class NavService {
               item.displayName == 'Events' ||
               item.displayName == 'Meetingss' ||
               item.displayName == 'Forum' ||
-              item.displayName == 'Validation Page'
+              item.displayName == 'Members Validation'
           );
           break;
         case 'Secretary':
@@ -134,6 +134,11 @@ export class NavService {
       displayName: 'Validation Page',
       iconName: 'link',
       route: '/dashboard/validation',
+    },
+    {
+      displayName: 'Members Validation',
+      iconName: 'link',
+      route: '/dashboard/membersValidation',
     },
 
     // ====================================

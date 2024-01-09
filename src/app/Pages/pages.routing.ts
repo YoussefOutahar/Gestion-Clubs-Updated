@@ -20,6 +20,7 @@ import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Pag
 import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { ForumComponent } from './Components/forum/forum.component';
+import { MembersValidationComponent } from './Components/ValidationHandling/MembersValidation/membersValidation.component';
 
 export const pageRoutes: Routes = [
   {
@@ -85,6 +86,11 @@ export const pageRoutes: Routes = [
   {
     path: 'validation',
     component: ValidationComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'membersValidation',
+    component: MembersValidationComponent,
     canActivate: [authGuard],
   },
   {

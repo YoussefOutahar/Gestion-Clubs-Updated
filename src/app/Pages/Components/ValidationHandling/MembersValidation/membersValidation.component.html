@@ -1,7 +1,9 @@
 <!-- validation.component.html -->
-<h1>Requests Table</h1>
-<table>
-  <thead>
+<h1 class="mb-4">List of members</h1>
+
+<p-table [value]="members" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+  styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+  <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Name</th>
       <th>Email</th>
@@ -10,21 +12,20 @@
       <th>Year</th>
       <th>Action</th>
     </tr>
-  </thead>
-  <tbody>
-    <!-- Display pending members -->
-    <tr *ngFor="let member of members">
+  </ng-template>
+  <ng-template pTemplate="body" let-member>
+    <tr>
       <td>{{ member.name }}</td>
       <td>{{ member.email }}</td>
       <td>{{ member.phone }}</td>
       <td>{{ member.field }}</td>
       <td>{{ member.year }}</td>
       <td>
-        <button mat-raised-button class="green-button"
-          (click)="validateMember(member)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
-        <button mat-raised-button class="red-button"
-          (click)="cancelMember(member)"><mat-icon>delete</mat-icon>Cancel</button>
+        <button type="button" pButton pRipple icon="pi pi-check" class="p-button-sm m-2"
+          (click)="validateMember(member)"></button>
+        <button type="button" pButton pRipple icon="pi pi-times" class="p-button-sm m-2"
+          (click)="cancelMember(member)"></button>
       </td>
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+</p-table>
