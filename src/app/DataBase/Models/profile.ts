@@ -18,6 +18,7 @@ export interface PendingProfile {
   email: string;
   field: string;
   year: string;
+  avatar: string;
   id_club: number;
   role_club: string;
   state: string;

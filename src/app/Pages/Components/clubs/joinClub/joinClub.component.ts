@@ -56,6 +56,7 @@ export class JoinFormComponent implements OnInit {
         field: this.joinForm.value.field,
         email: this.joinForm.value.mail,
         phone: this.joinForm.value.phone,
+        avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
         id_club: this.data,
         role_club: 'Member',
         state: 'Pending',
