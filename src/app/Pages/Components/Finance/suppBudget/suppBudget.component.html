@@ -8,7 +8,7 @@
     <div>
         <form *ngIf="suppBudgetForm" [formGroup]="suppBudgetForm" (ngSubmit)="handleSubmit()" class="suppBudget-form">
             <div>
-                <label for="eventName">Event Name</label>
+                <label for="eventName">Event Name :</label>
                 <mat-form-field appearance="fill">
                     <mat-select formControlName="eventId">
                         <mat-option *ngFor="let event of events" [value]="event.id">
@@ -19,7 +19,7 @@
             </div>
 
             <div>
-                <label for="totalCost">Amount Requested</label>
+                <label for="totalCost">Amount Requested :</label>
                 <input type="number" formControlName="totalCost" />
             </div>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div>
-                <label for="file">Upload File:</label>
+                <label for="file">Upload File :</label>
                 <input type="file" id="file" formControlName="file" (change)="onFileChange($event)" />
             </div>
 

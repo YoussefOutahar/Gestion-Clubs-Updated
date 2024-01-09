@@ -1,34 +1,71 @@
 /* charge-form.component.css */
 
-h1 {
-  margin-bottom: 30px;
+/* Your component-specific styling */
+body {
+  font-family: 'Arial', sans-serif;
 }
 
-form {
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.successMessage {
+  text-align: center;
+  margin: 20px 0;
+  color: #4caf50;
+}
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   display: grid;
-  gap: 15px;
-  padding: 30px;
+  gap: 20px;
+  transition: box-shadow 0.3s;
+}
+
+.form:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
-input,
-button {
+mat-form-field {
   width: 100%;
-  padding: 10px;
+}
+
+input,
+mat-select {
+  width: 100%;
+  padding: 12px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+input[type="file"] {
+  padding: 12px 10px;
 }
 
 button {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
   background-color: #4caf50;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:disabled {
@@ -36,6 +73,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.charge-form{
-  margin-inline: 30px;
+button:hover {
+  background-color: #45a049;
 }
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  .form {
+      padding: 15px;
+  }
+}
+
