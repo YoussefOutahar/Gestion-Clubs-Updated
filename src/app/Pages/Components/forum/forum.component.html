@@ -1,42 +1,30 @@
-<mat-sidenav-container class="container">
-  <mat-sidenav mode="side" opened>
-    <mat-card>
-      <mat-tab-group>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon matListIcon>forum</mat-icon>
-          </ng-template>
-          <mat-list class="conversations">
-              ...
-          </mat-list>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </mat-sidenav>
-  <mat-sidenav position="end" mode="side" opened *ngIf="selectedConversation">
-    <mat-card>
-      <mat-list class="members">
-          ...
-      </mat-list>
-    </mat-card>
-  </mat-sidenav>
-  <section class="empty-conversation" *ngIf="!selectedConversation">
-    <h1 class="mat-display-1">Select a conversation from the left to start chatting</h1>
-  </section>
-  <section *ngIf="selectedConversation">
-    <div class="mat-typography conversation-header">
-        ...
-    </div>
-    <mat-divider></mat-divider>
-    <mat-list dense class="conversation-history mat-typography">
-      ...
-    </mat-list>
-    <div class="conversation-input">
-      <mat-divider></mat-divider>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Start chatting..." name="text" [(ngModel)]="message">
-        <mat-icon matSuffix (click)="sendMessage">send</mat-icon>
-      </mat-form-field>
-    </div>
-  </section>
-</mat-sidenav-container>
+<div class="">
+  @for(msg of messages; track msg) { @if (msg.user_id == currentUser.id) {
+  <span class="p-fluid">
+    <p-card class="m-6 bg-blue-400" [header]="msg.userName">
+      {{ msg.content }}
+    </p-card>
+  </span>
+  } @else {
+  <span class="p-fluid">
+    <p-card class="m-6" header="test"> {{ msg.content }} </p-card>
+  </span>
+  } }
+</div>
+
+<div class="flex">
+  <div class="flex-grow-1 p-fluid">
+    <input
+      type="text"
+      pInputText
+      placeholder="Send message"
+      [(ngModel)]="message"
+    />
+  </div>
+  <p-button
+    label="Send"
+    icon="pi pi-send"
+    class="p-button-raised p-button-rounded ml-2"
+    (onClick)="sendMessage()"
+  ></p-button>
+</div>
