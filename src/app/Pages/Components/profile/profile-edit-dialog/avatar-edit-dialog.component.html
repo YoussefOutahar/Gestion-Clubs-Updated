@@ -7,7 +7,7 @@
     <img *ngIf="selectedFile" [src]="selectedFileUrl" class="rounded-circle object-cover" width="200"
         alt="Selected Avatar" />
 
-    <div>
+    <div class="dialog-actions">
         <button mat-button mat-raised-button color="primary" (click)="saveAvatar()">Save</button>
         <button mat-button mat-raised-button (click)="cancel()">Cancel</button>
     </div>

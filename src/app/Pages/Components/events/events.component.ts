@@ -98,6 +98,7 @@ export class EventsComponent implements OnInit {
       if (event) {
         console.log("the selected event : ", event);
         const dialogRef = this.dialog.open(EventDetailsComponent, {
+          maxWidth: '600px',
           data: {
             name: event.name,
             date: event.date,
