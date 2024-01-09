@@ -1,12 +1,7 @@
 <h1 class="mb-4">List of members</h1>
 
-<p-table
-  [value]="users"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 20]"
-  styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
->
+<p-table [value]="users" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+  styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Name</th>
@@ -27,24 +22,10 @@
       <td>{{ user.field }}</td>
       <td>{{ user.year }}</td>
       <td>
-        <button
-          type="button"
-          pButton
-          pRipple
-          icon="pi pi-user-edit"
-          class="p-button-sm m-2"
-          (click)="openEditDialog(user)"
-          *ngIf="canShowActions(user)"
-        ></button>
-        <button
-          type="button"
-          pButton
-          pRipple
-          icon="pi pi-trash"
-          class="p-button-sm m-2"
-          (click)="openDeleteDialog(user)"
-          *ngIf="canShowActions(user)"
-        ></button>
+        <button type="button" pButton pRipple icon="pi pi-user-edit" class="p-button-sm m-2"
+          (click)="openEditDialog(user)" *ngIf="canShowActions(user)"></button>
+        <button type="button" pButton pRipple icon="pi pi-trash" class="p-button-sm m-2"
+          (click)="openDeleteDialog(user)" *ngIf="canShowActions(user)"></button>
       </td>
     </tr>
   </ng-template>

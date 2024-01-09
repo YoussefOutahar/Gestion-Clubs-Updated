@@ -1,23 +1,14 @@
-<div class="dialog-header">
+<div class="container">
   <h1 mat-dialog-title>Edit User</h1>
-  <p>Name: {{ data.name }}</p>
-</div>
-<div mat-dialog-content>
-  <!-- Add form fields for editing user details -->
-  <p>Current Role: {{ data.role_club }}</p>
-  <p>Change role to:</p>
-  <mat-form-field>
-    <mat-select [(ngModel)]="data.role_club" placeholder="Select Role">
-      <mat-option value="President">President</mat-option>
-      <mat-option value="Vice-President">Vice-President</mat-option>
-      <mat-option value="Accountant">Accountant</mat-option>
-      <mat-option value="Secretary">Secretary</mat-option>
-      <mat-option value="Member">Member</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <!-- Add more fields as needed -->
-</div>
-<div class="dialog-actions">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onSaveClick()" cdkFocusInitial>Save</button>
+  <div>
+    <p>Name: {{ data.name }}</p>
+    <p>Current Role: {{ data.role_club }}</p>
+    <p>Change role to:</p>
+    <p-dropdown [options]="roleOptions" [(ngModel)]="data.role_club" optionLabel="value" placeholder="Select Role"></p-dropdown>
+
+  </div>
+  <div class="dialog-actions">
+    <button mat-button mat-button mat-raised-button color="primary"  (click)="onNoClick()">Cancel</button>
+    <button mat-button mat-raised-button (click)="onSaveClick()" cdkFocusInitial>Save</button>
+  </div>
 </div>
