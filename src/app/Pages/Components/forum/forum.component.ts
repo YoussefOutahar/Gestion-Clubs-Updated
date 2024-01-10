@@ -42,6 +42,8 @@ export class ForumComponent implements OnInit {
               .catch((error) => {
                 console.error('Error fetching messages:', error);
               });
+            console.log('current User : ', this.currentUser);
+            console.log('messages : ', this.messages);
           })
           .catch((error) => {
             console.error('Error fetching forums:', error);

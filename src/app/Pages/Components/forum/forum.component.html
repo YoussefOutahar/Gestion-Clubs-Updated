@@ -1,13 +1,41 @@
 <div class="">
-  @for(msg of messages; track msg) { @if (msg.user_id == currentUser.id) {
+  @for(msg of messages; track msg) { @if (msg.user_id === currentUser.id) {
   <span class="p-fluid">
-    <p-card class="m-6 bg-blue-400" [header]="msg.userName">
-      {{ msg.content }}
+    <p-card class="m-2 p-2" styleClass="bg-green-300">
+      <ng-template pTemplate="header">
+        <div class="flex flex-row-reverse pt-2 pr-4">
+          <p class="text-2xl font-bold">{{ msg.userName }}</p>
+        </div>
+      </ng-template>
+      <div
+        class="flex flex-row-reverse pr-4 bg-green-200 pt-4 pb-4 border-round"
+      >
+        {{ msg.content }}
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="flex flex-row-reverse pr-4">
+          <p class="text-xs">{{ msg.created_at }}</p>
+        </div>
+      </ng-template>
     </p-card>
   </span>
   } @else {
   <span class="p-fluid">
-    <p-card class="m-6" header="test"> {{ msg.content }} </p-card>
+    <p-card class="m-6" styleClass="bg-blue-300">
+      <ng-template pTemplate="header">
+        <div class="pt-2 pl-4">
+          <p class="text-2xl font-bold">{{ msg.userName }}</p>
+        </div>
+      </ng-template>
+      <div class="pl-4 bg-blue-200 pt-4 pb-4 border-round">
+        {{ msg.content }}
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="pl-4">
+          <p class="text-xs">{{ msg.created_at }}</p>
+        </div>
+      </ng-template>
+    </p-card>
   </span>
   } }
 </div>
