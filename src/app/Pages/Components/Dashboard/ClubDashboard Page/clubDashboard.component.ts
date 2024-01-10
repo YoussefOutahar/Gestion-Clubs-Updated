@@ -135,12 +135,21 @@ export class clubDashboardComponent {
     const clubBudgetsData = await this.dashboardService.getClubBudgetsByYears(
       this.currentUser.id_club
     );
-    const currentYearBudget =
-      clubBudgetsData[clubBudgetsData.length - 1].budget;
-    const lastYearBudget = clubBudgetsData[clubBudgetsData.length - 2].budget;
-    const percentageDifference =
-      ((currentYearBudget - lastYearBudget) / lastYearBudget) * 100;
-    console.log('clubBudgetsData : ', clubBudgetsData);
+
+    let currentYearBudget = 0;
+    let lastYearBudget = 0;
+    let percentageDifference = 0;
+
+    if (clubBudgetsData.length === 0) {
+      currentYearBudget = 0;
+      lastYearBudget = 0;
+      percentageDifference = 0;
+    } else {
+      currentYearBudget = clubBudgetsData[clubBudgetsData.length - 1].budget;
+      lastYearBudget = clubBudgetsData[clubBudgetsData.length - 2].budget;
+      percentageDifference =
+        ((currentYearBudget - lastYearBudget) / lastYearBudget) * 100;
+    }
 
     this.BudgetsChart = {
       series: [

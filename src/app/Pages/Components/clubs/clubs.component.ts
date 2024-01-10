@@ -51,7 +51,7 @@ export class ClubsComponent implements OnInit {
     if (club) {
       this.confirmationService.confirm({
         target: event.target as EventTarget,
-        message: 'Do you want to delete this record?',
+        message: 'Do you want to delete this Club?',
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         acceptButtonStyleClass: 'p-button-danger p-button-text',
@@ -63,7 +63,7 @@ export class ClubsComponent implements OnInit {
           this.messageService.add({
             severity: 'info',
             summary: 'Confirmed',
-            detail: 'Record deleted',
+            detail: 'Club deleted',
           });
         },
         reject: () => {
@@ -79,31 +79,6 @@ export class ClubsComponent implements OnInit {
 
   handleEdit(event: Event, club: Club | null) {
     if (club) {
-      this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Do you want to delete this record?',
-        header: 'Delete Confirmation',
-        icon: 'pi pi-info-circle',
-        acceptButtonStyleClass: 'p-button-danger p-button-text',
-        rejectButtonStyleClass: 'p-button-text p-button-text',
-        acceptIcon: 'none',
-        rejectIcon: 'none',
-
-        accept: () => {
-          this.messageService.add({
-            severity: 'info',
-            summary: 'Confirmed',
-            detail: 'Record deleted',
-          });
-        },
-        reject: () => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Rejected',
-            detail: 'You have rejected',
-          });
-        },
-      });
     }
   }
 }

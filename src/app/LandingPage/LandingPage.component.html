@@ -1,6 +1,71 @@
-<app-nav-bar></app-nav-bar>
-<app-carousel-events></app-carousel-events>
+<!-- navbar.component.html -->
+<div class="navbar">
+  <img
+    src="https://www.uir.ac.ma/assets/_resources/img/mono-logo.png"
+    alt="logo"
+    width="80"
+    height="80"
+  />
+  <div class="spacer"></div>
+  <ul class="nav-list">
+    <li><a href="https://www.uir.ac.ma/">UIR</a></li>
+    <li><a routerLink="/">Admission</a></li>
+    <!-- Add dropdown component here if needed -->
+    <li><a routerLink="/">Formation</a></li>
+    <li>
+      <a href="https://www.uir.ac.ma/fr/pole/executive-education"
+        >Executive Education</a
+      >
+    </li>
+    <li><a routerLink="/">Recherche</a></li>
+    <li><a routerLink="/">Internationale</a></li>
+    <li><a routerLink="/">Vie dans le compus</a></li>
+    <li><a routerLink="/club/create">Creer un club</a></li>
+  </ul>
+  <div class="spacer"></div>
+  <button
+    mat-raised-button
+    class="login-button"
+    routerLink="/session/authenticate"
+  >
+    Login
+  </button>
+</div>
+
+<app-image-slider></app-image-slider>
+
+<div class="horizontal-bar"></div>
+
+<div class="two-section">
+  <h1>Bureau des Etudiants de l'UIR</h1>
+  <div class="DVE-content">
+    <div class="BDE-image">
+      <!-- Your image goes here -->
+      <img
+        src="https://www.uir.ac.ma/upload/cbuilder/c076f4b3518ce8be7f84bb05ec8ce0b2cc0f366f.png"
+        alt="Clubs Image"
+      />
+    </div>
+    <div class="DVE-paragraph">
+      <h2>OBJECTIFS DU BUREAU DES ETUDIANTS</h2>
+      <p>
+        Cellule hébergée par l’UIR et rattachée à la Direction de la Vie
+        Etudiante. Ses valeurs et principes s’inscrivent dans la continuité et
+        le respect des valeurs morales et sociales du Royaume telles que
+        consacrées par la Constitution du Royaume du Maroc et prévues par le
+        Règlement Intérieur des Étudiants de l’Université Internationale de
+        Rabat, (Article 3) Encourager l’implication des étudiants dans le milieu
+        associatif marocain et international. Représenter les étudiants au sein
+        de l’Université ; Relayer l’information entre l’Administration de l’UIR
+        et ses étudiants ; Dynamiser et développer la vie étudiante au sein du
+        campus ; Contribuer à la promotion interne et externe de la vie
+        étudiante ; Organiser des événements phares du BDE suivant un calendrier
+        déterminé en début de chaque année, (Article 5)
+      </p>
+    </div>
+  </div>
+</div>
+
 <app-carousel-clubs></app-carousel-clubs>
-<app-body></app-body>
-<app-gallery></app-gallery>
+
 <app-footer></app-footer>

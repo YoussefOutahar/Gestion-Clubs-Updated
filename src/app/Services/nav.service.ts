@@ -31,10 +31,10 @@ export class NavService {
             item.navCap == 'Espace Admin' ||
             item.route == '/dashboard/adminDashboard' ||
             item.displayName == 'Clubs' ||
+            item.displayName == 'Members' ||
             item.displayName == 'Finance management' ||
             item.displayName == 'Events' ||
             item.displayName == 'Meetingss' ||
-            item.displayName == 'Forum' ||
             item.displayName == 'Validation Page'
         )
       );

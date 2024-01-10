@@ -17,9 +17,20 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { PrimeNgModule } from './UI-Modules/primeNg.module';
+import { LandingPage } from './LandingPage/landingPage.component';
+import { ImageSliderComponent } from './LandingPage/LandingPage-component/image-slider/image-slider.component';
+import { CarouselClubsComponent } from './LandingPage/LandingPage-component/club-carousel/club-carousel.component';
+import { FooterComponent } from './LandingPage/LandingPage-component/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    // ============ Landing Page ============ //
+    LandingPage,
+    ImageSliderComponent,
+    CarouselClubsComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

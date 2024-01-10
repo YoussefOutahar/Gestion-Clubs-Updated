@@ -232,6 +232,15 @@ export class ClubsService {
 
   // ============== Messages ============== //
 
+  async addForumToClub(forum: Forum): Promise<void> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Forums)
+      .insert(forum);
+    if (error) {
+      throw error;
+    }
+  }
+
   async getMessages(): Promise<ForumMessage[]> {
     const { data, error } = await this.supabase
       .from(TableNames.Messages)

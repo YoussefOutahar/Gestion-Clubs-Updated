@@ -17,6 +17,7 @@ import { AuthService } from '../../../Auth/auth.service';
 import { ProfilesService } from '../../../DataBase/Services/profiles.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddMeetingRequestComponent } from './addMeetingRequest/addMeetingRequest.component';
+import { MeetingsDetailsComponent } from './meetingsDetails/meetingsDetails.component';
 
 @Component({
   selector: 'app-meetings',
@@ -98,12 +99,12 @@ export class MeetingsComponent implements OnInit {
   handleDateSelect(selectInfo: DateSelectArg) {}
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      clickInfo.event.remove();
-    }
+    this.ref = this.dialogService.open(MeetingsDetailsComponent, {
+      header: 'Meeting Details',
+      width: '70%',
+      data: {
+        meeting: clickInfo.event.id,
+      },
+    });
   }
 }

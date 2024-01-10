@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './Layout/layout.component';
 import { BlankComponent } from './Layout/blank/blank.component';
-import { LandingPageComponent } from './LandingPage/LandingPage.component';
-import { LandingPage } from './Pages/Components/LandingPage/landingPage.component';
+import { LandingPage } from './LandingPage/landingPage.component';
+import { ClubCreationComponent } from './LandingPage/clubCreation/clubCreation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'landing-page',
         component: LandingPage,
+      },
+      {
+        path: 'club/create',
+        component: ClubCreationComponent,
       },
     ],
   },

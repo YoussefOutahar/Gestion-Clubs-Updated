@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Club } from '../../../../../DataBase/Models/club';
-import { ClubsService } from '../../../../../DataBase/Services/clubs.service';
 import { MatDialog } from '@angular/material/dialog';
-import { JoinFormComponent } from '../../../clubs/joinClub/joinClub.component';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
+import { JoinFormComponent } from '../../../Pages/Components/clubs/joinClub/joinClub.component';
+import { Club } from '../../../DataBase/Models/club';
 
 @Component({
   selector: 'app-carousel-clubs',
@@ -12,7 +12,7 @@ import { JoinFormComponent } from '../../../clubs/joinClub/joinClub.component';
 export class CarouselClubsComponent implements OnInit {
   clubs: Club[] = [];
 
-  constructor(private clubsService: ClubsService, public dialog: MatDialog  ) {}
+  constructor(private clubsService: ClubsService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getActiveClubs();
@@ -30,9 +30,8 @@ export class CarouselClubsComponent implements OnInit {
       const dialogRef = this.dialog.open(JoinFormComponent, {
         width: '450px',
         data: id,
-        
       });
-      
+
       dialogRef.afterClosed().subscribe((result) => {
         // Handle the result after the dialog is closed, e.g., update user details
         if (result) {
