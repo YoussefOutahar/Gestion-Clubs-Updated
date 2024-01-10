@@ -1,7 +1,7 @@
-<h1>Meetings Calendar</h1>
+<h1 class="mb-6">Meetings Calendar</h1>
 
-<full-calendar [options]="calendarOptions">
+<full-calendar [options]="calendarOptions" [deepChangeDetection]="true">
   <ng-template #eventContent let-arg>
-    <b>{{ arg.event.title }}</b>
+    <p-tag [value]="arg.event.title"></p-tag>
   </ng-template>
 </full-calendar>

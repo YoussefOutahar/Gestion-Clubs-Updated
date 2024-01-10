@@ -21,6 +21,10 @@ export class clubDashboardComponent {
 
   isLoading = true;
 
+  totalMembers = 0;
+  totalMeetings = 0;
+  totalBudget = 0;
+
   constructor(
     private dashboardService: DashboardService,
     private changeDetector: ChangeDetectorRef,
@@ -34,9 +38,18 @@ export class clubDashboardComponent {
     const user = this.authService.currentUser.value;
     this.profilesService
       .getProfileById(user.id)
-      .then((profile) => {
-        this.currentUser = profile[0]; // Assuming getProfileById returns an array
-        console.log('user : ', this.currentUser);
+      .then(async (profile) => {
+        this.currentUser = profile[0];
+
+        this.totalMembers = await this.dashboardService.getTotalClubMembers(
+          this.currentUser.id_club
+        );
+        this.totalMeetings = await this.dashboardService.getTotalClubMeetings(
+          this.currentUser.id_club
+        );
+        this.totalBudget = await this.dashboardService.getTotalClubBudget(
+          this.currentUser.id_club
+        );
 
         this.loadData();
         this.changeDetector.detectChanges();

@@ -15,13 +15,17 @@ import { ClubsService } from '../../../DataBase/Services/clubs.service';
 import { User } from '@supabase/supabase-js';
 import { AuthService } from '../../../Auth/auth.service';
 import { ProfilesService } from '../../../DataBase/Services/profiles.service';
-
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AddMeetingRequestComponent } from './addMeetingRequest/addMeetingRequest.component';
 
 @Component({
   selector: 'app-meetings',
   templateUrl: './meetings.component.html',
+  providers: [DialogService],
 })
 export class MeetingsComponent implements OnInit {
+  ref: DynamicDialogRef | undefined;
+
   currentUser: boolean | User | any;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
@@ -45,12 +49,14 @@ export class MeetingsComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private authService: AuthService,
     private profilesService: ProfilesService,
-  ) { }
+    public dialogService: DialogService
+  ) {}
 
   ngOnInit() {
     // Get the current user data
     const user = this.authService.currentUser.value;
-    this.profilesService.getProfileById(user.id)
+    this.profilesService
+      .getProfileById(user.id)
       .then((profile) => {
         this.currentUser = profile[0]; // Assuming getProfileById returns an array
         console.log('user : ', this.currentUser);
@@ -64,11 +70,13 @@ export class MeetingsComponent implements OnInit {
   }
 
   loadMeetings() {
-    this.clubService.getClubMeetings(this.currentUser.id_club).then((meetings) => {
-      console.log(meetings);
-      console.log(this.formatEvents(meetings));
-      this.calendarOptions.events = this.formatEvents(meetings);
-    });
+    this.clubService
+      .getClubMeetings(this.currentUser.id_club)
+      .then((meetings) => {
+        console.log(meetings);
+        console.log(this.formatEvents(meetings));
+        this.calendarOptions.events = this.formatEvents(meetings);
+      });
   }
 
   formatEvents(meetings: Meeting[]) {
@@ -77,31 +85,17 @@ export class MeetingsComponent implements OnInit {
         id: meeting.id!.toString(),
         title: `${meeting.location}`,
         date: meeting.date,
-        color: this.darkColorRandomizerGenerator(),
       })
     );
   }
-  darkColorRandomizerGenerator() {
-    const red = Math.floor(Math.random() * 128);
-    const green = Math.floor(Math.random() * 128);
-    const blue = Math.floor(Math.random() * 128);
-    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+
+  getRandomSeverity() {
+    const severities = ['success', 'info', 'warning', 'danger'];
+    const randomIndex = Math.floor(Math.random() * 4);
+    return severities[randomIndex];
   }
 
-  handleDateSelect(selectInfo: DateSelectArg) {
-    // const title = prompt('Please enter a new title for your event');
-    // const calendarApi = selectInfo.view.calendar;
-    // calendarApi.unselect(); // clear date selection
-    // if (title) {
-    //   calendarApi.addEvent({
-    //     id: createEventId(),
-    //     title,
-    //     start: selectInfo.startStr,
-    //     end: selectInfo.endStr,
-    //     allDay: selectInfo.allDay
-    //   });
-    // }
-  }
+  handleDateSelect(selectInfo: DateSelectArg) {}
 
   handleEventClick(clickInfo: EventClickArg) {
     if (

@@ -34,6 +34,7 @@ import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [],
@@ -70,6 +71,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ToastModule,
     ProgressSpinnerModule,
     TableModule,
+    ChipModule,
   ],
 })
 export class PrimeNgModule {}

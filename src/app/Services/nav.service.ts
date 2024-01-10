@@ -30,6 +30,7 @@ export class NavService {
           (item) =>
             item.navCap == 'Espace Admin' ||
             item.route == '/dashboard/adminDashboard' ||
+            item.displayName == 'Clubs' ||
             item.displayName == 'Finance management' ||
             item.displayName == 'Events' ||
             item.displayName == 'Meetingss' ||

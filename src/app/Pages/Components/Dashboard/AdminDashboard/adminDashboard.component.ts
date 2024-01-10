@@ -16,12 +16,20 @@ export class AdminDashboardComponent {
 
   isLoading = true;
 
+  totalClubs = 0;
+  totalEvents = 0;
+  totalMembers = 0;
+
   constructor(
     private dashboardService: DashboardService,
     private router: Router // Inject Router
   ) {}
 
   async ngOnInit() {
+    this.totalClubs = await this.dashboardService.getTotalClubs();
+    this.totalEvents = await this.dashboardService.getTotalEvents();
+    this.totalMembers = await this.dashboardService.getTotalMembers();
+
     const clubsWithEventCounts =
       await this.dashboardService.getClubsWithEventCounts();
 

@@ -13,10 +13,14 @@ export class AdminFinanceComponent implements OnInit {
   clubs: any[] = [];
   cardList: any[] = [];
 
+  isLoading: boolean = true;
+
   constructor(private clubsService: ClubsService, private router: Router) {}
 
   ngOnInit() {
     this.fetchData();
+    this.isLoading = false;
+    console.log('isLoading', this.isLoading);
   }
 
   async fetchData() {
