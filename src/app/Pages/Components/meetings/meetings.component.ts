@@ -103,7 +103,7 @@ export class MeetingsComponent implements OnInit {
       header: 'Meeting Details',
       width: '70%',
       data: {
-        meeting: clickInfo.event.id,
+        meetingId: clickInfo.event.id,
       },
     });
   }

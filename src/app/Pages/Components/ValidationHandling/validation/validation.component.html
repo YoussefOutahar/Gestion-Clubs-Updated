@@ -11,45 +11,85 @@
   <tbody>
     <!-- Display pending clubs -->
     <tr *ngFor="let club of clubs">
-      <td>{{ 'New Club' }}</td>
+      <td>{{ "New Club" }}</td>
       <td>{{ club.name }}</td>
       <td>
-        <button mat-raised-button class="green-button"
-          (click)="validateClub(club)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
-        <button mat-raised-button class="red-button"
-          (click)="cancelClub(club)"><mat-icon>delete</mat-icon>Cancel</button>
-        <button mat-raised-button color="primary"
-          (click)="showClubDetail(club)"><mat-icon>description</mat-icon>Details</button>
+        <button
+          mat-raised-button
+          class="green-button"
+          (click)="validateClub(club)"
+        >
+          <mat-icon>check_circle_outline</mat-icon>Validate
+        </button>
+        <button mat-raised-button class="red-button" (click)="cancelClub(club)">
+          <mat-icon>delete</mat-icon>Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="showClubDetail(club)"
+        >
+          <mat-icon>description</mat-icon>Details
+        </button>
       </td>
     </tr>
 
     <!-- Display pending events-->
     <tr *ngFor="let event of events">
-      <td>{{ 'New Event' }}</td>
+      <td>{{ "New Event" }}</td>
       <td>{{ event.name }}</td>
       <td>
-        <button mat-raised-button class="green-button"
-          (click)="validateEvent(event)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
-        <button mat-raised-button class="red-button"
-          (click)="cancelEvent(event)"><mat-icon>delete</mat-icon>Cancel</button>
-        <button mat-raised-button color="primary"
-          (click)="showEventDetails(event)"><mat-icon>description</mat-icon>Details</button>
+        <button
+          mat-raised-button
+          class="green-button"
+          (click)="validateEvent(event)"
+        >
+          <mat-icon>check_circle_outline</mat-icon>Validate
+        </button>
+        <button
+          mat-raised-button
+          class="red-button"
+          (click)="cancelEvent(event)"
+        >
+          <mat-icon>delete</mat-icon>Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="showEventDetails(event)"
+        >
+          <mat-icon>description</mat-icon>Details
+        </button>
       </td>
     </tr>
 
     <!-- Display pending events-->
     <tr *ngFor="let request of requests">
-      <td>{{ 'New Request' }}</td>
+      <td>{{ "New Request" }}</td>
       <td>{{ request.name }}</td>
       <td>
-        <button mat-raised-button class="green-button"
-          (click)="validateRequest(request)"><mat-icon>check_circle_outline</mat-icon>Validate</button>
-        <button mat-raised-button class="red-button"
-          (click)="cancelRequest(request)"><mat-icon>delete</mat-icon>Cancel</button>
-        <button mat-raised-button color="primary"
-          (click)="showRequestDetails(request)"><mat-icon>description</mat-icon>Details</button>
+        <button
+          mat-raised-button
+          class="green-button"
+          (click)="validateRequest(request)"
+        >
+          <mat-icon>check_circle_outline</mat-icon>Validate
+        </button>
+        <button
+          mat-raised-button
+          class="red-button"
+          (click)="cancelRequest(request)"
+        >
+          <mat-icon>delete</mat-icon>Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="showRequestDetails(request)"
+        >
+          <mat-icon>description</mat-icon>Details
+        </button>
       </td>
     </tr>
-
   </tbody>
 </table>
