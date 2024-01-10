@@ -1,8 +1,8 @@
-import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
-import { ChartComponent } from "ng-apexcharts";
-import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
-import { ClubsService } from "../../../../DataBase/Services/clubs.service";
-import { Router } from "@angular/router";
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { ChartComponent } from 'ng-apexcharts';
+import { DashboardService } from '../../../../DataBase/Services/dashboard.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
+import { Router } from '@angular/router';
 import { User } from '@supabase/supabase-js';
 import { AuthService } from '../../../../Auth/auth.service';
 import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
@@ -11,7 +11,6 @@ import { ProfilesService } from '../../../../DataBase/Services/profiles.service'
   selector: 'app-clubDashboard-page',
   templateUrl: './clubDashboard.component.html',
 })
-
 export class clubDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   currentUser: boolean | User | any;
@@ -20,18 +19,21 @@ export class clubDashboardComponent {
   public BudgetsChart: any;
   public event: any; // Add this property to store the upcoming event
 
+  isLoading = true;
+
   constructor(
     private dashboardService: DashboardService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private authService: AuthService,
-    private profilesService: ProfilesService,
-  ) { }
+    private profilesService: ProfilesService
+  ) {}
 
   async ngOnInit() {
     // Get the current user data
     const user = this.authService.currentUser.value;
-    this.profilesService.getProfileById(user.id)
+    this.profilesService
+      .getProfileById(user.id)
       .then((profile) => {
         this.currentUser = profile[0]; // Assuming getProfileById returns an array
         console.log('user : ', this.currentUser);
@@ -45,9 +47,10 @@ export class clubDashboardComponent {
   }
 
   async loadData() {
-    const clubsWithEventCounts = await this.dashboardService.getClubsWithEventCounts();
+    const clubsWithEventCounts =
+      await this.dashboardService.getClubsWithEventCounts();
 
-    const chartData = clubsWithEventCounts.map(club => ({
+    const chartData = clubsWithEventCounts.map((club) => ({
       x: club.clubName,
       y: club.eventCount,
     }));
@@ -68,7 +71,7 @@ export class clubDashboardComponent {
       },
       xaxis: {
         type: 'category',
-        categories: chartData.map(item => item.x),
+        categories: chartData.map((item) => item.x),
       },
       yaxis: {
         title: {
@@ -92,41 +95,45 @@ export class clubDashboardComponent {
     // Load upcoming event
     this.loadUpcomingEvent();
 
-    const eventCountByYear = await this.dashboardService.getEventCountByYearByClub(this.currentUser.id_club);
-    console.log("eventCountByYear : ", eventCountByYear);
+    const eventCountByYear =
+      await this.dashboardService.getEventCountByYearByClub(
+        this.currentUser.id_club
+      );
+    console.log('eventCountByYear : ', eventCountByYear);
 
     this.eventNumberChart = {
       series: [
         {
           name: 'Event Count',
-          data: eventCountByYear.map(item => item.eventCount),
+          data: eventCountByYear.map((item) => item.eventCount),
         },
       ],
       chart: {
         type: 'area',
         height: 300,
       },
-      labels: eventCountByYear.map(item => item.year),
+      labels: eventCountByYear.map((item) => item.year),
       xaxis: {
         type: 'category',
       },
       tooltip: { theme: 'light' },
-
-
     };
 
-
-    const clubBudgetsData = await this.dashboardService.getClubBudgetsByYears(this.currentUser.id_club);
-    const currentYearBudget = clubBudgetsData[clubBudgetsData.length - 1].budget;
+    const clubBudgetsData = await this.dashboardService.getClubBudgetsByYears(
+      this.currentUser.id_club
+    );
+    const currentYearBudget =
+      clubBudgetsData[clubBudgetsData.length - 1].budget;
     const lastYearBudget = clubBudgetsData[clubBudgetsData.length - 2].budget;
-    const percentageDifference = ((currentYearBudget - lastYearBudget) / lastYearBudget) * 100;
-    console.log("clubBudgetsData : ", clubBudgetsData);
+    const percentageDifference =
+      ((currentYearBudget - lastYearBudget) / lastYearBudget) * 100;
+    console.log('clubBudgetsData : ', clubBudgetsData);
 
     this.BudgetsChart = {
       series: [
         {
           name: 'Budget',
-          data: clubBudgetsData.map(item => item.budget),
+          data: clubBudgetsData.map((item) => item.budget),
         },
       ],
       chart: {
@@ -138,7 +145,7 @@ export class clubDashboardComponent {
       },
       xaxis: {
         type: 'category',
-        categories: clubBudgetsData.map(item => item.year),
+        categories: clubBudgetsData.map((item) => item.year),
       },
       tooltip: {
         theme: 'dark',
@@ -166,29 +173,33 @@ export class clubDashboardComponent {
       percentageElement.innerHTML = `${percentageDifference.toFixed(2)}%`;
 
       // Update arrow icon based on the sign of percentageDifference
-      const arrowButton = document.querySelector('.bg-light-error.text-error.shadow-none.icon-27');
+      const arrowButton = document.querySelector(
+        '.bg-light-error.text-error.shadow-none.icon-27'
+      );
 
       if (arrowButton) {
         // Change the button class based on the percentageDifference
         if (percentageDifference > 0) {
           arrowButton.classList.remove('bg-light-error', 'text-error');
           arrowButton.classList.add('bg-light-success', 'text-success');
-          arrowButton.innerHTML = '<i-tabler name="arrow-up-right" class="icon-20"></i-tabler>';
+          arrowButton.innerHTML =
+            '<i-tabler name="arrow-up-right" class="icon-20"></i-tabler>';
         } else {
           // If percentageDifference is not positive, keep the original class
           arrowButton.classList.remove('bg-light-success', 'text-success');
           arrowButton.classList.add('bg-light-error', 'text-error');
-          arrowButton.innerHTML = '<i-tabler name="arrow-down-right" class="icon-20"></i-tabler>';
+          arrowButton.innerHTML =
+            '<i-tabler name="arrow-down-right" class="icon-20"></i-tabler>';
         }
       }
     }
+
+    this.isLoading = false;
   }
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();
   }
-
-
 
   addNewEvent() {
     // Redirect to addEventRequest component
@@ -199,6 +210,4 @@ export class clubDashboardComponent {
     // Redirect to addMeetingRequest component
     this.router.navigate(['/dashboard/meeting/create']);
   }
-
-
 }

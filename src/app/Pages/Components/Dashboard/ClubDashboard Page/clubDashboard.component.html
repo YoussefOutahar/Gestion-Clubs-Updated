@@ -1,3 +1,16 @@
+@if (isLoading) {
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="height: 80vh"
+>
+  <div>
+    <p-progressSpinner
+      strokeWidth="5"
+      animationDuration="2s"
+    ></p-progressSpinner>
+  </div>
+</div>
+} @if (!isLoading) {
 <div class="grid"></div>
 <div class="row">
   <div class="col-lg-8">
@@ -115,3 +128,5 @@
     </mat-card>
   </div>
 </div>
+
+}

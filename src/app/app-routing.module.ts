@@ -32,7 +32,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'dashboard', redirectTo: '/dashboard/home', pathMatch: 'full' },
+      { path: 'dashboard', redirectTo: '/dashboard/events', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () =>
