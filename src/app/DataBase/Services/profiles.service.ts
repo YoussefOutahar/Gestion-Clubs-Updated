@@ -54,6 +54,27 @@ export class ProfilesService {
     return data;
   }
 
+  async getPendingMembers(id: string): Promise<PendingProfile[]> {
+    try {
+      const { data, error } = await this.supabase
+        .from(TableNames.PendingProfiles)
+        .select('*')
+        .eq('role_club', 'Member')
+        .eq('id_club', id);
+  
+      if (error) {
+        throw new Error(`Error fetching pending members: ${error.message}`);
+      }
+  
+      return data || [];
+    } catch (error) {
+      // Handle unexpected errors, log, or rethrow as needed
+      console.error('An error occurred while fetching pending members:', error);
+      throw error;
+    }
+  }
+  
+
   async validatePendingProfile(profile: PendingProfile) {
     const password = Math.random().toString(36).slice(-8);
 
@@ -135,6 +156,17 @@ export class ProfilesService {
     const { data, error } = await this.supabase
       .from(TableNames.Profiles)
       .update(profile)
+      .eq('id', profile.id);
+    if (error) {
+      throw error;
+    }
+    return data ? data : [];
+  }
+
+  async deletePendingProfile(profile: PendingProfile): Promise<PendingProfile[]> {
+    const { data, error } = await this.supabase
+      .from(TableNames.PendingProfiles)
+      .delete()
       .eq('id', profile.id);
     if (error) {
       throw error;

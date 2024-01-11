@@ -18,23 +18,21 @@ import { EventDetailsComponent } from './event-details-popup/event-details.compo
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    height: 'auto',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+      right: 'dayGridMonth,timeGridWeek,listWeek',
     },
     initialView: 'dayGridMonth',
     events: [],
     // eventsSet: this.handleEvents.bind(this),
     weekends: true,
     selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
   };
@@ -43,7 +41,7 @@ export class EventsComponent implements OnInit {
     private clubsService: ClubsService,
     private changeDetector: ChangeDetectorRef,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loadEvents();
@@ -52,8 +50,6 @@ export class EventsComponent implements OnInit {
 
   loadEvents() {
     this.clubsService.getEvents().then((events) => {
-      console.log(events);
-      console.log(this.formatEvents(events));
       this.calendarOptions.events = this.formatEvents(events);
     });
   }
@@ -64,15 +60,13 @@ export class EventsComponent implements OnInit {
         id: event.id!.toString(),
         title: `${event.name}`,
         date: event.date,
-        color: this.darkColorRandomizerGenerator(),
       })
     );
   }
-  darkColorRandomizerGenerator() {
-    const red = Math.floor(Math.random() * 128);
-    const green = Math.floor(Math.random() * 128);
-    const blue = Math.floor(Math.random() * 128);
-    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+  getRandomSeverity() {
+    const severities = ['success', 'info', 'warning', 'danger'];
+    const randomIndex = Math.floor(Math.random() * 4);
+    return severities[randomIndex];
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
@@ -92,12 +86,13 @@ export class EventsComponent implements OnInit {
 
   handleEventClick(clickInfo: EventClickArg) {
     const eventName = clickInfo.event.title;
-  
+
     // Assuming that getEventByName returns a Promise<Event | null> based on the name
     this.clubsService.getEventByName(eventName).then((event) => {
       if (event) {
-        console.log("the selected event : ", event);
+        console.log('the selected event : ', event);
         const dialogRef = this.dialog.open(EventDetailsComponent, {
+          maxWidth: '600px',
           data: {
             name: event.name,
             date: event.date,
@@ -114,7 +109,6 @@ export class EventsComponent implements OnInit {
       }
     });
   }
-
 
   // handleEvents(events: EventApi[]) {
   //   this.currentEvents.set(events);

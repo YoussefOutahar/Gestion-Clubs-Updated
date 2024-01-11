@@ -219,11 +219,11 @@ export class ClubsService {
     return data;
   }
 
-  async getClubForums(club: Club): Promise<Forum[]> {
+  async getClubForums(club_id: number): Promise<Forum[]> {
     const { data, error } = await this.supabase
       .from(TableNames.Forums)
       .select('*')
-      .eq('club_id', club.id);
+      .eq('club_id', club_id);
     if (error) {
       throw error;
     }
@@ -231,6 +231,15 @@ export class ClubsService {
   }
 
   // ============== Messages ============== //
+
+  async addForumToClub(forum: Forum): Promise<void> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Forums)
+      .insert(forum);
+    if (error) {
+      throw error;
+    }
+  }
 
   async getMessages(): Promise<ForumMessage[]> {
     const { data, error } = await this.supabase
@@ -262,6 +271,15 @@ export class ClubsService {
       throw error;
     }
     return data;
+  }
+
+  async sendMessage(message: ForumMessage): Promise<void> {
+    const { data, error } = await this.supabase
+      .from(TableNames.Messages)
+      .insert(message);
+    if (error) {
+      throw error;
+    }
   }
 
   // ============== Events ============== //

@@ -37,12 +37,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
-import { ClubCreationComponent } from './Components/clubs/clubCreation/clubCreation.component';
+import { ClubCreationComponent } from '../LandingPage/clubCreation/clubCreation.component';
 import { ValidationDetailstDialogComponent } from './Components/ValidationHandling/validation-showDetails-dialog/validation-showDetails.component';
-import { ImageSliderComponent } from './Components/LandingPage/LandingPage-component/image-slider/image-slider.component';
-import { LandingPage } from './Components/LandingPage/landingPage.component';
-import { CarouselClubsComponent } from './Components/LandingPage/LandingPage-component/club-carousel/club-carousel.component';
-import { FooterComponent } from './Components/LandingPage/LandingPage-component/footer/footer.component';
 import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
 import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
 import { PrimeNgModule } from '../UI-Modules/primeNg.module';
@@ -52,6 +48,7 @@ import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/a
 import { ProfileComponent } from './Components/profile/profile.component';
 import { JoinFormComponent } from './Components/clubs/joinClub/joinClub.component';
 import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dialog/avatar-edit-dialog.component';
+import { MembersValidationComponent } from './Components/ValidationHandling/MembersValidation/membersValidation.component';
 @NgModule({
   declarations: [
     // ========== Dashboards ========== //
@@ -82,6 +79,7 @@ import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dia
     // =========== Validation ============= //
     ValidationComponent,
     ValidationDetailstDialogComponent,
+    MembersValidationComponent,
 
     // ===========Events============= //
     EventsComponent,
@@ -92,11 +90,6 @@ import { AvatarEditDialogComponent } from './Components/profile/profile-edit-dia
     ForumComponent,
     ProfileComponent,
     AvatarEditDialogComponent,
-    // ============ Landing Page ============ //
-    LandingPage,
-    ImageSliderComponent,
-    CarouselClubsComponent,
-    FooterComponent,
   ],
   imports: [
     CommonModule,

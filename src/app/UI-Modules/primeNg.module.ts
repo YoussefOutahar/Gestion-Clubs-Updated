@@ -33,6 +33,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [],
@@ -56,6 +58,7 @@ import { TableModule } from 'primeng/table';
     ToolbarModule,
     // ===================
     StyleClassModule,
+    DropdownModule,
 
     ScrollPanelModule,
     PanelModule,
@@ -68,6 +71,7 @@ import { TableModule } from 'primeng/table';
     ToastModule,
     ProgressSpinnerModule,
     TableModule,
+    ChipModule,
   ],
 })
 export class PrimeNgModule {}

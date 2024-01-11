@@ -25,7 +25,19 @@ export class NavService {
     let privilege = this.authService.currentUser.getValue().user_metadata.role;
 
     if (privilege == 'admin') {
-      return Promise.resolve(this.navItems);
+      return Promise.resolve(
+        this.navItems.filter(
+          (item) =>
+            item.navCap == 'Espace Admin' ||
+            item.route == '/dashboard/adminDashboard' ||
+            item.displayName == 'Clubs' ||
+            item.displayName == 'Members' ||
+            item.displayName == 'Finance management' ||
+            item.displayName == 'Events' ||
+            item.displayName == 'Meetingss' ||
+            item.displayName == 'Validation Page'
+        )
+      );
     } else {
       let id = this.authService.currentUser.getValue().id;
       let club_role = await this.profilesService.getProfileRole(id);
@@ -33,23 +45,23 @@ export class NavService {
         case 'President':
           this.navItems = this.navItems.filter(
             (item) =>
-              item.displayName == 'Dashboard' ||
+              item.route == '/dashboard/clubDashboard' ||
               item.displayName == 'Club Finance management' ||
               item.displayName == 'Events' ||
               item.displayName == 'Meetingss' ||
               item.displayName == 'Forum' ||
-              item.displayName == 'Validation Page'
+              item.displayName == 'Members Validation'
           );
           break;
         case 'VicePresident':
           this.navItems = this.navItems.filter(
             (item) =>
-              item.displayName == 'Dashboard' ||
+              item.route == '/dashboard/clubDashboard' ||
               item.displayName == 'Club Finance management' ||
               item.displayName == 'Events' ||
               item.displayName == 'Meetingss' ||
               item.displayName == 'Forum' ||
-              item.displayName == 'Validation Page'
+              item.displayName == 'Members Validation'
           );
           break;
         case 'Secretary':
@@ -93,7 +105,12 @@ export class NavService {
     {
       displayName: 'Dashboard',
       iconName: 'layout-dashboard',
-      route: '/dashboard/home',
+      route: '/dashboard/adminDashboard',
+    },
+    {
+      displayName: 'Dashboard',
+      iconName: 'layout-dashboard',
+      route: '/dashboard/clubDashboard',
     },
     {
       displayName: 'Clubs',
@@ -134,6 +151,11 @@ export class NavService {
       displayName: 'Validation Page',
       iconName: 'link',
       route: '/dashboard/validation',
+    },
+    {
+      displayName: 'Members Validation',
+      iconName: 'link',
+      route: '/dashboard/membersValidation',
     },
 
     // ====================================

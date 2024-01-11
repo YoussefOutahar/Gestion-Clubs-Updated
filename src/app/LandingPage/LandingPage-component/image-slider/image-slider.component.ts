@@ -1,6 +1,6 @@
 // image-slider.component.ts
 import { Component, Input, OnInit } from '@angular/core';
-import { ClubsService } from '../../../../../DataBase/Services/clubs.service';
+import { ClubsService } from '../../../DataBase/Services/clubs.service';
 @Component({
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',

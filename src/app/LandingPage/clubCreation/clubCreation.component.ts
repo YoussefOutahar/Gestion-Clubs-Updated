@@ -5,13 +5,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Category, Club } from '../../../../DataBase/Models/club';
-import { ClubsService } from '../../../../DataBase/Services/clubs.service';
-import { ProfilesService } from '../../../../DataBase/Services/profiles.service';
-import { UploadsService } from '../../../../DataBase/Services/uploads.service';
+import { Category, Club } from '../../DataBase/Models/club';
+import { ClubsService } from '../../DataBase/Services/clubs.service';
+import { ProfilesService } from '../../DataBase/Services/profiles.service';
+import { UploadsService } from '../../DataBase/Services/uploads.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from '../../../../DataBase/Services/notifications.service';
-import { Notification } from '../../../../DataBase/Models/notification';
+import { NotificationsService } from '../../DataBase/Services/notifications.service';
+import { Notification } from '../../DataBase/Models/notification';
 
 @Component({
   selector: 'app-clubCreation',
@@ -209,7 +209,8 @@ export class ClubCreationComponent implements OnInit {
         year: '',
         phone: this.supervisorFormGroup.get('phone')?.value!,
         email: this.supervisorFormGroup.get('email')?.value!,
-        avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
+        avatar:
+          'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
         id_club: this.createdClub?.id!,
         role_club: 'Supervisor',
         state: 'pending',
@@ -224,7 +225,8 @@ export class ClubCreationComponent implements OnInit {
       year: this.presidentFormGroup.get('year')?.value!,
       phone: this.presidentFormGroup.get('phone')?.value!,
       email: this.presidentFormGroup.get('email')?.value!,
-      avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
+      avatar:
+        'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
       id_club: this.createdClub?.id!,
       role_club: 'President',
       state: 'pending',
@@ -238,7 +240,8 @@ export class ClubCreationComponent implements OnInit {
       field: this.vicePresidentFormGroup.get('field')?.value!,
       year: this.vicePresidentFormGroup.get('year')?.value!,
       phone: this.vicePresidentFormGroup.get('phone')?.value!,
-      avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
+      avatar:
+        'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
       email: this.vicePresidentFormGroup.get('email')?.value!,
       id_club: this.createdClub?.id!,
       role_club: 'VicePresident',
@@ -253,7 +256,8 @@ export class ClubCreationComponent implements OnInit {
       field: this.secretaryFormGroup.get('field')?.value!,
       year: this.secretaryFormGroup.get('year')?.value!,
       phone: this.secretaryFormGroup.get('phone')?.value!,
-      avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
+      avatar:
+        'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
       email: this.secretaryFormGroup.get('email')?.value!,
       id_club: this.createdClub?.id!,
       role_club: 'Secretary',
@@ -268,7 +272,8 @@ export class ClubCreationComponent implements OnInit {
       field: this.financierFormGroup.get('field')?.value!,
       year: this.financierFormGroup.get('year')?.value!,
       phone: this.financierFormGroup.get('phone')?.value!,
-      avatar: 'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
+      avatar:
+        'https://vussefkqdtgdosoytjch.supabase.co/storage/v1/object/public/Avatars/user-1.jpg',
       email: this.financierFormGroup.get('email')?.value!,
       id_club: this.createdClub?.id!,
       role_club: 'Accountant',
@@ -286,6 +291,15 @@ export class ClubCreationComponent implements OnInit {
     };
 
     this.notificationService.addNotification(notification);
+  }
+
+  addClubForum() {
+    this.clubsService.addForumToClub({
+      club_id: this.createdClub?.id!,
+      name: this.createdClub?.name! + ' Forum',
+      description: 'General forum',
+      created_at: new Date().toISOString(),
+    });
   }
 
   async onSubmit() {

@@ -1,5 +1,16 @@
-<!-- app/admin-finance/admin-finance.component.html -->
-
+@if (isLoading) {
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="height: 80vh"
+>
+  <div>
+    <p-progressSpinner
+      strokeWidth="5"
+      animationDuration="2s"
+    ></p-progressSpinner>
+  </div>
+</div>
+} @if (!isLoading) {
 <h1>Admin Finance Management</h1>
 
 <div class="finance-cards">
@@ -11,7 +22,9 @@
 </div>
 
 <div class="assign-budget-button">
-  <button mat-raised-button color="primary" (click)="navigateToAssignBudget()">Assign Budget</button>
+  <button mat-raised-button color="primary" (click)="navigateToAssignBudget()">
+    Assign Budget
+  </button>
 </div>
 
 <div class="charges-table">
@@ -39,3 +52,4 @@
     </table>
   </div>
 </div>
+}

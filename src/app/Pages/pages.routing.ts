@@ -13,13 +13,14 @@ import { AssignBudgetComponent } from './Components/Finance/assignBudget/assignB
 import { ClubFinanceComponent } from './Components/Finance/ClubFinance/clubFinance.component';
 import { AddChargeComponent } from './Components/Finance/addCharge/addCharge.component';
 import { SuppBudgetComponent } from './Components/Finance/suppBudget/suppBudget.component';
-import { ClubCreationComponent } from './Components/clubs/clubCreation/clubCreation.component';
+import { ClubCreationComponent } from '../LandingPage/clubCreation/clubCreation.component';
 import { AddEventRequestComponent } from './Components/events/addEventRequest/addEventRequest.component';
 import { AddMeetingRequestComponent } from './Components/meetings/addMeetingRequest/addMeetingRequest.component';
 import { clubDashboardComponent } from './Components/Dashboard/ClubDashboard Page/clubDashboard.component';
 import { AdminDashboardComponent } from './Components/Dashboard/AdminDashboard/adminDashboard.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { ForumComponent } from './Components/forum/forum.component';
+import { MembersValidationComponent } from './Components/ValidationHandling/MembersValidation/membersValidation.component';
 
 export const pageRoutes: Routes = [
   {
@@ -88,6 +89,11 @@ export const pageRoutes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'membersValidation',
+    component: MembersValidationComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'forum',
     component: ForumComponent,
     canActivate: [authGuard],
@@ -98,11 +104,6 @@ export const pageRoutes: Routes = [
     canActivate: [authGuard],
   },
   // ====================================
-  {
-    path: 'club/create',
-    component: ClubCreationComponent,
-    canActivate: [authGuard],
-  },
   {
     path: 'meeting/create',
     component: AddMeetingRequestComponent,

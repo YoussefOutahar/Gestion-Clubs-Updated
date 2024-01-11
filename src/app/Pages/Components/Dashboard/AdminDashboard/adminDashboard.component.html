@@ -1,149 +1,138 @@
+@if(isLoading) {
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="height: 80vh"
+>
+  <div>
+    <p-progressSpinner
+      strokeWidth="5"
+      animationDuration="2s"
+    ></p-progressSpinner>
+  </div>
+</div>
+} @if (!isLoading) {
 <div class="grid mb-4">
   <div class="col card mr-5 shadow-3">
     <div class="card mb-0">
       <div class="flex justify-content-between mb-3">
         <div>
-          <span class="block text-500 font-medium mb-3">Orders</span>
-          <div class="text-900 font-medium text-xl">152</div>
+          <span class="block text-500 font-medium mb-3">Clubs</span>
+          <div class="text-900 font-medium text-xl">{{ totalClubs }}</div>
         </div>
         <div
           class="flex align-items-center justify-content-center bg-blue-100 border-round"
           [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
         >
-          <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+          <i class="pi pi-home text-blue-500 text-xl"></i>
         </div>
       </div>
-      <span class="text-green-500 font-medium">24 new </span>
-      <span class="text-500">since last visit</span>
+      <span class="text-green-500 font-medium">Total</span>
     </div>
   </div>
   <div class="col card mr-5 shadow-3">
     <div class="card mb-0">
       <div class="flex justify-content-between mb-3">
         <div>
-          <span class="block text-500 font-medium mb-3">Revenue</span>
-          <div class="text-900 font-medium text-xl">$2.100</div>
+          <span class="block text-500 font-medium mb-3">Members</span>
+          <div class="text-900 font-medium text-xl">{{ totalMembers }}</div>
         </div>
         <div
           class="flex align-items-center justify-content-center bg-orange-100 border-round"
           [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
         >
-          <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+          <i class="pi pi-user text-orange-500 text-xl"></i>
         </div>
       </div>
-      <span class="text-green-500 font-medium">%52+ </span>
-      <span class="text-500">since last week</span>
+      <span class="text-green-500 font-medium">Total</span>
     </div>
   </div>
   <div class="col card mr-5 shadow-3">
     <div class="card mb-0">
       <div class="flex justify-content-between mb-3">
         <div>
-          <span class="block text-500 font-medium mb-3">Customers</span>
-          <div class="text-900 font-medium text-xl">28441</div>
+          <span class="block text-500 font-medium mb-3">Events</span>
+          <div class="text-900 font-medium text-xl">{{ totalEvents }}</div>
         </div>
         <div
           class="flex align-items-center justify-content-center bg-cyan-100 border-round"
           [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
         >
-          <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+          <i class="pi pi-megaphone text-cyan-500 text-xl"></i>
         </div>
       </div>
-      <span class="text-green-500 font-medium">520 </span>
-      <span class="text-500">newly registered</span>
-    </div>
-  </div>
-  <div class="col card mr-5 shadow-3">
-    <div class="card mb-0">
-      <div class="flex justify-content-between mb-3">
-        <div>
-          <span class="block text-500 font-medium mb-3">Comments</span>
-          <div class="text-900 font-medium text-xl">152 Unread</div>
-        </div>
-        <div
-          class="flex align-items-center justify-content-center bg-purple-100 border-round"
-          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-        >
-          <i class="pi pi-comment text-purple-500 text-xl"></i>
-        </div>
-      </div>
-      <span class="text-green-500 font-medium">85 </span>
-      <span class="text-500">responded</span>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-8">
-    <mat-card class="cardWithShadow">
-      <mat-card-content class="p-24">
-        <div class="d-flex w-100">
-          <mat-card-title>Active clubs</mat-card-title>
-        </div>
-        <apx-chart
-          [series]="activeClubsChart.series"
-          [chart]="activeClubsChart.chart"
-        ></apx-chart>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <!--<div class="col-lg-6">
-      <mat-card class="cardWithShadow">
-        <mat-card-content class="p-24">
-          <div class="d-flex w-100">
-            <mat-card-title>Events statistics</mat-card-title>
-          </div>
-          <apx-chart [series]="eventNumberChart.series" [chart]="eventNumberChart.chart" [xaxis]="eventNumberChart.xaxis"
-            [stroke]="eventNumberChart.stroke" [dataLabels]="eventNumberChart.dataLabels" [yaxis]="eventNumberChart.yaxis"
-            [labels]="eventNumberChart.labels" [legend]="eventNumberChart.legend"></apx-chart>
-        </mat-card-content>
-      </mat-card>
-    </div>-->
-  <div class="col-lg-4">
-    <div class="row">
-      <div class="col-lg-12 col-sm-6">
-        <div class="redirection-button">
-          <button mat-raised-button color="primary" (click)="addNewEvent()">
-            Add new event
-          </button>
-        </div>
-      </div>
-      <div class="col-lg-12 col-sm-6">
-        <mat-card class="cardWithShadow">
-          <mat-card-header class="d-flex align-items-center p-x-24">
-            <mat-card-title>Events statistics</mat-card-title>
-          </mat-card-header>
-          <apx-chart
-            [series]="eventNumberChart.series"
-            [chart]="eventNumberChart.chart"
-            [xaxis]="eventNumberChart.xaxis"
-            [dataLabels]="eventNumberChart.dataLabels"
-            [yaxis]="eventNumberChart.yaxis"
-            [labels]="eventNumberChart.labels"
-          ></apx-chart>
-        </mat-card>
-      </div>
+      <span class="text-green-500 font-medium">Total</span>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-8">
+<div>
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+      <div class="d-flex w-100">
+        <mat-card-title>Active clubs</mat-card-title>
+      </div>
+      <apx-chart
+        [series]="activeClubsChart.series"
+        [chart]="activeClubsChart.chart"
+      ></apx-chart>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="flex justify-content-center mb-4">
+  <div class="redirection-button">
+    <button mat-raised-button color="primary" (click)="addNewEvent()">
+      Add new event
+    </button>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="col">
     <mat-card class="cardWithShadow">
+      <mat-card-header class="d-flex align-items-center p-x-24">
+        <mat-card-title>Events statistics</mat-card-title>
+      </mat-card-header>
+      <apx-chart
+        [series]="eventNumberChart.series"
+        [chart]="eventNumberChart.chart"
+        [xaxis]="eventNumberChart.xaxis"
+        [dataLabels]="eventNumberChart.dataLabels"
+        [yaxis]="eventNumberChart.yaxis"
+        [labels]="eventNumberChart.labels"
+      ></apx-chart>
+    </mat-card>
+  </div>
+  <div class="col">
+    <mat-card class="cardWithShadow">
+      <mat-card-header class="d-flex align-items-center p-x-24">
+        <mat-card-title>Upcoming Event : {{ event.name }}</mat-card-title>
+      </mat-card-header>
       <mat-card-content class="p-24">
-        <div class="w-100">
-          <mat-card-title>Upcoming Event :  {{ event.name }}</mat-card-title>
-          <div class="align-items-center">
-            <!--<h3 class="mat-subtitle-1 f-s-14 f-w-600" *ngIf="event">{{ event.name }}</h3>-->
-            <img
-              [src]="event?.img"
-              alt="Event Image"
-              style="width: 500px; border-radius: 8px 8px 0 0"
-              *ngIf="event"
-            />
-            <p *ngIf="!event">No upcoming events</p>
-          </div>
+        <div class="flex justify-content-center">
+          <img
+            [src]="event?.img"
+            alt="Event Image"
+            style="width: 500px; border-radius: 8px 8px 0 0"
+            *ngIf="event"
+          />
+          <p *ngIf="!event">No upcoming events</p>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+
+<!--<div class="col-lg-6">
+        <mat-card class="cardWithShadow">
+          <mat-card-content class="p-24">
+            <div class="d-flex w-100">
+              <mat-card-title>Events statistics</mat-card-title>
+            </div>
+            <apx-chart [series]="eventNumberChart.series" [chart]="eventNumberChart.chart" [xaxis]="eventNumberChart.xaxis"
+              [stroke]="eventNumberChart.stroke" [dataLabels]="eventNumberChart.dataLabels" [yaxis]="eventNumberChart.yaxis"
+              [labels]="eventNumberChart.labels" [legend]="eventNumberChart.legend"></apx-chart>
+          </mat-card-content>
+        </mat-card>
+      </div>-->
+}

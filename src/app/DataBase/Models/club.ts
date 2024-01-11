@@ -73,6 +73,7 @@ export interface ForumMessage {
   forum_id: number;
   user_id: string;
   content: string;
+  userName?: string;
 }
 
 // export interface Event {

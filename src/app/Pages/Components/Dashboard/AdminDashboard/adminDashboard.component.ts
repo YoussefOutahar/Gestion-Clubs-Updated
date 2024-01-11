@@ -1,27 +1,39 @@
-import { Component, ViewChild } from "@angular/core";
-import { ChartComponent } from "ng-apexcharts";
-import { DashboardService } from "../../../../DataBase/Services/dashboard.service";
-import { ClubsService } from "../../../../DataBase/Services/clubs.service";
-import { Router } from "@angular/router";
+import { Component, ViewChild } from '@angular/core';
+import { ChartComponent } from 'ng-apexcharts';
+import { DashboardService } from '../../../../DataBase/Services/dashboard.service';
+import { ClubsService } from '../../../../DataBase/Services/clubs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminDashboard-page',
   templateUrl: './adminDashboard.component.html',
 })
-
 export class AdminDashboardComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   public eventNumberChart!: any;
   public activeClubsChart: any;
   public event: any; // Add this property to store the upcoming event
 
-  constructor(private dashboardService: DashboardService, private clubsService: ClubsService, private router: Router, // Inject Router
-  ) { }
+  isLoading = true;
+
+  totalClubs = 0;
+  totalEvents = 0;
+  totalMembers = 0;
+
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router // Inject Router
+  ) {}
 
   async ngOnInit() {
-    const clubsWithEventCounts = await this.dashboardService.getClubsWithEventCounts();
+    this.totalClubs = await this.dashboardService.getTotalClubs();
+    this.totalEvents = await this.dashboardService.getTotalEvents();
+    this.totalMembers = await this.dashboardService.getTotalMembers();
 
-    const chartData = clubsWithEventCounts.map(club => ({
+    const clubsWithEventCounts =
+      await this.dashboardService.getClubsWithEventCounts();
+
+    const chartData = clubsWithEventCounts.map((club) => ({
       x: club.clubName,
       y: club.eventCount,
     }));
@@ -42,7 +54,7 @@ export class AdminDashboardComponent {
       },
       xaxis: {
         type: 'category',
-        categories: chartData.map(item => item.x),
+        categories: chartData.map((item) => item.x),
       },
       yaxis: {
         title: {
@@ -67,13 +79,13 @@ export class AdminDashboardComponent {
     this.loadUpcomingEvent();
 
     const eventCountByYear = await this.dashboardService.getEventCountByYear();
-    console.log("eventCountByYear : ",eventCountByYear);
+    console.log('eventCountByYear : ', eventCountByYear);
 
     this.eventNumberChart = {
       series: [
         {
           name: 'Event Count',
-          data: eventCountByYear.map(item => item.eventCount),
+          data: eventCountByYear.map((item) => item.eventCount),
         },
       ],
       chart: {
@@ -82,26 +94,24 @@ export class AdminDashboardComponent {
       },
       xaxis: {
         type: 'category',
-        categories: eventCountByYear.map(item => item.year),
+        categories: eventCountByYear.map((item) => item.year),
       },
       yaxis: {
         title: {
           text: 'Event Count',
         },
       },
-
     };
-  };
+
+    this.isLoading = false;
+  }
 
   async loadUpcomingEvent() {
     this.event = await this.dashboardService.getUpcomingEvent();
   }
-
-
 
   addNewEvent() {
     // Redirect to addEventRequest component
     this.router.navigate(['/dashboard/event/create']);
   }
 }
-
